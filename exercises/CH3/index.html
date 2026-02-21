@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Chapter 3: Fundamentals of C</title>
+    <link rel="stylesheet" href="style3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- ========================== -->
+    <!-- ===== NAVIGATION BAR ===== -->
+    <!-- ========================== -->
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#" class="logo">
+                    <span class="logo-text1">Explor</span>
+                    <span class="logo-text2">gramming</span>
+                </a>
+            </div>
+            <a href="../../index.html" class="btn-back">
+                <i class="fas fa-arrow-left"></i>
+                Back to Home
+            </a>
+        </div>
+    </nav>
+
+    <!-- ============================= -->
+    <!-- ===== NOTES/STUDY SCREEN ==== -->
+    <!-- ============================= -->
+
+    <div class="notes-screen" id="notesScreen">
+        <div class="notes-container">
+
+            <!-- Chapter Header -->
+            <div class="chapter-header">
+                <span class="chapter-tag">Chapter 3</span>
+                <h1>Fundamentals of C</h1>
+                <p class="chapter-subtitle">Master data types, operators, expressions, and write your first complete C programs</p>
+                <div class="chapter-meta">
+                    <span class="meta-item">
+                        <i class="fas fa-book"></i>
+                        16 Topics
+                    </span>
+                    <span class="meta-item">
+                        <i class="fas fa-dumbbell"></i>
+                        21 Exercises
+                    </span>
+                    <span class="meta-item">
+                        <i class="fas fa-clock"></i>
+                        ~50 min
+                    </span>
+                </div>
+            </div>
+
+            <!-- ======================== -->
+            <!-- ===== NOTES CONTENT ==== -->
+            <!-- ======================== -->
+
+            <div class="notes-content">
+
+                <!-- ===================================== -->
+                <!-- PART 1: FUNDAMENTALS OF C PROGRAMMING -->
+                <!-- ===================================== -->
+
+                <div class="part-divider">
+                    <span class="part-tag">Part 1</span>
+                    <h2>C Programming Fundamentals</h2>
+                    <p style="font-weight: 700; color: rgba(0, 0, 0, 0.3); font-size: 0.875rem;">(This chapter is best viewed on devices wider than 480px (tablets, laptops, etc.))</p>                    
+                </div>
+
+                <!-- ==================== -->
+                <!-- TOPIC 1: Definitions -->
+                <!-- ==================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Data Types, Operators, Expressions & Variables</h2>
+                    
+                    <div class="definition-grid">
+                        <div class="definition-card">
+                            <h3><i class="fas fa-database"></i> Data Type</h3>
+                            <p>A <strong>data type</strong> specifies the type of data that a variable can store. It determines how much memory is allocated and what operations can be performed on the variable.</p>
+                            <div class="example-box">
+                                <div class="example-label">Common Data Types:</div>
+                                <code>int, float, double, char</code>
+                            </div>
+                        </div>
+                        <div class="definition-card">
+                            <h3><i class="fas fa-cube"></i> Variable</h3>
+                            <p>A <strong>variable</strong> is a named storage location in memory that holds a value. The value can change during program execution.</p>
+                            <div class="example-box">
+                                <div class="example-label">Example:</div>
+                                <code>int age;</code>
+                            </div>
+                        </div>
+                        <div class="definition-card">
+                            <h3><i class="fas fa-plus-circle"></i> Operator</h3>
+                            <p>An <strong>operator</strong> is a symbol that tells the compiler to perform specific mathematical or logical operations.</p>
+                            <div class="example-box">
+                                <div class="example-label">Examples:</div>
+                                <code>+, -, *, /, %</code>
+                            </div>
+                        </div>
+                        <div class="definition-card">
+                            <h3><i class="fas fa-calculator"></i> Expression</h3>
+                            <p>An <strong>expression</strong> is a combination of variables, constants, and operators that produces a single value when evaluated.</p>
+                            <div class="example-box">
+                                <div class="example-label">Example:</div>
+                                <code>a + b * 2</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="subtopic-heading">Example: All Concepts Together</h3>
+                    <div class="code-block">
+<pre>int a = 5;          // Variable 'a' of type int
+int b = 10;         // Variable 'b' of type int
+int result;         // Variable 'result' (uninitialized)
+
+result = a + b * 2; // Expression using operators (+, *)
+                    // Result: 5 + (10 * 2) = 25
+
+printf("Result: %d", result);
+</pre>
+                    </div>
+
+                    <div class="explanation-box">
+                        <strong>Explanation:</strong>
+                        <ul>
+                            <li><code>int</code> is the <strong>data type</strong></li>
+                            <li><code>a</code>, <code>b</code>, <code>result</code> are <strong>variables</strong></li>
+                            <li><code>+</code>, <code>*</code> are <strong>operators</strong></li>
+                            <li><code>a + b * 2</code> is an <strong>expression</strong></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ===================== -->
+                <!-- TOPIC 2: Naming Rules -->
+                <!-- ===================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Variable Naming Rules</h2>
+                    <p>When creating variable names in C, you must follow specific rules:</p>
+
+                    <div class="rules-list">
+                        <div class="rule-item rule-valid">
+                            <div class="rule-icon"><i class="fas fa-check-circle"></i></div>
+                            <div class="rule-content">
+                                <strong>Must start with a letter or underscore</strong>
+                                <p>Variable names can begin with any letter (a-z, A-Z) or an underscore (_)</p>
+                                <code class="rule-example">age, _count, totalScore</code>
+                            </div>
+                        </div>
+                        
+                        <div class="rule-item rule-valid">
+                            <div class="rule-icon"><i class="fas fa-check-circle"></i></div>
+                            <div class="rule-content">
+                                <strong>Can contain letters, digits, and underscores</strong>
+                                <p>After the first character, you can use letters, numbers, and underscores</p>
+                                <code class="rule-example">age2, student_name, total123</code>
+                            </div>
+                        </div>
+                        
+                        <div class="rule-item rule-valid">
+                            <div class="rule-icon"><i class="fas fa-check-circle"></i></div>
+                            <div class="rule-content">
+                                <strong>Case-sensitive</strong>
+                                <p>C distinguishes between uppercase and lowercase letters</p>
+                                <code class="rule-example">Age, age, AGE are all different</code>
+                            </div>
+                        </div>
+                        
+                        <div class="rule-item rule-invalid">
+                            <div class="rule-icon"><i class="fas fa-times-circle"></i></div>
+                            <div class="rule-content">
+                                <strong>Cannot start with a digit</strong>
+                                <p>Variable names cannot begin with numbers</p>
+                                <code class="rule-example">✗ 2students, 9count</code>
+                            </div>
+                        </div>
+                        
+                        <div class="rule-item rule-invalid">
+                            <div class="rule-icon"><i class="fas fa-times-circle"></i></div>
+                            <div class="rule-content">
+                                <strong>Cannot use reserved keywords</strong>
+                                <p>Keywords like int, if, else, while cannot be used as variable names</p>
+                                <code class="rule-example">✗ int, float, return, for</code>
+                            </div>
+                        </div>
+                        
+                        <div class="rule-item rule-invalid">
+                            <div class="rule-icon"><i class="fas fa-times-circle"></i></div>
+                            <div class="rule-content">
+                                <strong>No spaces or special characters</strong>
+                                <p>Spaces and most special characters (except underscore) are not allowed</p>
+                                <code class="rule-example">✗ my age, total$, student#1</code>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================================= -->
+                <!-- TOPIC 3: Constants & Declarations -->
+                <!-- ================================= -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Constants and Variable Declarations</h2>
+                    
+                    <h3 class="subtopic-heading">Constants</h3>
+                    <p>A <strong>constant</strong> is a value that cannot be changed during program execution. Constants are defined using the <code>#define</code> directive or the <code>const</code> keyword.</p>
+
+                    <div class="code-block">
+<pre>#define PI 3.14159        // Using #define
+const int MAX_SIZE = 100; // Using const keyword
+</pre>
+
+                    </div>
+
+                    <h3 class="subtopic-heading">Variable Declarations</h3>
+                    <p>There are several ways to declare and initialize variables in C:</p>
+
+                    <div class="declaration-examples">
+                        <div class="declaration-card">
+                            <div class="declaration-header">
+                                <span class="declaration-badge declaration-badge--1">1</span>
+                                <strong>Uninitialized Declaration</strong>
+                            </div>
+                            <p><strong>Declared</strong> a variable without assigning an initial value. The variable contains garbage value.</p>
+                            <div class="code-block">
+<pre>int x;        // x is only declared but not initialized
+float price;  // price is only declared but not initialized
+</pre>
+                            </div>
+                        </div>
+
+                        <div class="declaration-card">
+                            <div class="declaration-header">
+                                <span class="declaration-badge declaration-badge--2">2</span>
+                                <strong>Initialized Declaration</strong>
+                            </div>
+                            <p>Declare and assign a value to a variable in one statement. This can be called initialized value.</p>
+                            <div class="code-block">
+<pre>int age = 25;       // age is initialized to 25
+float pi = 3.14;    // pi is initialized to 3.14
+</pre>
+                            </div>
+                        </div>
+
+                        <div class="declaration-card">
+                            <div class="declaration-header">
+                                <span class="declaration-badge declaration-badge--3">3</span>
+                                <strong>Multiple Variables Declared</strong>
+                            </div>
+                            <p>Declare multiple variables of the same type in one statement.</p>
+                            <div class="code-block">
+<pre>int a, b, c;           // Three variables declared
+float x, y, z;
+</pre>
+                            </div>
+                        </div>
+
+                        <div class="declaration-card">
+                            <div class="declaration-header">
+                                <span class="declaration-badge declaration-badge--4">4</span>
+                                <strong>Multiple Initialization</strong>
+                            </div>
+                            <p>Declare and initialize multiple variables in one statement.</p>
+                            <div class="code-block">
+<pre>int a = 5, b = 10, c = 15;       // All initialized
+float x = 1.5, y = 2.5, z = 3.5;
+</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Complete Example: All Declaration Types</h4>
+                    <div class="code-block">
+<pre>int main() {
+    // Uninitialized
+    int count;
+    
+    // Initialized age is 21
+    int age = 21;
+    
+    // Multiple variables declared
+    int x, y, z;
+    
+    // Multiple initialization
+    int a = 1, b = 2, c = 3;
+    
+    // Constant
+    const float PI = 3.14159;
+    
+    return 0;
+}
+</pre>
+                    </div>
+                </section>
+
+                <!-- ============================= -->
+                <!-- TOPIC 4: Arithmetic Operators -->
+                <!-- ============================= -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Binary Arithmetic Operators</h2>
+                    <p>Arithmetic operators perform mathematical calculations on numeric operands:</p>
+
+                    <div class="operator-table">
+                        <div class="operator-row operator-header">
+                            <div class="operator-cell">Operator</div>
+                            <div class="operator-cell">Name</div>
+                            <div class="operator-cell">Example</div>
+                            <div class="operator-cell">Result</div>
+                        </div>
+
+                        <div class="operator-row">
+                            <div class="operator-cell"><code>+</code></div>
+                            <div class="operator-cell">Addition</div>
+                            <div class="operator-cell"><code>5 + 3</code></div>
+                            <div class="operator-cell"><code>8</code></div>
+                        </div>
+
+                        <div class="operator-row">
+                            <div class="operator-cell"><code>-</code></div>
+                            <div class="operator-cell">Subtraction</div>
+                            <div class="operator-cell"><code>10 - 4</code></div>
+                            <div class="operator-cell"><code>6</code></div>
+                        </div>
+
+                        <div class="operator-row">
+                            <div class="operator-cell"><code>*</code></div>
+                            <div class="operator-cell">Multiplication</div>
+                            <div class="operator-cell"><code>7 * 6</code></div>
+                            <div class="operator-cell"><code>42</code></div>
+                        </div>
+
+                        <div class="operator-row">
+                            <div class="operator-cell"><code>/</code></div>
+                            <div class="operator-cell">Division</div>
+                            <div class="operator-cell"><code>20 / 4</code></div>
+                            <div class="operator-cell"><code>5</code></div>
+                        </div>
+
+                        <div class="operator-row">
+                            <div class="operator-cell"><code>%</code></div>
+                            <div class="operator-cell">Modulus (Remainder)</div>
+                            <div class="operator-cell"><code>17 % 5</code></div>
+                            <div class="operator-cell"><code>2</code></div>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <i class="fas fa-info-circle"></i>
+                        <div>
+                            <strong>Note on Modulus Operator (%)</strong>
+                            <p>The modulus operator returns the <strong>remainder</strong> after division. For example, <code>17 % 5 = 2</code> because 17 ÷ 5 = 3 with a remainder of 2.</p>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Example Code:</h4>
+                    <div class="code-block">
+<pre>int a = 10, b = 3;
+
+int sum = a + b;        // 13
+int diff = a - b;       // 7
+int product = a * b;    // 30
+int quotient = a / b;   // 3 (integer division)
+int remainder = a % b;  // 1
+</pre>
+                    </div>
+                </section>
+
+                <!-- ============================= -->
+                <!-- TOPIC 5: Relational Operators -->
+                <!-- ============================= -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Relational Operators</h2>
+                    <p>Relational operators compare two values and return a boolean result (1 for true, 0 for false):</p>
+
+                    <div class="operator-table">
+                        <div class="operator-row operator-header">
+                            <div class="operator-cell">Operator</div>
+                            <div class="operator-cell">Name</div>
+                            <div class="operator-cell">Example</div>
+                            <div class="operator-cell">Result</div>
+                        </div>
+
+                        <div class="operator-row">
+                            <div class="operator-cell"><code>&gt;</code></div>
+                            <div class="operator-cell">Greater than</div>
+                            <div class="operator-cell"><code>5 &gt; 3</code></div>
+                            <div class="operator-cell"><code>1 (true)</code></div>
+                        </div>
+
+                        <div class="operator-row">
+                            <div class="operator-cell"><code>&gt;=</code></div>
+                            <div class="operator-cell">Greater than or equal to</div>
+                            <div class="operator-cell"><code>5 &gt;= 5</code></div>
+                            <div class="operator-cell"><code>1 (true)</code></div>
+                        </div>
+
+                        <div class="operator-row">
+                            <div class="operator-cell"><code>&lt;</code></div>
+                            <div class="operator-cell">Less than</div>
+                            <div class="operator-cell"><code>3 &lt; 5</code></div>
+                            <div class="operator-cell"><code>1 (true)</code></div>
+                        </div>
+
+                        <div class="operator-row">
+                            <div class="operator-cell"><code>&lt;=</code></div>
+                            <div class="operator-cell">Less than or equal to</div>
+                            <div class="operator-cell"><code>4 &lt;= 4</code></div>
+                            <div class="operator-cell"><code>1 (true)</code></div>
+                        </div>
+
+                        <div class="operator-row">
+                            <div class="operator-cell"><code>==</code></div>
+                            <div class="operator-cell">Equal to</div>
+                            <div class="operator-cell"><code>5 == 5</code></div>
+                            <div class="operator-cell"><code>1 (true)</code></div>
+                        </div>
+
+                        <div class="operator-row">
+                            <div class="operator-cell"><code>!=</code></div>
+                            <div class="operator-cell">Not equal to</div>
+                            <div class="operator-cell"><code>5 != 3</code></div>
+                            <div class="operator-cell"><code>1 (true)</code></div>
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <strong> Common Mistake: Don't Confuse = with ==</strong>
+                            <ul>
+                                <li><code>=</code> is the <strong>assignment operator</strong> (assigns a value): <code>x = 5;</code></li>
+                                <li><code>==</code> is the <strong>comparison operator</strong> (checks equality): <code>if (x == 5)</code></li>
+                                <li>Other assignment operators: <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>%=</code></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Example Code:</h4>
+                    <div class="code-block">
+<pre>int a = 10, b = 5;
+
+if (a &gt; b)   // true, executes block
+    printf("a is greater than b");
+
+if (a == b)  // false, skips block
+    printf("a equals b");
+
+if (a != b)  // true, executes block
+    printf("a is not equal to b");
+</pre>
+                    </div>
+                </section>
+
+                <!-- ========================== -->
+                <!-- TOPIC 6: Logical Operators -->
+                <!-- ========================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Logical Operators</h2>
+                    <p>Logical operators combine boolean expressions and return a boolean result:</p>
+
+                    <div class="logical-operators">
+                        <div class="logical-card">
+                            <div class="logical-header">
+                                <code>&&</code>
+                                <strong>Logical AND</strong>
+                            </div>
+                            <p>Returns true (1) if <strong>both</strong> operands are true.</p>
+                            <div class="code-block">
+<pre>int a = 5, b = 10;
+
+if (a &gt; 0 && b &gt; 0)  // true AND true = true
+    printf("Both positive");
+
+if (a &gt; 10 && b &gt; 5) // false AND true = false
+    printf("Won't print");
+</pre>
+                            </div>
+                        </div>
+
+                        <div class="logical-card">
+                            <div class="logical-header">
+                                <code>||</code>
+                                <strong>Logical OR</strong>
+                            </div>
+                            <p>Returns true (1) if <strong>at least one</strong> operand is true.</p>
+                            <div class="code-block">
+<pre>int age = 16;
+
+if (age &lt; 13 || age &gt; 19) // false OR false = false
+    printf("Not a teenager");
+
+if (age &gt; 15 || age &lt; 10) // true OR false = true
+    printf("Will print");
+</pre>
+                            </div>
+                        </div>
+
+                        <div class="logical-card">
+                            <div class="logical-header">
+                                <code>!</code>
+                                <strong>Logical NOT</strong>
+                            </div>
+                            <p>Returns the <strong>opposite</strong> boolean value (inverts true to false, false to true).</p>
+                            <div class="code-block">
+<pre>int isRaining = 0; // false
+
+if (!isRaining)        // NOT false = true
+    printf("Go outside!");
+
+if (!(5 &gt; 10))         // NOT false = true
+    printf("5 is not greater than 10");
+</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="truth-table">
+                        <h4>Truth Tables</h4>
+                        <div class="truth-tables-grid">
+                            <div class="truth-table-box">
+                                <strong>AND (&&)</strong>
+                                <table>
+                                    <tr><th>A</th><th>B</th><th>A && B</th></tr>
+                                    <tr><td>0</td><td>0</td><td>0</td></tr>
+                                    <tr><td>0</td><td>1</td><td>0</td></tr>
+                                    <tr><td>1</td><td>0</td><td>0</td></tr>
+                                    <tr><td>1</td><td>1</td><td class="true">1</td></tr>
+                                </table>
+                            </div>
+                            <div class="truth-table-box">
+                                <strong>OR (||)</strong>
+                                <table>
+                                    <tr><th>A</th><th>B</th><th>A || B</th></tr>
+                                    <tr><td>0</td><td>0</td><td>0</td></tr>
+                                    <tr><td>0</td><td>1</td><td class="true">1</td></tr>
+                                    <tr><td>1</td><td>0</td><td class="true">1</td></tr>
+                                    <tr><td>1</td><td>1</td><td class="true">1</td></tr>
+                                </table>
+                            </div>
+                            <div class="truth-table-box">
+                                <strong>NOT (!)</strong>
+                                <table>
+                                    <tr><th>A</th><th>!A</th></tr>
+                                    <tr><td>0</td><td class="true">1</td></tr>
+                                    <tr><td>1</td><td>0</td></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================== -->
+                <!-- TOPIC 7: Increment & Decrement -->
+                <!-- ============================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Increment and Decrement Operators</h2>
+                    <p>These operators increase or decrease a variable's value by 1:</p>
+
+                    <div class="two-column">
+                        <div class="increment-card">
+                            <h3><code>++</code> Increment</h3>
+                            <p>Increases the value by 1</p>
+                            <div class="code-block">
+<pre>int x = 5;
+x++;      // x becomes 6
+// Same as: x = x + 1;
+</pre>
+                            </div>
+                        </div>
+
+                        <div class="increment-card">
+                            <h3><code>--</code> Decrement</h3>
+                            <p>Decreases the value by 1</p>
+                            <div class="code-block">
+<pre>int y = 10;
+y--;      // y becomes 9
+// Same as: y = y - 1;
+</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="subtopic-heading">Prefix vs Postfix</h3>
+                    <p>The placement of the operator (before or after the variable) affects <strong>when</strong> the increment/decrement happens:</p>
+
+                    <div class="prefix-postfix-comparison">
+                        <div class="comparison-card">
+                            <div class="comparison-header">
+                                <strong>Prefix (++x, --x)</strong>
+                                <span class="comparison-badge">Increment FIRST</span>
+                            </div>
+                            <p>The variable is incremented/decremented <strong>before</strong> its value is used in the expression.</p>
+                            <div class="code-block">
+<pre>int x = 5;
+int y = ++x;  // x becomes 6 first, then y = 6
+
+printf("x = %d, y = %d", x, y);
+// Output: x = 6, y = 6
+</pre>
+                            </div>
+                        </div>
+
+                        <div class="comparison-card">
+                            <div class="comparison-header">
+                                <strong>Postfix (x++, x--)</strong>
+                                <span class="comparison-badge">Use FIRST</span>
+                            </div>
+                            <p>The variable's current value is used in the expression <strong>first</strong>, then it is incremented/decremented.</p>
+                            <div class="code-block">
+<pre>int x = 5;
+int y = x++;  // y = 5 first, then x becomes 6
+
+printf("x = %d, y = %d", x, y);
+// Output: x = 6, y = 5
+</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Side-by-Side Comparison:</h4>
+                    <div class="code-block">
+<pre>// PREFIX
+int a = 5;
+int b = ++a;  // a = 6, b = 6
+
+// POSTFIX
+int x = 5;
+int y = x++;  // x = 6, y = 5
+</pre>
+                    </div>
+                </section>
+
+                <!-- ============================ -->
+                <!-- TOPIC 8: Compound Assignment -->
+                <!-- ============================ -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Compound Assignment Operators</h2>
+                    <p>Compound assignment operators combine an arithmetic operation with assignment, providing a shorthand notation:</p>
+
+                    <div class="compound-table">
+                        <div class="compound-row compound-header">
+                            <div class="compound-cell">Operator</div>
+                            <div class="compound-cell">Example</div>
+                            <div class="compound-cell">Equivalent To</div>
+                            <div class="compound-cell">Meaning</div>
+                        </div>
+
+                        <div class="compound-row">
+                            <div class="compound-cell"><code>+=</code></div>
+                            <div class="compound-cell"><code>x += 3</code></div>
+                            <div class="compound-cell"><code>x = x + 3</code></div>
+                            <div class="compound-cell">Add and assign</div>
+                        </div>
+
+                        <div class="compound-row">
+                            <div class="compound-cell"><code>-=</code></div>
+                            <div class="compound-cell"><code>x -= 5</code></div>
+                            <div class="compound-cell"><code>x = x - 5</code></div>
+                            <div class="compound-cell">Subtract and assign</div>
+                        </div>
+
+                        <div class="compound-row">
+                            <div class="compound-cell"><code>*=</code></div>
+                            <div class="compound-cell"><code>x *= 2</code></div>
+                            <div class="compound-cell"><code>x = x * 2</code></div>
+                            <div class="compound-cell">Multiply and assign</div>
+                        </div>
+
+                        <div class="compound-row">
+                            <div class="compound-cell"><code>/=</code></div>
+                            <div class="compound-cell"><code>x /= 4</code></div>
+                            <div class="compound-cell"><code>x = x / 4</code></div>
+                            <div class="compound-cell">Divide and assign</div>
+                        </div>
+
+                        <div class="compound-row">
+                            <div class="compound-cell"><code>%=</code></div>
+                            <div class="compound-cell"><code>x %= 3</code></div>
+                            <div class="compound-cell"><code>x = x % 3</code></div>
+                            <div class="compound-cell">Modulus and assign</div>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Example Code:</h4>
+                    <div class="code-block">
+<pre>int total = 100;
+
+total += 50;   // total = total + 50  → 150
+total -= 20;   // total = total - 20  → 130
+total *= 2;    // total = total * 2   → 260
+total /= 4;    // total = total / 4   → 65
+total %= 10;   // total = total % 10  → 5
+
+printf("Final: %d", total); // Output: 5
+</pre>
+                    </div>
+                </section>
+
+                <!-- ============================ -->
+                <!-- TOPIC 9: Operator Precedence -->
+                <!-- ============================ -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Operator Precedence</h2>
+                    <p><strong>Operator precedence</strong> determines which operations are performed first in an expression with multiple operators. Operators with higher precedence are evaluated before operators with lower precedence.</p>
+
+                    <div class="precedence-table">
+                        <div class="precedence-header">Order of Precedence (Highest to Lowest)</div>
+                        <div class="precedence-row">
+                            <div class="precedence-level">1</div>
+                            <div class="precedence-ops"><code>() &nbsp; []</code></div>
+                            <div class="precedence-desc">Parentheses, Array subscript</div>
+                        </div>
+                        <div class="precedence-row">
+                            <div class="precedence-level">2</div>
+                            <div class="precedence-ops"><code>++ &nbsp; -- &nbsp; ! &nbsp; - &nbsp; +</code></div>
+                            <div class="precedence-desc">Increment, Decrement, Logical NOT, Unary minus/plus</div>
+                        </div>
+                        <div class="precedence-row">
+                            <div class="precedence-level">3</div>
+                            <div class="precedence-ops"><code>* &nbsp; / &nbsp; %</code></div>
+                            <div class="precedence-desc">Multiplication, Division, Modulus</div>
+                        </div>
+                        <div class="precedence-row">
+                            <div class="precedence-level">4</div>
+                            <div class="precedence-ops"><code>+ &nbsp; -</code></div>
+                            <div class="precedence-desc">Addition, Subtraction</div>
+                        </div>
+                        <div class="precedence-row">
+                            <div class="precedence-level">5</div>
+                            <div class="precedence-ops"><code>&lt; &nbsp; &lt;= &nbsp; &gt; &nbsp; &gt;=</code></div>
+                            <div class="precedence-desc">Relational operators</div>
+                        </div>
+                        <div class="precedence-row">
+                            <div class="precedence-level">6</div>
+                            <div class="precedence-ops"><code>== &nbsp; !=</code></div>
+                            <div class="precedence-desc">Equality operators</div>
+                        </div>
+                        <div class="precedence-row">
+                            <div class="precedence-level">7</div>
+                            <div class="precedence-ops"><code>&</code></div>
+                            <div class="precedence-desc">bitwise AND</div>
+                        </div>
+                        <div class="precedence-row">
+                            <div class="precedence-level">8</div>
+                            <div class="precedence-ops"><code>&&</code></div>
+                            <div class="precedence-desc">Logical AND</div>
+                        </div>
+                        <div class="precedence-row">
+                            <div class="precedence-level">9</div>
+                            <div class="precedence-ops"><code>||</code></div>
+                            <div class="precedence-desc">Logical OR</div>
+                        </div>
+                        <div class="precedence-row">
+                            <div class="precedence-level">10</div>
+                            <div class="precedence-ops"><code>= &nbsp; += &nbsp; -= &nbsp; *= &nbsp; /= &nbsp; %=</code></div>
+                            <div class="precedence-desc">Assignment operators</div>
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <strong> Common Mistake: Don't Confuse Unary (-, +) with Normal/Binary (+, -)</strong>
+                            <ul>
+                                <li>Example of Unary (-, +) example: <code>+x</code> or <code>-x</code></li>
+                                <li>Example of Normal (+, -) example: <code>a + b</code> or <code>a - b</code></li>                                
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Example Without Parentheses:</h4>
+                    <div class="code-block">
+<pre>int result = 5 + 3 * 2;
+// Step 1: 3 * 2 = 6  (multiplication first)
+// Step 2: 5 + 6 = 11
+// Result: 11
+</pre>
+                    </div>
+
+                    <h4 class="example-heading">Example With Parentheses:</h4>
+                    <div class="code-block">
+<pre>int result = (5 + 3) * 2;
+// Step 1: 5 + 3 = 8  (parentheses first)
+// Step 2: 8 * 2 = 16
+// Result: 16
+</pre>
+                    </div>
+
+                    <div class="info-box">
+                        <i class="fas fa-lightbulb"></i>
+                        <div>
+                            <strong>Use Parentheses for Clarity</strong>
+                            <p>Even when not strictly necessary, using parentheses makes your code more readable and prevents mistakes. <code>(a + b) * c</code> is clearer than <code>a + b * c</code>.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ========================= -->
+                <!-- TOPIC 10: Type Conversion -->
+                <!-- ========================= -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Type Conversion (Casting)</h2>
+                    <p>Type conversion allows you to convert a value from one data type to another. There are two types:</p>
+
+                    <div class="conversion-cards">
+                        <div class="conversion-card">
+                            <div class="conversion-header">
+                                <i class="fas fa-magic"></i>
+                                <strong>Implicit Conversion (Automatic)</strong>
+                            </div>
+                            <p>The compiler automatically converts one data type to another when needed. This usually happens when mixing different types in an expression.</p>
+                            <div class="code-block">
+<pre>int a = 5;
+float b = 2.5;
+float result = a + b;  // 'a' is automatically converted to float
+                       // 5.0 + 2.5 = 7.5
+
+printf("%.1f", result); // Output: 7.5
+</pre>
+                            </div>
+                            <p class="conversion-note"><strong>Note:</strong> C promotes smaller types to larger types (int → float → double) to prevent data loss.</p>
+                        </div>
+
+                        <div class="conversion-card">
+                            <div class="conversion-header">
+                                <i class="fas fa-hand-pointer"></i>
+                                <strong>Explicit Conversion (Manual Casting)</strong>
+                            </div>
+                            <p>You manually convert a value to a specific type using the cast operator. Syntax: <code>(type) value</code></p>
+                            <div class="code-block">
+<pre>float x = 7.8;
+int y = (int) x;  // Explicitly convert float to int
+                  // Truncates decimal: 7.8 → 7
+
+printf("%d", y);  // Output: 7
+
+// Another example
+int a = 5, b = 2;
+float result = (float) a / b;  // 5.0 / 2 = 2.5
+// Without cast: 5 / 2 = 2 (integer division)
+</pre>
+                            </div>
+                            <p class="conversion-note"><strong>Note:</strong> Casting from float to int <strong>truncates</strong> (removes) the decimal part, it does not round.</p>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Comparison Example:</h4>
+                    <div class="code-block">
+<pre>// Without casting (integer division)
+int result1 = 7 / 2;        // 3 (both are int)
+
+// With casting (float division)
+float result2 = (float) 7 / 2;  // 3.5
+</pre>
+                    </div>
+                </section>
+
+                <!-- ============================ -->
+                <!-- TOPIC 11: Compound Statement -->
+                <!-- ============================ -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Compound Statement</h2>
+                    <p>A <strong>compound statement</strong> (also called a <strong>block</strong>) is a group of statements enclosed in curly braces <code>{ }</code>. It allows you to group multiple statements together so they are treated as a single unit.</p>
+
+                    <div class="code-block">
+<pre>// Single statement (no braces needed)
+if (x &gt; 0)
+    printf("Positive");
+
+// Compound statement (braces required)
+if (x &gt; 0) {
+    printf("x is positive\n");
+    printf("Value: %d\n", x);
+    x = x * 2;
+}
+</pre>
+                    </div>
+
+                    <div class="info-box">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Best Practice</strong>
+                            <p>Always use curly braces <code>{ }</code>, even for single statements in if/else/while/for blocks. This prevents bugs when you later add more statements.</p>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Complete Example:</h4>
+                    <div class="code-block">
+<pre>int score = 85;
+
+if (score &gt;= 50) {
+    // Compound statement - multiple lines treated as one block
+    printf("You passed!\n");
+    printf("Your score: %d\n", score);
+    score += 10;  // Bonus points
+    printf("With bonus: %d\n", score);
+}
+</pre>
+                    </div>
+                </section>
+
+                <!-- ================================= -->
+                <!-- PART 2: WRITING SIMPLE C PROGRAMS -->
+                <!-- ================================= -->
+
+                <div class="part-divider">
+                    <span class="part-tag">Part 2</span>
+                    <h2>Writing Simple C Programs</h2>
+                </div>
+
+                <!-- =========================== -->
+                <!-- TOPIC 12: Formatting Output -->
+                <!-- =========================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Formatting Output with printf()</h2>
+                    <p>The <code>printf()</code> function allows you to control how data is displayed using <strong>format specifiers</strong>, <strong>field width</strong>, <strong>precision</strong>, and <strong>flags</strong>.</p>
+
+                    <h3 class="subtopic-heading">Field Width</h3>
+                    <p>The <strong>field width</strong> specifies the minimum number of characters to be printed. If the value has fewer characters, it is padded with spaces.</p>
+
+                    <div class="code-block">
+<pre>int num = 42;
+
+printf("%d\n", num);    // Output: 42
+printf("%5d\n", num);   // Output:    42  (3 spaces + 42)
+printf("%10d\n", num);  // Output:         42  (8 spaces + 42)
+</pre>
+                    </div>
+
+                    <div class="explanation-box">
+                        <strong>Explanation:</strong>
+                        <ul>
+                            <li><code>%5d</code> means the output should be at least 5 characters wide</li>
+                            <li>Since 42 is only 2 digits, 3 spaces are added before it</li>
+                            <li>The number is <strong>right-aligned</strong> by default</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="subtopic-heading">Precision for Floating-Point Numbers</h3>
+                    <p>Use <code>.n</code> to specify how many decimal places to show:</p>
+
+                    <div class="code-block">
+<pre>float pi = 3.14159265;
+
+printf("%f\n", pi);      // Output: 3.141593 (default 6 decimals)
+printf("%.2f\n", pi);    // Output: 3.14
+printf("%.4f\n", pi);    // Output: 3.1416 (rounded)
+printf("%10.2f\n", pi);  // Output:       3.14 (width 10, precision 2)
+</pre>
+                    </div>
+
+                    <h3 class="subtopic-heading">Flags</h3>
+                    <p>Flags modify the output format:</p>
+
+                    <div class="flags-table">
+                        <div class="flags-row flags-header">
+                            <div class="flags-cell">Flag</div>
+                            <div class="flags-cell">Meaning</div>
+                            <div class="flags-cell">Example</div>
+                        </div>
+                        <div class="flags-row">
+                            <div class="flags-cell"><code>-</code></div>
+                            <div class="flags-cell">Left-align</div>
+                            <div class="flags-cell"><code>%-5d</code> → <code>42   </code></div>
+                        </div>
+                        <div class="flags-row">
+                            <div class="flags-cell"><code>+</code></div>
+                            <div class="flags-cell">Show sign for positive numbers</div>
+                            <div class="flags-cell"><code>%+d</code> → <code>+42</code></div>
+                        </div>
+                        <div class="flags-row">
+                            <div class="flags-cell"><code>0</code></div>
+                            <div class="flags-cell">Pad with zeros instead of spaces</div>
+                            <div class="flags-cell"><code>%05d</code> → <code>00042</code></div>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Complete Example:</h4>
+                    <div class="code-block">
+<pre>int num = 42;
+float price = 19.99;
+
+printf("%5d\n", num);      //    42
+printf("%-5d\n", num);     // 42   
+printf("%05d\n", num);     // 00042
+printf("%+d\n", num);      // +42
+printf("$%6.2f\n", price); // $ 19.99
+</pre>
+                    </div>
+
+                    <div class="benefits-box">
+                        <strong>✓ Benefits of Format Specifiers:</strong>
+                        <ul>
+                            <li>Create aligned, professional-looking output</li>
+                            <li>Control decimal precision for accurate financial calculations</li>
+                            <li>Format tables and reports with proper spacing</li>
+                            <li>Make output more readable and consistent</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ================== -->
+                <!-- TOPIC 13: Comments -->
+                <!-- ================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Comments</h2>
+                    <p><strong>Comments</strong> are notes in your code that are ignored by the compiler. They help explain what the code does, making it easier for you and others to understand.</p>
+
+                    <div class="comment-types">
+                        <div class="comment-card">
+                            <div class="comment-header">
+                                <code>//</code>
+                                <strong>Single-Line Comment</strong>
+                            </div>
+                            <p>Starts with <code>//</code> and continues to the end of the line.</p>
+                            <div class="code-block">
+<pre>// This is a single-line comment
+int age = 21;  // Declare and initialize age
+
+// Calculate area of rectangle
+int area = length * width;
+</pre>
+                            </div>
+                        </div>
+
+                        <div class="comment-card">
+                            <div class="comment-header">
+                                <code>/* */</code>
+                                <strong>Multi-Line Comment</strong>
+                            </div>
+                            <p>Starts with <code>/*</code> and ends with <code>*/</code>. Can span multiple lines.</p>
+                            <div class="code-block">
+<pre>/*
+ * This is a multi-line comment.
+ * It can span several lines.
+ * Useful for longer explanations.
+ */
+int calculate(int x, int y) {
+    /* This is also valid */
+    return x + y;
+}
+</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <i class="fas fa-lightbulb"></i>
+                        <div>
+                            <strong>When to Use Comments</strong>
+                            <ul>
+                                <li>Explain complex logic or algorithms</li>
+                                <li>Describe what a function does</li>
+                                <li>Mark sections of code for organization</li>
+                                <li>Temporarily disable code during testing</li>
+                                <li>Add reminders or to-do notes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ========================== -->
+                <!-- TOPIC 14: Escape Sequences -->
+                <!-- ========================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Escape Sequences</h2>
+                    <p><strong>Escape sequences</strong> are special characters that begin with a backslash <code>\</code> and represent characters that are difficult or impossible to type directly.</p>
+
+                    <div class="escape-table">
+                        <div class="escape-row escape-header">
+                            <div class="escape-cell">Escape Sequence</div>
+                            <div class="escape-cell">Name</div>
+                            <div class="escape-cell">Description</div>
+                        </div>
+
+                        <div class="escape-row">
+                            <div class="escape-cell"><code>\n</code></div>
+                            <div class="escape-cell">Newline</div>
+                            <div class="escape-cell">Moves cursor to the next line</div>
+                        </div>
+
+                        <div class="escape-row">
+                            <div class="escape-cell"><code>\t</code></div>
+                            <div class="escape-cell">Tab</div>
+                            <div class="escape-cell">Inserts a horizontal tab (8 spaces)</div>
+                        </div>
+
+                        <div class="escape-row">
+                            <div class="escape-cell"><code>\\</code></div>
+                            <div class="escape-cell">Backslash</div>
+                            <div class="escape-cell">Prints a single backslash \</div>
+                        </div>
+
+                        <div class="escape-row">
+                            <div class="escape-cell"><code>\"</code></div>
+                            <div class="escape-cell">Double Quote</div>
+                            <div class="escape-cell">Prints a double quote "</div>
+                        </div>
+
+                        <div class="escape-row">
+                            <div class="escape-cell"><code>\'</code></div>
+                            <div class="escape-cell">Single Quote</div>
+                            <div class="escape-cell">Prints a single quote '</div>
+                        </div>
+
+                        <div class="escape-row">
+                            <div class="escape-cell"><code>\a</code></div>
+                            <div class="escape-cell">Alert (Bell)</div>
+                            <div class="escape-cell">Produces a beep sound</div>
+                        </div>
+
+                        <div class="escape-row">
+                            <div class="escape-cell"><code>\r</code></div>
+                            <div class="escape-cell">Carriage Return</div>
+                            <div class="escape-cell">Moves cursor to the beginning of line</div>
+                        </div>
+
+                        <div class="escape-row">
+                            <div class="escape-cell"><code>\b</code></div>
+                            <div class="escape-cell">Backspace</div>
+                            <div class="escape-cell">Moves cursor one position back</div>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Example Code:</h4>
+                    <div class="code-block">
+<pre>printf("Hello\nWorld");          // Hello
+                                 // World
+
+printf("Name:\tJohn");           // Name:    John
+
+printf("C:\\Program Files\\");  // C:\Program Files\
+
+printf("He said \"Hello\"");     // He said "Hello"
+
+printf("Line 1\nLine 2\nLine 3");
+// Output:
+// Line 1
+// Line 2
+// Line 3</pre>
+                    </div>
+                </section>
+
+                <!-- =========================== -->
+                <!-- TOPIC 15: stdio.h Functions -->
+                <!-- =========================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Functions in stdio.h</h2>
+                    <p>The <code>&lt;stdio.h&gt;</code> header file provides functions for input and output operations. The two most commonly used functions are:</p>
+
+                    <div class="function-cards">
+                        <div class="function-card">
+                            <div class="function-header">
+                                <code>printf()</code>
+                                <strong>Output Function</strong>
+                            </div>
+                            <p>Prints formatted output to the screen (standard output).</p>
+                            <div class="code-block">
+<pre>// Syntax:
+printf("format string", arguments);
+
+// Examples:
+printf("Hello, World!");
+printf("Age: %d", 25);
+printf("Name: %s, Score: %.2f", "Alice", 95.5);</pre>
+                            </div>
+                            <div class="format-specifiers">
+                                <strong>Common Format Specifiers:</strong>
+                                <ul>
+                                    <li><code>%d</code> or <code>%i</code> - Integer</li>
+                                    <li><code>%f</code> - Float/Double</li>
+                                    <li><code>%c</code> - Single character</li>
+                                    <li><code>%s</code> - String</li>
+                                    <li><code>%lf</code> - Double (for scanf)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="function-card">
+                            <div class="function-header">
+                                <code>scanf()</code>
+                                <strong>Input Function</strong>
+                            </div>
+                            <p>Reads formatted input from the keyboard (standard input).</p>
+                            <div class="code-block">
+<pre>// Syntax:
+scanf("format string", &variable);
+
+// Examples:
+int age;
+scanf("%d", &age);  // Note the & (address-of operator)
+
+float price;
+scanf("%f", &price);
+
+char grade;
+scanf(" %c", &grade);  // Space before %c to skip whitespace</pre>
+                            </div>
+                            <div class="warning-box">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <div>
+                                    <strong>Important: Use & with scanf()</strong>
+                                    <p>For variables (not arrays), you <strong>must</strong> use the <code>&</code> operator before the variable name in <code>scanf()</code>. This passes the memory address where the input should be stored.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- =========================== -->
+                <!-- TOPIC 16: Simple C Programs -->
+                <!-- =========================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Complete C Programs</h2>
+                    
+                    <h3 class="subtopic-heading">Program 1: Print a Line of Text</h3>
+                    <div class="program-box">
+                        <div class="code-block">
+<pre>#include &lt;stdio.h&gt;
+
+int main() {
+    printf("Welcome to C Programming!\n");
+    printf("This is my first program.\n");
+    
+    return 0;
+}</pre>
+                        </div>
+
+                        <div class="program-explanation">
+                            <strong>Program Explanation:</strong>
+                            <ol>
+                                <li><code>#include &lt;stdio.h&gt;</code> - Includes the standard input/output library, which provides <code>printf()</code></li>
+                                <li><code>int main()</code> - The main function where program execution begins. <code>int</code> means it returns an integer</li>
+                                <li><code>printf(...)</code> - Prints the text to the screen. <code>\n</code> creates a new line after each message</li>
+                                <li><code>return 0;</code> - Returns 0 to the operating system, indicating the program finished successfully</li>
+                                <li><code>{ }</code> - Curly braces define the body (block) of the main function</li>
+                            </ol>
+                        </div>
+
+                        <div class="program-output">
+                            <strong>Output:</strong>
+                            <pre>Welcome to C Programming!
+This is my first program.</pre>
+                        </div>
+                    </div>
+
+                    <h3 class="subtopic-heading">Program 2: Adding Two Integers</h3>
+                    <div class="program-box">
+                        <div class="code-block">
+<pre>#include &lt;stdio.h&gt;
+
+int main() {
+    int num1, num2, sum;
+    
+    // Prompt user for input
+    printf("Enter first number: ");
+    scanf("%d", &num1);
+    
+    printf("Enter second number: ");
+    scanf("%d", &num2);
+    
+    // Calculate sum
+    sum = num1 + num2;
+    
+    // Display result
+    printf("\nThe sum of %d and %d is %d\n", num1, num2, sum);
+    
+    return 0;
+}</pre>
+                        </div>
+
+                        <div class="program-explanation">
+                            <strong>Program Explanation:</strong>
+                            <ol>
+                                <li><code>int num1, num2, sum;</code> - Declares three integer variables to store the two numbers and their sum</li>
+                                <li><code>printf("Enter...")</code> - Prompts the user to enter a number</li>
+                                <li><code>scanf("%d", &num1)</code> - Reads an integer from the keyboard and stores it in <code>num1</code>. The <code>&</code> gives scanf the memory address where to store the value</li>
+                                <li><code>sum = num1 + num2;</code> - Adds the two numbers and stores the result in <code>sum</code></li>
+                                <li><code>printf(..., num1, num2, sum)</code> - Displays the result. <code>%d</code> placeholders are replaced by the variable values</li>
+                            </ol>
+                        </div>
+
+                        <div class="program-output">
+                            <strong>Sample Run:</strong>
+                            <pre>Enter first number: 15
+Enter second number: 27
+
+The sum of 15 and 27 is 42</pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============= -->
+                <!-- KEY TAKEAWAYS -->
+                <!-- ============= -->
+                <section class="topic-section highlight-section">
+                    <h2><i class="fas fa-star"></i> Key Takeaways</h2>
+                    <ul class="takeaways-list">
+                        <li>Data types specify what kind of data a variable can store (int, float, char, double)</li>
+                        <li>Variables must start with a letter or underscore, are case-sensitive, and cannot be reserved keywords</li>
+                        <li>Arithmetic operators: + - * / % (modulus gives remainder)</li>
+                        <li>Relational operators (>, >=, <, <=, ==, !=) compare values and return true/false</li>
+                        <li>Logical operators (&&, ||, !) combine boolean expressions</li>
+                        <li>Prefix (++x) increments before use; Postfix (x++) uses value then increments</li>
+                        <li>Compound assignment: x += 5 is the same as x = x + 5</li>
+                        <li>Operator precedence: *, /, % before +, -; use parentheses for clarity</li>
+                        <li>Implicit conversion is automatic; explicit conversion uses (type) casting</li>
+                        <li>Format specifiers control output: %5d for width, %.2f for precision</li>
+                        <li>Escape sequences: \n (newline), \t (tab), \\ (backslash), \" (quote)</li>
+                        <li>printf() outputs data; scanf() reads input (use & for variables)</li>
+                        <li>Every C program needs #include &lt;stdio.h&gt; and int main()</li>
+                    </ul>
+                </section>
+
+            </div>
+            <!-- END NOTES CONTENT -->
+
+            <!-- Start Exercise Button -->
+            <div class="start-exercise-section">
+                <div class="ready-box">
+                    <i class="fas fa-dumbbell"></i>
+                    <h3>Ready to Practice?</h3>
+                    <p>Test your understanding with 21 exercises covering C fundamentals, operators, and programming basics. Take your time, there's no timer!</p>
+                </div>
+                <button id="startExerciseBtn" class="btn btn-start">
+                    <i class="fas fa-play"></i>
+                    Start Exercises
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================= -->
+    <!-- ===== EXERCISE SCREEN ======= -->
+    <!-- ============================= -->
+
+    <div class="exercise-screen" id="exerciseScreen">
+        <div class="exercise-container">
+            <div class="exercise-header">
+                <div class="exercise-info">
+                    <h1>Chapter 3: Fundamentals of C — Exercises</h1>
+                    <div class="progress-info">
+                        <span class="question-counter">
+                            Question <span id="currentQuestion">1</span> of <span id="totalQuestions">10</span>
+                        </span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="no-timer-badge">
+                    <i class="fas fa-infinity"></i>
+                    <span>No Time Limit</span>
+                </div>
+            </div>
+
+            <div class="question-container" id="questionContainer"></div>
+
+            <div class="exercise-navigation">
+                <button id="prevBtn" class="btn btn-outline" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                    Previous
+                </button>
+                <button id="nextBtn" class="btn btn-primary">
+                    Next
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button id="submitBtn" class="btn btn-submit" style="display: none;">
+                    <i class="fas fa-check-circle"></i>
+                    Submit Exercises
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================= -->
+    <!-- ===== RESULTS SCREEN ======== -->
+    <!-- ============================= -->
+
+    <div class="results-screen" id="resultsScreen">
+        <div class="results-container">
+            <div class="results-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h1>Exercises Complete!</h1>
+            <div class="score-display">
+                <div class="score-circle">
+                    <span class="score-number" id="scoreNumber">0</span>
+                    <span class="score-total">/ <span id="scoreTotalDisplay">10</span></span>
+                </div>
+                <p class="score-label">Correct Answers</p>
+            </div>
+            <div class="results-stats">
+                <div class="stat-item">
+                    <i class="fas fa-percent"></i>
+                    <span class="stat-label">Score</span>
+                    <span class="stat-value" id="percentageScore">0%</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-check-double"></i>
+                    <span class="stat-label">Status</span>
+                    <span class="stat-value" id="statusText">Good Job!</span>
+                </div>
+            </div>
+            <div class="results-actions">
+                <button class="btn btn-primary" onclick="window.location.href='../../index.html'">
+                    <i class="fas fa-home"></i>
+                    Back to Home
+                </button>
+                <button class="btn btn-outline" onclick="location.reload()">
+                    <i class="fas fa-redo"></i>
+                    Retry Exercises
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="main3.js"></script>
+</body>
+</html>

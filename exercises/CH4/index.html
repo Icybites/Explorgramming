@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Chapter 4: Control Structures</title>
+    <link rel="stylesheet" href="style4.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- ========================== -->
+    <!-- ===== NAVIGATION BAR ===== -->
+    <!-- ========================== -->
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#" class="logo">
+                    <span class="logo-text1">Explor</span>
+                    <span class="logo-text2">gramming</span>
+                </a>
+            </div>
+            <a href="../../index.html" class="btn-back">
+                <i class="fas fa-arrow-left"></i>
+                Back to Home
+            </a>
+        </div>
+    </nav>
+
+    <!-- ============================= -->
+    <!-- ===== NOTES/STUDY SCREEN ==== -->
+    <!-- ============================= -->
+
+    <div class="notes-screen" id="notesScreen">
+        <div class="notes-container">
+
+            <!-- Chapter Header -->
+            <div class="chapter-header">
+                <span class="chapter-tag">Chapter 4</span>
+                <h1>Control Structures</h1>
+                <p class="chapter-subtitle">Learn how to control program flow using selection and iteration structures</p>
+                <div class="chapter-meta">
+                    <span class="meta-item">
+                        <i class="fas fa-book"></i>
+                        14 Topics
+                    </span>
+                    <span class="meta-item">
+                        <i class="fas fa-dumbbell"></i>
+                        15 Exercises
+                    </span>
+                    <span class="meta-item">
+                        <i class="fas fa-clock"></i>
+                        ~45 min
+                    </span>
+                </div>
+            </div>
+
+            <!-- ======================== -->
+            <!-- ===== NOTES CONTENT ==== -->
+            <!-- ======================== -->
+
+            <div class="notes-content">
+
+                <!-- ==================================== -->
+                <!-- TOPIC 1: Types of Control Structures -->
+                <!-- ==================================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Types of Control Structures</h2>
+                    <p>A <strong>control structure</strong> determines the order in which statements are executed in a program. There are three fundamental types:</p>
+
+                    <div class="control-types-grid">
+                        <div class="control-type-card">
+                            <div class="control-type-icon" style="background: rgba(37, 99, 235, 0.1);">
+                                <i class="fas fa-arrow-down" style="color: #2563eb;"></i>
+                            </div>
+                            <h3>Sequence Structure</h3>
+                            <p>Statements are executed one after another in the order they appear. This is the default flow of execution.</p>
+                            <div class="example-box">
+                                <div class="example-label">Example:</div>
+                                <code>statement1;<br>statement2;<br>statement3;</code>
+                            </div>
+                        </div>
+
+                        <div class="control-type-card">
+                            <div class="control-type-icon" style="background: rgba(124, 58, 237, 0.1);">
+                                <i class="fas fa-code-branch" style="color: #7c3aed;"></i>
+                            </div>
+                            <h3>Selection Structure</h3>
+                            <p>Allows the program to choose between different paths based on a condition. Implemented using <strong>if</strong>, <strong>if-else</strong>, and <strong>switch</strong> statements.</p>
+                            <div class="example-box">
+                                <div class="example-label">Methods:</div>
+                                <code>if, if-else, switch</code>
+                            </div>
+                        </div>
+
+                        <div class="control-type-card">
+                            <div class="control-type-icon" style="background: rgba(16, 185, 129, 0.1);">
+                                <i class="fas fa-redo" style="color: #10b981;"></i>
+                            </div>
+                            <h3>Iteration Structure</h3>
+                            <p>Allows statements to be executed repeatedly (loops) as long as a condition is true. Implemented using <strong>for</strong>, <strong>while</strong>, and <strong>do-while</strong> loops.</p>
+                            <div class="example-box">
+                                <div class="example-label">Methods:</div>
+                                <code>for, while, do-while</code>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- =========================== -->
+                <!-- TOPIC 2: Sequence Structure -->
+                <!-- =========================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Sequence Structure</h2>
+                    <p>The <strong>sequence structure</strong> is the simplest control structure. Statements are executed sequentially, one after another, in the exact order they are written in the program.</p>
+
+                    <div class="code-block">
+<pre>#include &lt;stdio.h&gt;
+
+int main() {
+    int a = 5;           // Step 1: Declare and initialize a
+    int b = 10;          // Step 2: Declare and initialize b
+    int sum = a + b;     // Step 3: Calculate sum
+    printf("Sum: %d\n", sum);  // Step 4: Display result
+    
+    return 0;
+}</pre>
+                    </div>
+
+                    <div class="explanation-box">
+                        <strong>Flow of Execution:</strong>
+                        <p>Each statement executes from top to bottom without any branching or repetition. The program starts at the first statement and proceeds linearly until it reaches the end.</p>
+                    </div>
+                </section>
+
+                <!-- ============================ -->
+                <!-- PART 1: SELECTION STRUCTURES -->
+                <!-- ============================ -->
+
+                <div class="part-divider">
+                    <span class="part-tag">Part 1</span>
+                    <h2>Selection Structures</h2>
+                </div>
+
+                <!-- ====================================== -->
+                <!-- TOPIC 3: Selection Statements Overview -->
+                <!-- ====================================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Selection Statements in C</h2>
+                    <p>Selection statements allow your program to make decisions and execute different code based on conditions. There are three types:</p>
+
+                    <div class="selection-overview">
+                        <div class="selection-method">
+                            <div class="selection-method-header">
+                                <code>if</code>
+                                <strong>Simple Condition</strong>
+                            </div>
+                            <p>Executes a block of code <strong>only if</strong> a condition is true. If the condition is false, the code is skipped.</p>
+                        </div>
+
+                        <div class="selection-method">
+                            <div class="selection-method-header">
+                                <code>if-else</code>
+                                <strong>Two-Way Decision</strong>
+                            </div>
+                            <p>Executes one block of code if the condition is true, and a <strong>different block</strong> if the condition is false.</p>
+                        </div>
+
+                        <div class="selection-method">
+                            <div class="selection-method-header">
+                                <code>switch</code>
+                                <strong>Multi-Way Decision</strong>
+                            </div>
+                            <p>Selects one of many blocks of code to execute based on the value of an expression. Useful when checking multiple possible values.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===================== -->
+                <!-- TOPIC 4: if Statement -->
+                <!-- ===================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Selection: if Statement</h2>
+                    <p>The <strong>if statement</strong> executes a block of code only if a specified condition is to true (non-zero).</p>
+
+                    <div class="flow-diagram">
+                        <div class="flow-step-inline">Condition</div>
+                        <div class="flow-branches-inline">
+                            <div class="flow-path">
+                                <span class="flow-label-true">TRUE</span>
+                                <span class="flow-arrow-down">↓</span>
+                                <span class="flow-action">Execute Code</span>
+                            </div>
+                            <div class="flow-path">
+                                <span class="flow-label-false">FALSE</span>
+                                <span class="flow-arrow-down">↓</span>
+                                <span class="flow-action">Skip Code</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Example:</h4>
+                    <div class="code-block">
+<pre>int age = 20;
+
+if (age >= 18) {
+    printf("You are an adult.\n");
+    printf("You can vote!\n");
+}
+
+printf("End of program");
+
+// Output:
+// You are an adult.
+// You can vote!
+// End of program</pre>
+                    </div>
+
+                    <div class="explanation-box">
+                        <strong>Explanation:</strong>
+                        <ul>
+                            <li>The condition <code>age >= 18</code> is evaluated</li>
+                            <li>Since 20 >= 18 is true, the code inside the braces executes</li>
+                            <li>Both printf statements run</li>
+                            <li>If age was less than 18, the entire block would be skipped</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ========================== -->
+                <!-- TOPIC 5: if-else Statement -->
+                <!-- ========================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Selection: if-else Statement</h2>
+                    <p>The <strong>if-else statement</strong> provides an alternative path of execution. If the condition is true, the if-block executes; otherwise, the else-block executes.</p>
+
+                    <div class="flow-diagram">
+                        <div class="flow-step-inline">Condition</div>
+                        <div class="flow-branches-inline">
+                            <div class="flow-path">
+                                <span class="flow-label-true">TRUE</span>
+                                <span class="flow-arrow-down">↓</span>
+                                <span class="flow-action">Execute if-block</span>
+                            </div>
+                            <div class="flow-path">
+                                <span class="flow-label-false">FALSE</span>
+                                <span class="flow-arrow-down">↓</span>
+                                <span class="flow-action">Execute else-block</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Example:</h4>
+                    <div class="code-block">
+<pre>int score = 75;
+
+if (score >= 50) {
+    printf("Congratulations! You passed.\n");
+    printf("Your score: %d\n", score);
+} else {
+    printf("Sorry, you failed.\n");
+    printf("Better luck next time!\n");
+}
+
+// Output: (since 75 >= 50 is true)
+// Congratulations! You passed.
+// Your score: 75</pre>
+                    </div>
+
+                    <div class="explanation-box">
+                        <strong>Explanation:</strong>
+                        <ul>
+                            <li>The condition <code>score >= 50</code> is checked</li>
+                            <li>If true (score is 50 or more), the if-block executes</li>
+                            <li>If false (score is less than 50), the else-block executes</li>
+                            <li>Exactly one of the two blocks will always run</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="subtopic-heading">else-if Ladder (Multiple Conditions)</h3>
+                    <p>You can chain multiple conditions using <code>else if</code>:</p>
+
+                    <div class="code-block">
+<pre>int grade = 85;
+
+if (grade >= 90) {
+    printf("Grade: A\n");
+} else if (grade >= 80) {
+    printf("Grade: B\n");
+} else if (grade >= 70) {
+    printf("Grade: C\n");
+} else if (grade >= 60) {
+    printf("Grade: D\n");
+} else {
+    printf("Grade: F\n");
+}
+
+// Output: Grade: B</pre>
+                    </div>
+                </section>
+
+                <!-- ========================= -->
+                <!-- TOPIC 6: switch Statement -->
+                <!-- ========================= -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Selection: switch Statement</h2>
+                    <p>The <strong>switch statement</strong> allows you to select one of many code blocks to execute based on the value of a variable or expression. It's cleaner than multiple if-else statements when checking for specific values.</p>
+
+                    <div class="info-box">
+                        <i class="fas fa-info-circle"></i>
+                        <div>
+                            <strong>Important Points:</strong>
+                            <ul>
+                                <li><code>break</code> exits the switch after a case executes</li>
+                                <li>Without <code>break</code>, execution falls through to the next case</li>
+                                <li><code>default</code> is optional and executes if no case matches</li>
+                                <li>The expression must evaluate to an integer or character</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Example:</h4>
+                    <div class="code-block">
+<pre>int day = 3;
+
+switch (day) {
+    case 1:
+        printf("Monday\n");
+        break;
+    case 2:
+        printf("Tuesday\n");
+        break;
+    case 3:
+        printf("Wednesday\n");
+        break;
+    case 4:
+        printf("Thursday\n");
+        break;
+    case 5:
+        printf("Friday\n");
+        break;
+    case 6:
+        printf("Saturday\n");
+        break;
+    case 7:
+        printf("Sunday\n");
+        break;
+    default:
+        printf("Invalid day\n");
+}
+
+// Output: Wednesday</pre>
+                    </div>
+
+                    <div class="explanation-box">
+                        <strong>Explanation:</strong>
+                        <ul>
+                            <li>The variable <code>day</code> has the value 3</li>
+                            <li>The switch checks each case until it finds <code>case 3</code></li>
+                            <li><code>printf("Wednesday\n");</code> executes</li>
+                            <li><code>break;</code> exits the switch statement</li>
+                            <li>If day was 10, the <code>default</code> case would execute</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="subtopic-heading">Switch with Characters:</h3>
+                    <div class="code-block">
+<pre>char grade = 'B';
+
+switch (grade) {
+    case 'A':
+        printf("Excellent!\n");
+        break;
+    case 'B':
+        printf("Good job!\n");
+        break;
+    case 'C':
+        printf("Satisfactory\n");
+        break;
+    case 'D':
+        printf("Needs improvement\n");
+        break;
+    case 'F':
+        printf("Failed\n");
+        break;
+    default:
+        printf("Invalid grade\n");
+}
+
+// Output: Good job!</pre>
+                    </div>
+                </section>
+
+                <!-- ======================= -->
+                <!-- TOPIC 7: Null Statement -->
+                <!-- ======================= -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Null Statement</h2>
+                    <p>A <strong>null statement</strong> (also called an empty statement) is a statement that consists of only a semicolon <code>;</code>. It does nothing but satisfy the syntax requirement when a statement is needed.</p>
+
+                    <div class="code-block">
+<pre>// Null statement in an if
+if (x > 10)
+    ;  // Null statement - does nothing
+
+// Null statement in a loop
+while (getchar() != '\n')
+    ;  // Keep reading until newline</pre>
+                    </div>
+
+                    <div class="warning-box">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <strong> Common Mistake with Null Statements:</strong>
+                            <p>Accidentally placing a semicolon after an if statement creates a null statement, which can lead to logic errors:</p>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Valid Use of Null Statement:</h4>
+                    <div class="code-block">
+<pre>// Wait until a condition becomes true
+while (sensorReady() == 0)
+    ;  // Null statement - just wait
+
+// Now proceed after sensor is ready
+processData();</pre>
+                    </div>
+                </section>
+
+                <!-- ============================ -->
+                <!-- PART 2: ITERATION STRUCTURES -->
+                <!-- ============================ -->
+
+                <div class="part-divider">
+                    <span class="part-tag">Part 2</span>
+                    <h2>Iteration Structures (Loops)</h2>
+                </div>
+
+                <!-- ============================ -->
+                <!-- TOPIC 8: Iteration Structure -->
+                <!-- ============================ -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Iteration Structure</h2>
+                    <p>The <strong>iteration structure</strong> (also called a <strong>loop</strong>) allows you to execute a block of code repeatedly as long as a specified condition remains true. This eliminates the need to write the same code multiple times.</p>
+
+                    <div class="iteration-benefits">
+                        <h4>Why Use Loops?</h4>
+                        <ul>
+                            <li><strong>Avoid Repetition:</strong> Write code once, execute it many times</li>
+                            <li><strong>Process Collections:</strong> Iterate through arrays, lists, or data structures</li>
+                            <li><strong>Handle Unknown Quantities:</strong> Loop until a condition is met.</li>
+                            <li><strong>Perform Calculations:</strong> Sum numbers, find averages, search for values</li>
+                        </ul>
+                    </div>
+
+                    <p>C provides three types of loops: <strong>for</strong>, <strong>while</strong>, and <strong>do-while</strong>. Each has different use cases, but all can accomplish the same tasks.</p>
+                </section>
+
+                <!-- ================= -->
+                <!-- TOPIC 9: for Loop -->
+                <!-- ================= -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> for Loop</h2>
+                    <p>The <strong>for loop</strong> is used when you know in advance how many times you want to repeat a block of code. It's ideal for counter-controlled loops.</p>
+
+                    <div class="syntax-box">
+                        <div class="syntax-label">Syntax:</div>
+                        <div class="code-block">
+<pre>for (initialization; condition; update) {
+    // Code to repeat
+}</pre>
+                        </div>
+                    </div>
+
+                    <div class="loop-components">
+                        <div class="loop-component">
+                            <div class="loop-component-label">1. Initialization</div>
+                            <p>Executes <strong>once</strong> at the beginning. Usually initializes a counter variable.</p>
+                            <code>int i = 0</code>
+                        </div>
+                        <div class="loop-component">
+                            <div class="loop-component-label">2. Condition</div>
+                            <p>Checked <strong>before each iteration</strong>. Loop continues while true.</p>
+                            <code>i &lt; 5</code>
+                        </div>
+                        <div class="loop-component">
+                            <div class="loop-component-label">3. Update</div>
+                            <p>Executes <strong>after each iteration</strong>. Usually increments the counter.</p>
+                            <code>i++</code>
+                        </div>
+                    </div>
+
+                    <h3 class="subtopic-heading">Step-by-Step Execution:</h3>
+                    <div class="execution-steps">
+                        <div class="exec-step">
+                            <div class="exec-number">1</div>
+                            <div class="exec-content">
+                                <strong>Initialization:</strong> <code>i = 0</code> executes once
+                            </div>
+                        </div>
+                        <div class="exec-step">
+                            <div class="exec-number">2</div>
+                            <div class="exec-content">
+                                <strong>Check condition:</strong> Is <code>i &lt; 5</code>? If true, continue. If false, exit loop.
+                            </div>
+                        </div>
+                        <div class="exec-step">
+                            <div class="exec-number">3</div>
+                            <div class="exec-content">
+                                <strong>Execute body:</strong> Run the code inside the loop
+                            </div>
+                        </div>
+                        <div class="exec-step">
+                            <div class="exec-number">4</div>
+                            <div class="exec-content">
+                                <strong>Update:</strong> <code>i++</code> executes (i becomes 1)
+                            </div>
+                        </div>
+                        <div class="exec-step exec-step-repeat">
+                            <div class="exec-number"><i class="fas fa-redo"></i></div>
+                            <div class="exec-content">
+                                <strong>Repeat:</strong> Go back to step 2
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Example: Print Numbers 1 to 5</h4>
+                    <div class="code-block">
+<pre>for (int i = 1; i &lt;= 5; i++) {
+    printf("%d\n", i);
+}
+
+// Output:
+// 1
+// 2
+// 3
+// 4
+// 5</pre>
+                    </div>
+
+                    <h4 class="example-heading">Example: Sum of First 10 Numbers</h4>
+                    <div class="code-block">
+<pre>int sum = 0;
+
+for (int i = 1; i &lt;= 10; i++) {
+    sum = sum + i;  // or: sum += i;
+}
+
+printf("Sum = %d\n", sum);
+
+// Output: Sum = 55</pre>
+                    </div>
+
+                    <div class="explanation-box">
+                        <strong>Trace Through the Loop:</strong>
+                        <ul>
+                            <li>Iteration 1: i=1, sum = 0+1 = 1</li>
+                            <li>Iteration 2: i=2, sum = 1+2 = 3</li>
+                            <li>Iteration 3: i=3, sum = 3+3 = 6</li>
+                            <li>... continues until i=10, sum = 45+10 = 55</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ==================== -->
+                <!-- TOPIC 10: while Loop -->
+                <!-- ==================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> while Loop</h2>
+                    <p>The <strong>while loop</strong> repeats a block of code as long as a specified condition is true. The condition is checked <strong>before</strong> each iteration, so the loop body may never execute if the condition is initially false.</p>
+
+                    <div class="syntax-box">
+                        <div class="syntax-label">Syntax:</div>
+                        <div class="code-block">
+<pre>while (condition) {
+    // Code to repeat
+}</pre>
+                        </div>
+                    </div>
+
+                    <h3 class="subtopic-heading">Step-by-Step Execution:</h3>
+                    <div class="execution-steps">
+                        <div class="exec-step">
+                            <div class="exec-number">1</div>
+                            <div class="exec-content">
+                                <strong>Check condition:</strong> Is the condition true?
+                            </div>
+                        </div>
+                        <div class="exec-step">
+                            <div class="exec-number">2</div>
+                            <div class="exec-content">
+                                <strong>If TRUE:</strong> Execute the loop body
+                            </div>
+                        </div>
+                        <div class="exec-step">
+                            <div class="exec-number">3</div>
+                            <div class="exec-content">
+                                <strong>If FALSE:</strong> Exit the loop immediately
+                            </div>
+                        </div>
+                        <div class="exec-step exec-step-repeat">
+                            <div class="exec-number"><i class="fas fa-redo"></i></div>
+                            <div class="exec-content">
+                                <strong>Repeat:</strong> Go back to step 1
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Example: Print Numbers 1 to 5</h4>
+                    <div class="code-block">
+<pre>int i = 1;
+
+while (i &lt;= 5) {
+    printf("%d\n", i);
+    i++;  // Don't forget to update!
+}
+
+// Output:
+// 1
+// 2
+// 3
+// 4
+// 5</pre>
+                    </div>
+
+                    <div class="warning-box">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <strong> Avoid Infinite Loops:</strong>
+                            <p>Always make sure the loop condition will eventually become false. Forgetting to update the loop variable creates an infinite loop:</p>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Example: Input Validation</h4>
+                    <div class="code-block">
+<pre>int num;
+
+printf("Enter a positive number: ");
+scanf("%d", &num);
+
+while (num &lt;= 0) {
+    printf("Invalid! Enter a positive number: ");
+    scanf("%d", &num);
+}
+
+printf("You entered: %d\n", num);</pre>
+                    </div>
+
+                    <div class="explanation-box">
+                        <strong>Explanation:</strong>
+                        <p>The loop keeps asking for input until the user enters a positive number. If the first input is valid, the loop body never executes.</p>
+                    </div>
+                </section>
+
+                <!-- ======================= -->
+                <!-- TOPIC 11: do-while Loop -->
+                <!-- ======================= -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> do-while Loop</h2>
+                    <p>The <strong>do-while loop</strong> is similar to the while loop, but the condition is checked <strong>after</strong> each iteration. This guarantees that the loop body executes <strong>at least once</strong>, even if the condition is initially false.</p>
+
+                    <div class="syntax-box">
+                        <div class="syntax-label">Syntax:</div>
+                        <div class="code-block">
+<pre>do {
+    // Code to repeat
+} while (condition);</pre>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <i class="fas fa-lightbulb"></i>
+                        <div>
+                            <strong>Key Difference: while vs do-while</strong>
+                            <ul>
+                                <li><strong>while:</strong> Condition checked before each iteration (may execute 0 times)</li>
+                                <li><strong>do-while:</strong> Condition checked AFTER each iteration (always executes at least 1 time)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3 class="subtopic-heading">Step-by-Step Execution:</h3>
+                    <div class="execution-steps">
+                        <div class="exec-step">
+                            <div class="exec-number">1</div>
+                            <div class="exec-content">
+                                <strong>Execute body:</strong> Run the code inside the loop (always runs first)
+                            </div>
+                        </div>
+                        <div class="exec-step">
+                            <div class="exec-number">2</div>
+                            <div class="exec-content">
+                                <strong>Check condition:</strong> Is the condition true?
+                            </div>
+                        </div>
+                        <div class="exec-step">
+                            <div class="exec-number">3</div>
+                            <div class="exec-content">
+                                <strong>If TRUE:</strong> Repeat from step 1
+                            </div>
+                        </div>
+                        <div class="exec-step">
+                            <div class="exec-number">4</div>
+                            <div class="exec-content">
+                                <strong>If FALSE:</strong> Exit the loop
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Example: Print Numbers 1 to 5</h4>
+                    <div class="code-block">
+<pre>int i = 1;
+
+do {
+    printf("%d\n", i);
+    i++;
+} while (i &lt;= 5);
+
+// Output:
+// 1
+// 2
+// 3
+// 4
+// 5</pre>
+                    </div>
+
+                    <h4 class="example-heading">Example: Menu System</h4>
+                    <div class="code-block">
+<pre>int choice;
+
+do {
+    printf("\n=== Menu ===\n");
+    printf("1. Option A\n");
+    printf("2. Option B\n");
+    printf("3. Exit\n");
+    printf("Enter choice: ");
+    scanf("%d", &choice);
+    
+    if (choice == 1)
+        printf("You selected Option A\n");
+    else if (choice == 2)
+        printf("You selected Option B\n");
+        
+} while (choice != 3);
+
+printf("Goodbye!\n");</pre>
+                    </div>
+
+                    <div class="explanation-box">
+                        <strong>Explanation:</strong>
+                        <p>The menu displays at least once. The loop continues until the user enters 3 to exit. This is a perfect use case for do-while because you want the menu to keep showing until customers decide to exit (enters 3)</p>
+                    </div>
+                </section>
+
+                <!-- ========================== -->
+                <!-- TOPIC 12: break & continue -->
+                <!-- ========================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> break and continue Statements</h2>
+                    <p>These statements provide additional control over loop execution:</p>
+
+                    <div class="two-column">
+                        <div class="control-statement-card">
+                            <h3><code>break</code></h3>
+                            <p>Immediately <strong>exits</strong> the loop, regardless of the loop condition. Execution continues with the first statement after the loop.</p>
+                            <div class="code-block">
+<pre>for (int i = 1; i &lt;= 10; i++) {
+    if (i == 5)
+        break;  // Exit loop when i is 5
+    printf("%d ", i);
+}
+
+// Output: 1 2 3 4</pre>
+                            </div>
+                        </div>
+
+                        <div class="control-statement-card">
+                            <h3><code>continue</code></h3>
+                            <p><strong>Skips</strong> the rest of the current iteration and jumps to the next iteration. The loop does not exit.</p>
+                            <div class="code-block">
+<pre>for (int i = 1; i &lt;= 5; i++) {
+    if (i == 3)
+        continue;  // Skip when i is 3
+    printf("%d ", i);
+}
+
+// Output: 1 2 4 5</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Example: Skip Even Numbers</h4>
+                    <div class="code-block">
+<pre>printf("Odd numbers from 1 to 10:\n");
+
+for (int i = 1; i &lt;= 10; i++) {
+    if (i % 2 == 0)
+        continue;  // Skip even numbers
+    printf("%d ", i);
+}
+
+// Output: 1 3 5 7 9</pre>
+                    </div>
+                </section>
+
+                <!-- ==================================== -->
+                <!-- PART 3: ADVANCED REPETITION CONCEPTS -->
+                <!-- ==================================== -->
+
+                <div class="part-divider">
+                    <span class="part-tag">Part 3</span>
+                    <h2>Advanced Repetition Structures</h2>
+                </div>
+
+                <!-- ============================= -->
+                <!-- TOPIC 13: Types of Repetition -->
+                <!-- ============================= -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Types of Repetition Structures</h2>
+                    <p>Loops can be classified into three categories based on how they control repetition:</p>
+
+                    <div class="repetition-types">
+                        <div class="repetition-card">
+                            <div class="repetition-header">
+                                <i class="fas fa-hashtag"></i>
+                                <strong>Counter-Controlled Repetition</strong>
+                            </div>
+                            <p>The loop repeats a <strong>specific number of times</strong>. A counter variable tracks the number of iterations.</p>
+                            <div class="code-block">
+<pre>// Print "Hello" 5 times
+for (int count = 1; count &lt;= 5; count++) {
+    printf("Hello\n");
+}
+
+// count is the counter variable
+// Loop executes exactly 5 times</pre>
+                            </div>
+                            <div class="explanation-box">
+                                <strong>When to Use:</strong>
+                                <p>Use when you know in advance how many times to repeat (e.g., process 10 students, display 20 items, repeat N times).</p>
+                            </div>
+                        </div>
+
+                        <div class="repetition-card">
+                            <div class="repetition-header">
+                                <i class="fas fa-flag"></i>
+                                <strong>Sentinel-Controlled Repetition</strong>
+                            </div>
+                            <p>The loop continues until a <strong>special value</strong> (sentinel) is encountered. The sentinel signals the end of input.</p>
+                            <div class="code-block">
+<pre>// Calculate average until user enters -1
+int num, sum = 0, count = 0;
+
+printf("Enter numbers (-1 to stop):\n");
+scanf("%d", &num);
+
+while (num != -1) {  // -1 is the sentinel
+    sum += num;
+    count++;
+    scanf("%d", &num);
+}
+
+if (count > 0)
+    printf("Average: %.2f\n", (float)sum / count);
+
+// Loop ends when user enters -1</pre>
+                            </div>
+                            <div class="explanation-box">
+                                <strong>When to Use:</strong>
+                                <p>Use when you don't know how many iterations are needed, but you have a special value that signals completion (e.g., -1, 0, "quit").</p>
+                            </div>
+                        </div>
+
+                        <div class="repetition-card">
+                            <div class="repetition-header">
+                                <i class="fas fa-bolt"></i>
+                                <strong>Event-Controlled Repetition</strong>
+                            </div>
+                            <p>The loop continues until a <strong>specific event or condition</strong> occurs (not based on counting or a sentinel value).</p>
+                            <div class="code-block">
+<pre>// Keep trying until correct password
+char password[20];
+int attempts = 0;
+int maxAttempts = 3;
+
+do {
+    printf("Enter password: ");
+    scanf("%s", password);
+    attempts++;
+    
+    if (strcmp(password, "secret") == 0) {
+        printf("Access granted!\n");
+        break;  // Event: correct password
+    } else {
+        printf("Wrong password\n");
+    }
+} while (attempts &lt; maxAttempts);
+
+if (attempts == maxAttempts)
+    printf("Account locked\n");
+
+// Loop ends when password is correct OR max attempts reached</pre>
+                            </div>
+                            <div class="explanation-box">
+                                <strong>When to Use:</strong>
+                                <p>Use when repetition depends on a condition or event (e.g., wait until data is ready, retry until success, read until end of file).</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ====================== -->
+                <!-- TOPIC 14: Nested Loops -->
+                <!-- ====================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Nested Loops</h2>
+                    <p>A <strong>nested loop</strong> is a loop inside another loop. The inner loop completes all its iterations for each iteration of the outer loop.</p>
+
+                    <div class="syntax-box">
+                        <div class="syntax-label">Syntax:</div>
+                        <div class="code-block">
+<pre>for (initialization; condition; update) {
+    // Outer loop body
+    
+    for (initialization; condition; update) {
+        // Inner loop body
+    }
+    
+    // Outer loop continues
+}</pre>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <i class="fas fa-info-circle"></i>
+                        <div>
+                            <strong>How Nested Loops Work:</strong>
+                            <ul>
+                                <li>For each iteration of the outer loop, the inner loop runs completely</li>
+                                <li>If outer loop runs 3 times and inner loop runs 4 times, total iterations = 3 × 4 = 12</li>
+                                <li>You can nest any combination of for, while, and do-while loops</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Example: Multiplication Table</h4>
+                    <div class="code-block">
+<pre>// Print multiplication table (1 to 5)
+for (int i = 1; i &lt;= 5; i++) {        // Outer loop: rows
+    for (int j = 1; j &lt;= 5; j++) {    // Inner loop: columns
+        printf("%d x %d = %d\t", i, j, i * j);
+    }
+    printf("\n");  // New line after each row
+}
+
+// Output:
+// 1 x 1 = 1    1 x 2 = 2    1 x 3 = 3    1 x 4 = 4    1 x 5 = 5
+// 2 x 1 = 2    2 x 2 = 4    2 x 3 = 6    2 x 4 = 8    2 x 5 = 10
+// 3 x 1 = 3    3 x 2 = 6    3 x 3 = 9    3 x 4 = 12   3 x 5 = 15
+// 4 x 1 = 4    4 x 2 = 8    4 x 3 = 12   4 x 4 = 16   4 x 5 = 20
+// 5 x 1 = 5    5 x 2 = 10   5 x 3 = 15   5 x 4 = 20   5 x 5 = 25</pre>
+                    </div>
+
+                    <div class="explanation-box">
+                        <strong>Trace Through Execution:</strong>
+                        <ul>
+                            <li>Outer loop: i=1, Inner loop runs 5 times (j=1,2,3,4,5)</li>
+                            <li>Outer loop: i=2, Inner loop runs 5 times again</li>
+                            <li>... continues until i=5</li>
+                            <li>Total iterations: 5 × 5 = 25</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="subtopic-heading">Combining for and while</h3>
+                    <div class="code-block">
+<pre>// Print star pattern
+for (int i = 1; i &lt;= 4; i++) {       // Outer: for loop
+    int j = 1;
+    while (j &lt;= i) {                  // Inner: while loop
+        printf("* ");
+        j++;
+    }
+    printf("\n");
+}
+
+// Output:
+// *
+// * *
+// * * *
+// * * * *</pre>
+                    </div>
+                </section>
+
+                <!-- ============= --> 
+                <!-- KEY TAKEAWAYS -->
+                <!-- ============= -->
+                <section class="topic-section highlight-section">
+                    <h2><i class="fas fa-star"></i> Key Takeaways</h2>
+                    <ul class="takeaways-list">
+                        <li>Three control structures: sequence, selection, iteration</li>
+                        <li>if statement executes code only if condition is true</li>
+                        <li>if-else provides two paths: one for true, one for false</li>
+                        <li>switch selects from multiple cases based on a value; use break to prevent fall-through</li>
+                        <li>Null statement (;) does nothing</li>
+                        <li>for loop: best when you know how many iterations (counter-controlled)</li>
+                        <li>while loop: condition checked before each iteration (may execute 0 times)</li>
+                        <li>do-while loop: condition checked after each iteration (always executes at least once)</li>
+                        <li>break exits a loop immediately; continue skips to next iteration</li>
+                        <li>Counter-controlled: fixed number of iterations</li>
+                        <li>Sentinel-controlled: loop until special value encountered</li>
+                        <li>Event-controlled: loop until specific condition/event occurs</li>
+                        <li>Nested loops: loop inside another loop</li>
+                        <li>Always update loop variables to avoid infinite loops</li>
+                    </ul>
+                </section>
+
+            </div>
+            <!-- END NOTES CONTENT -->
+
+            <!-- Start Exercise Button -->
+            <div class="start-exercise-section">
+                <div class="ready-box">
+                    <i class="fas fa-dumbbell"></i>
+                    <h3>Ready to Practice?</h3>
+                    <p>Test your understanding with 15 exercises covering control structures, loops, and program flow. Take your time, there's no timer!</p>
+                </div>
+                <button id="startExerciseBtn" class="btn btn-start">
+                    <i class="fas fa-play"></i>
+                    Start Exercises
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ============================= -->
+    <!-- ===== EXERCISE SCREEN ======= -->
+    <!-- ============================= -->
+
+    <div class="exercise-screen" id="exerciseScreen">
+        <div class="exercise-container">
+            <div class="exercise-header">
+                <div class="exercise-info">
+                    <h1>Chapter 4: Control Structures — Exercises</h1>
+                    <div class="progress-info">
+                        <span class="question-counter">
+                            Question <span id="currentQuestion">1</span> of <span id="totalQuestions">10</span>
+                        </span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="no-timer-badge">
+                    <i class="fas fa-infinity"></i>
+                    <span>No Time Limit</span>
+                </div>
+            </div>
+
+            <div class="question-container" id="questionContainer"></div>
+
+            <div class="exercise-navigation">
+                <button id="prevBtn" class="btn btn-outline" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                    Previous
+                </button>
+                <button id="nextBtn" class="btn btn-primary">
+                    Next
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button id="submitBtn" class="btn btn-submit" style="display: none;">
+                    <i class="fas fa-check-circle"></i>
+                    Submit Exercises
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================= -->
+    <!-- ===== RESULTS SCREEN ======== -->
+    <!-- ============================= -->
+
+    <div class="results-screen" id="resultsScreen">
+        <div class="results-container">
+            <div class="results-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h1>Exercises Complete!</h1>
+            <div class="score-display">
+                <div class="score-circle">
+                    <span class="score-number" id="scoreNumber">0</span>
+                    <span class="score-total">/ <span id="scoreTotalDisplay">10</span></span>
+                </div>
+                <p class="score-label">Correct Answers</p>
+            </div>
+            <div class="results-stats">
+                <div class="stat-item">
+                    <i class="fas fa-percent"></i>
+                    <span class="stat-label">Score</span>
+                    <span class="stat-value" id="percentageScore">0%</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-check-double"></i>
+                    <span class="stat-label">Status</span>
+                    <span class="stat-value" id="statusText">Good Job!</span>
+                </div>
+            </div>
+            <div class="results-actions">
+                <button class="btn btn-primary" onclick="window.location.href='../../index.html'">
+                    <i class="fas fa-home"></i>
+                    Back to Home
+                </button>
+                <button class="btn btn-outline" onclick="location.reload()">
+                    <i class="fas fa-redo"></i>
+                    Retry Exercises
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="main4.js"></script>
+</body>
+</html>

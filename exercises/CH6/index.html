@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Chapter 6: Arrays (1D & 2D)</title>
+    <link rel="stylesheet" href="style6.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- ========================== -->
+    <!-- ===== NAVIGATION BAR ===== -->
+    <!-- ========================== -->
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#" class="logo">
+                    <span class="logo-text1">Explor</span>
+                    <span class="logo-text2">gramming</span>
+                </a>
+            </div>
+            <a href="../../index.html" class="btn-back">
+                <i class="fas fa-arrow-left"></i>
+                Back to Home
+            </a>
+        </div>
+    </nav>
+
+    <!-- ============================= -->
+    <!-- ===== NOTES/STUDY SCREEN ==== -->
+    <!-- ============================= -->
+
+    <div class="notes-screen" id="notesScreen">
+        <div class="notes-container">
+
+            <!-- Chapter Header -->
+            <div class="chapter-header">
+                <span class="chapter-tag">Chapter 6</span>
+                <h1>Arrays (1D & 2D)</h1>
+                <p class="chapter-subtitle">Learn how to store and manipulate collections of data using one-dimensional and two-dimensional arrays</p>
+                <div class="chapter-meta">
+                    <span class="meta-item">
+                        <i class="fas fa-book"></i>
+                        11 Topics
+                    </span>
+                    <span class="meta-item">
+                        <i class="fas fa-dumbbell"></i>
+                        14 Exercises
+                    </span4>
+                    <span class="meta-item">
+                        <i class="fas fa-clock"></i>
+                        ~45 min
+                    </span>
+                </div>
+            </div>
+
+            <!-- ======================== -->
+            <!-- ===== NOTES CONTENT ==== -->
+            <!-- ======================== -->
+
+            <div class="notes-content">
+
+                <!-- ============================== -->
+                <!-- PART 1: ONE-DIMENSIONAL ARRAYS -->
+                <!-- ============================== -->
+
+                <div class="part-divider">
+                    <span class="part-tag">Part 1</span>
+                    <h2>One-Dimensional Arrays</h2>
+                </div>
+
+                <!-- ============================ -->
+                <!-- TOPIC 1: Definition of Array -->
+                <!-- ============================ -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> What is an Array?</h2>
+                    <p>An <strong>array</strong> is a collection of elements of the same data type stored in contiguous memory locations. Instead of declaring multiple individual variables, you can store many values under a single name and access them using an index.</p>
+
+                    <div class="array-visual">
+                        <div class="single-vars">
+                            <div class="single-var-header">
+                                <i class="fas fa-times-circle"></i>
+                                <strong>Without Arrays</strong>
+                            </div>
+                            <div class="single-var-list">
+                                <div class="var-item">int score1 = 85;</div>
+                                <div class="var-item">int score2 = 90;</div>
+                                <div class="var-item">int score3 = 78;</div>
+                                <div class="var-item">int score4 = 92;</div>
+                                <div class="var-item">int score5 = 88;</div>
+                            </div>
+                            <p class="problem-note">Hard to manage many variables!</p>
+                        </div>
+
+                        <div class="array-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                            <span>Better Solution</span>
+                        </div>
+
+                        <div class="array-vars">
+                            <div class="array-var-header">
+                                <i class="fas fa-check-circle"></i>
+                                <strong>With Arrays</strong>
+                            </div>
+                            <div class="array-declaration">
+                                int scores[5];
+                            </div>
+                            <div class="array-boxes">
+                                <div class="array-box">
+                                    <div class="array-index">0</div>
+                                    <div class="array-value">85</div>
+                                </div>
+                                <div class="array-box">
+                                    <div class="array-index">1</div>
+                                    <div class="array-value">90</div>
+                                </div>
+                                <div class="array-box">
+                                    <div class="array-index">2</div>
+                                    <div class="array-value">78</div>
+                                </div>
+                                <div class="array-box">
+                                    <div class="array-index">3</div>
+                                    <div class="array-value">92</div>
+                                </div>
+                                <div class="array-box">
+                                    <div class="array-index">4</div>
+                                    <div class="array-value">88</div>
+                                </div>
+                            </div>
+                            <p class="success-note">Easy to manage with loops!</p>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <i class="fas fa-lightbulb"></i>
+                        <div>
+                            <strong>Key Characteristics:</strong>
+                            <ul>
+                                <li>All elements must be of the <strong>same data type</strong></li>
+                                <li>Elements are stored in <strong>contiguous memory</strong> locations</li>
+                                <li>Array size is <strong>fixed</strong> once declared</li>
+                                <li>Access elements using an <strong>index</strong> (starting from 0)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ======================= -->
+                <!-- TOPIC 2: Array Indexing -->
+                <!-- ======================= -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Understanding Array Indexing</h2>
+                    <p>Arrays use <strong>zero-based indexing</strong>, meaning the first element is at index 0, not 1. The last element is at index <code>size - 1</code>.</p>
+
+                    <div class="indexing-diagram">
+                        <div class="index-label">Array Name: <code>numbers</code></div>
+                        <div class="index-boxes">
+                            <div class="index-box">
+                                <div class="index-number">Index 0</div>
+                                <div class="index-value">10</div>
+                                <div class="index-access">numbers[0]</div>
+                            </div>
+                            <div class="index-box">
+                                <div class="index-number">Index 1</div>
+                                <div class="index-value">20</div>
+                                <div class="index-access">numbers[1]</div>
+                            </div>
+                            <div class="index-box">
+                                <div class="index-number">Index 2</div>
+                                <div class="index-value">30</div>
+                                <div class="index-access">numbers[2]</div>
+                            </div>
+                            <div class="index-box">
+                                <div class="index-number">Index 3</div>
+                                <div class="index-value">40</div>
+                                <div class="index-access">numbers[3]</div>
+                            </div>
+                            <div class="index-box">
+                                <div class="index-number">Index 4</div>
+                                <div class="index-value">50</div>
+                                <div class="index-access">numbers[4]</div>
+                            </div>
+                        </div>
+                        <div class="index-note">
+                            <strong>Array Size: 5</strong> → Valid indices: 0, 1, 2, 3, 4
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Accessing Elements:</h4>
+                    <div class="code-block">
+<pre>int numbers[5] = {10, 20, 30, 40, 50};
+
+printf("%d", numbers[0]);  // Output: 10 (first element)
+printf("%d", numbers[2]);  // Output: 30 (third element)
+printf("%d", numbers[4]);  // Output: 50 (last element)</pre>
+                    </div>
+
+                    <div class="warning-box">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <strong> Index Out of Bounds:</strong>
+                            <p>Accessing an index outside the valid range (e.g., <code>numbers[5]</code> or <code>numbers[-1]</code>) causes <strong>undefined behavior</strong> and may crash your program!</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ========================= -->
+                <!-- TOPIC 3: Declaring Arrays -->
+                <!-- ========================= -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Declaring Arrays in C</h2>
+                    <p>To declare an array, specify the data type, array name, and size in square brackets.</p>
+
+                    <div class="syntax-box">
+                        <div class="syntax-label">Syntax:</div>
+                        <div class="code-block">
+<pre>data_type array_name[size];</pre>
+                        </div>
+                    </div>
+
+                    <div class="declaration-examples">
+                        <div class="decl-card">
+                            <code>int ages[10];</code>
+                            <p>Array of 10 integers</p>
+                        </div>
+                        <div class="decl-card">
+                            <code>float prices[5];</code>
+                            <p>Array of 5 floating-point numbers</p>
+                        </div>
+                        <div class="decl-card">
+                            <code>char name[20];</code>
+                            <p>Array of 20 characters (string)</p>
+                        </div>
+                        <div class="decl-card">
+                            <code>double temps[7];</code>
+                            <p>Array of 7 double-precision numbers</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- =========================== -->
+                <!-- TOPIC 4: Initialized Arrays -->
+                <!-- =========================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Uninitialized vs Initialized Arrays</h2>
+
+                    <div class="two-column">
+                        <div class="init-card">
+                            <h4><i class="fas fa-question-circle"></i> Uninitialized Array</h4>
+                            <p>An array declared without initial values contains <strong>garbage values</strong> (random data from memory).</p>
+                            <div class="code-block">
+<pre>int numbers[5];
+// numbers[0] = ?
+// numbers[1] = ?
+// numbers[2] = ?
+// ... random values!</pre>
+                            </div>
+                            <div class="note-box">
+                                <strong>Note:</strong> Always initialize or assign values before using!
+                            </div>
+                        </div>
+
+                        <div class="init-card">
+                            <h4><i class="fas fa-check-circle"></i> Initialized Array</h4>
+                            <p>You can initialize an array when declaring it by providing values in curly braces.</p>
+                            <div class="code-block">
+<pre>int numbers[5] = {10, 20, 30, 40, 50};
+// numbers[0] = 10
+// numbers[1] = 20
+// numbers[2] = 30
+// numbers[3] = 40
+// numbers[4] = 50</pre>
+                            </div>
+                            <div class="note-box note-box--success">
+                                <strong>Safe:</strong> All elements have defined values!
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="subtopic-heading">Partial Initialization</h3>
+                    <div class="code-block">
+<pre>int numbers[5] = {10, 20};
+// numbers[0] = 10
+// numbers[1] = 20
+// numbers[2] = 0  (remaining elements auto-initialized to 0)
+// numbers[3] = 0
+// numbers[4] = 0</pre>
+                    </div>
+
+                    <h3 class="subtopic-heading">Size Omission</h3>
+                    <div class="code-block">
+<pre>int numbers[] = {10, 20, 30, 40, 50};
+// Compiler automatically determines size = 5</pre>
+                    </div>
+                </section>
+
+                <!-- ========================== -->
+                <!-- TOPIC 5: #define Constants -->
+                <!-- ========================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Using #define for Symbolic Constants</h2>
+                    <p>The <code>#define</code> directive creates symbolic constants that can be used throughout your program. This is especially useful for array sizes.</p>
+
+                    <div class="info-box">
+                        <i class="fas fa-info-circle"></i>
+                        <div>
+                            <strong>Why Use #define?</strong>
+                            <ul>
+                                <li><strong>Readability:</strong> <code>MAX_STUDENTS</code> is clearer than <code>50</code></li>
+                                <li><strong>Maintainability:</strong> Change the value in one place instead of everywhere</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Without #define (Bad Practice):</h4>
+                    <div class="code-block">
+<pre>int scores[50];
+for (int i = 0; i < 50; i++) {
+    // process scores
+}
+printf("Total students: %d", 50);
+// What does 50 mean? Hard to change!</pre>
+                    </div>
+
+                    <h4 class="example-heading">With #define (Good Practice):</h4>
+                    <div class="code-block">
+<pre>#include &lt;stdio.h&gt;
+#define MAX_STUDENTS 50
+
+int main() {
+    int scores[MAX_STUDENTS];
+    
+    for (int i = 0; i < MAX_STUDENTS; i++) {
+        // process scores
+    }
+    
+    printf("Total students: %d", MAX_STUDENTS);
+    return 0;
+}
+// Easy to understand and modify!</pre>
+                    </div>
+
+                    <div class="explanation-box">
+                        <strong>How it works:</strong>
+                        <p>The preprocessor replaces every occurrence of <code>MAX_STUDENTS</code> with <code>50</code> before compilation. If you need to change the size to 100, you only modify one line!</p>
+                    </div>
+                </section>
+
+                <!-- ======================= -->
+                <!-- TOPIC 6: Passing Arrays -->
+                <!-- ======================= -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Passing Arrays to Functions</h2>
+                    <p>Arrays can be passed to functions, but unlike regular variables, arrays are passed <strong>by reference</strong> (the function receives the memory address, not a copy).</p>
+
+                    <div class="syntax-box">
+                        <div class="syntax-label">Syntax:</div>
+                        <div class="code-block">
+<pre>return_type function_name(data_type array_name[], int size) {
+    // function body
+}</pre>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Example: Print Array Elements</h4>
+                    <div class="code-block">
+<pre>#include &lt;stdio.h&gt;
+
+void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int numbers[] = {10, 20, 30, 40, 50};
+    int size = 5;
+    
+    printArray(numbers, size);  // Output: 10 20 30 40 50
+    return 0;
+}</pre>
+                    </div>
+
+                    <h3 class="subtopic-heading">The sizeof Operator</h3>
+                    <p>The <code>sizeof</code> operator returns the size (in bytes) of a variable or data type. It's useful for calculating array size.</p>
+
+                    <div class="code-block">
+<pre>#include &lt;stdio.h&gt;
+
+int main() {
+    int numbers[] = {10, 20, 30, 40, 50};
+    
+    int arraySize = sizeof(numbers);        // Total bytes: 20 (5 elements x 4 bytes)
+    int elementSize = sizeof(numbers[0]);   // Size of one int: 4 bytes
+    int length = arraySize / elementSize;   // Number of elements: 20 / 4 = 5
+    
+    printf("Array has %d elements\n", length);  // Output: Array has 5 elements
+    
+    return 0;
+}</pre>
+                    </div>
+                </section>
+
+                <!-- ============================== -->
+                <!-- PART 2: TWO-DIMENSIONAL ARRAYS -->
+                <!-- ============================== -->
+
+                <div class="part-divider">
+                    <span class="part-tag">Part 2</span>
+                    <h2>Two-Dimensional Arrays</h2>
+                </div>
+
+                <!-- ================================ -->
+                <!-- TOPIC 7: Multidimensional Arrays -->
+                <!-- ================================ -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Multidimensional Arrays in C</h2>
+                    <p>A <strong>multidimensional array</strong> is an array of arrays. The most common type is a <strong>2D array</strong>, which can be visualized as a table with rows and columns.</p>
+
+                    <div class="code-block">
+<pre>// 1D Array (list)
+int numbers[5];
+
+// 2D Array (table/matrix)
+int matrix[3][4];  // 3 rows, 4 columns
+
+// 3D Array (cube)
+int cube[2][3][4];  // 2 layers, 3 rows, 4 columns</pre>
+                    </div>
+
+                    <p>In this chapter, we'll focus on <strong>2D arrays</strong>, which are widely used for representing grids, tables, matrices, and game boards.</p>
+                </section>
+
+                <!-- ======================== -->
+                <!-- TOPIC 8: 2D Array Basics -->
+                <!-- ======================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> 2D Arrays: Rows and Columns</h2>
+                    <p>A 2D array is declared by specifying two dimensions: the number of rows and the number of columns.</p>
+
+                    <div class="syntax-box">
+                        <div class="syntax-label">Syntax:</div>
+                        <div class="code-block">
+<pre>data_type array_name[rows][columns];</pre>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Example:</h4>
+                    <div class="code-block">
+<pre>int matrix[3][4];  // 3 rows, 4 columns = 12 elements</pre>
+                    </div>
+
+                    <div class="matrix-visual">
+                        <div class="matrix-label">matrix[3][4]</div>
+                        <div class="matrix-grid">
+                            <div class="matrix-header">
+                                <div class="matrix-corner"></div>
+                                <div class="matrix-col-label">Col 0</div>
+                                <div class="matrix-col-label">Col 1</div>
+                                <div class="matrix-col-label">Col 2</div>
+                                <div class="matrix-col-label">Col 3</div>
+                            </div>
+                            <div class="matrix-row">
+                                <div class="matrix-row-label">Row 0</div>
+                                <div class="matrix-cell">[0][0]</div>
+                                <div class="matrix-cell">[0][1]</div>
+                                <div class="matrix-cell">[0][2]</div>
+                                <div class="matrix-cell">[0][3]</div>
+                            </div>
+                            <div class="matrix-row">
+                                <div class="matrix-row-label">Row 1</div>
+                                <div class="matrix-cell">[1][0]</div>
+                                <div class="matrix-cell">[1][1]</div>
+                                <div class="matrix-cell">[1][2]</div>
+                                <div class="matrix-cell">[1][3]</div>
+                            </div>
+                            <div class="matrix-row">
+                                <div class="matrix-row-label">Row 2</div>
+                                <div class="matrix-cell">[2][0]</div>
+                                <div class="matrix-cell">[2][1]</div>
+                                <div class="matrix-cell">[2][2]</div>
+                                <div class="matrix-cell">[2][3]</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Accessing Elements:</h4>
+                    <div class="code-block">
+<pre>matrix[0][0] = 1;   // First row, first column
+matrix[0][3] = 4;   // First row, last column
+matrix[2][1] = 10;  // Last row, second column</pre>
+                    </div>
+                </section>
+
+                <!-- =============================== -->
+                <!-- TOPIC 9: Initializing 2D Arrays -->
+                <!-- =============================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Initializing 2D Arrays</h2>
+                    <p>You can initialize a 2D array when declaring it using nested curly braces, where each inner set represents a row.</p>
+
+                    <h4 class="example-heading">Method 1: Row-by-Row Initialization</h4>
+                    <div class="code-block">
+<pre>int matrix[3][4] = {
+    {1, 2, 3, 4},      // Row 0
+    {5, 6, 7, 8},      // Row 1
+    {9, 10, 11, 12}    // Row 2
+};</pre>
+                    </div>
+
+                    <div class="init-visual">
+                        <div class="init-grid">
+                            <div class="init-cell">1</div>
+                            <div class="init-cell">2</div>
+                            <div class="init-cell">3</div>
+                            <div class="init-cell">4</div>
+                            <div class="init-cell">5</div>
+                            <div class="init-cell">6</div>
+                            <div class="init-cell">7</div>
+                            <div class="init-cell">8</div>
+                            <div class="init-cell">9</div>
+                            <div class="init-cell">10</div>
+                            <div class="init-cell">11</div>
+                            <div class="init-cell">12</div>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Method 2: Flatten Initialization</h4>
+                    <div class="code-block">
+<pre>int matrix[3][4] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+// Fills row by row automatically</pre>
+                    </div>
+
+                    <h4 class="example-heading">Partial Initialization:</h4>
+                    <div class="code-block">
+<pre>int matrix[3][4] = {
+    {1, 2},        // Row 0: 1, 2, 0, 0
+    {5},           // Row 1: 5, 0, 0, 0
+                   // Row 2: 0, 0, 0, 0 (all zeros)
+};
+// Unspecified elements are initialized to 0</pre>
+                    </div>
+                </section>
+
+                <!-- ======================== -->
+                <!-- TOPIC 10: Modifying Rows -->
+                <!-- ======================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Modifying a Specific Row in a 2D Array</h2>
+                    <p>You can modify all elements in a specific row by using a loop that iterates through the columns of that row.</p>
+
+                    <h4 class="example-heading">Example: Set All Values in Row 1 to 99</h4>
+                    <div class="code-block">
+<pre>#include &lt;stdio.h&gt;
+
+int main() {
+    int matrix[3][4] = {
+        {1, 2, 3, 4},
+        {5, 6, 7, 8},
+        {9, 10, 11, 12}
+    };
+    
+    // Modify row 1 (second row)
+    int rowToModify = 1;
+    for (int col = 0; col < 4; col++) {
+        matrix[rowToModify][col] = 99;
+    }
+    
+    // Print the modified array
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 4; j++) {
+            printf("%3d ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+    
+    return 0;
+}
+
+// Output:
+//   1   2   3   4
+//  99  99  99  99
+//   9  10  11  12</pre>
+                    </div>
+
+                    <div class="explanation-box">
+                        <strong>Explanation:</strong>
+                        <ul>
+                            <li>The outer loop (<code>i</code>) would iterate through rows</li>
+                            <li>The inner loop (<code>col</code>) iterates through columns of row 1</li>
+                            <li>Each element in row 1 is set to 99</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- =========================== -->
+                <!-- TOPIC 11: Totaling Elements -->
+                <!-- =========================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Totaling Elements in a 2D Array</h2>
+                    <p>To sum all elements in a 2D array, use nested loops: the outer loop iterates through rows, and the inner loop iterates through columns.</p>
+
+                    <h4 class="example-heading">Example: Sum All Elements</h4>
+                    <div class="code-block">
+<pre>#include &lt;stdio.h&gt;
+
+int main() {
+    int matrix[3][4] = {
+        {1, 2, 3, 4},
+        {5, 6, 7, 8},
+        {9, 10, 11, 12}
+    };
+    
+    int total = 0;
+    
+    // Nested loops to sum all elements
+    for (int row = 0; row < 3; row++) {
+        for (int col = 0; col < 4; col++) {
+            total += matrix[row][col];
+        }
+    }
+    
+    printf("Sum of all elements: %d\n", total);
+    
+    return 0;
+}
+
+// Output: Sum of all elements: 78
+// Calculation: 1+2+3+4+5+6+7+8+9+10+11+12 = 78</pre>
+                    </div>
+
+                    <div class="explanation-box">
+                        <strong>How it works:</strong>
+                        <ul>
+                            <li>Outer loop (<code>row</code>): Iterates through each row (0, 1, 2)</li>
+                            <li>Inner loop (<code>col</code>): For each row, iterates through each column (0, 1, 2, 3)</li>
+                            <li>Each element is added to <code>total</code></li>
+                            <li>After both loops complete, <code>total</code> contains the sum of all 12 elements</li>
+                        </ul>
+                    </div>
+
+                    <h4 class="example-heading">Example: Sum Each Row Separately</h4>
+                    <div class="code-block">
+<pre>#include &lt;stdio.h&gt;
+
+int main() {
+    int matrix[3][4] = {
+        {1, 2, 3, 4},
+        {5, 6, 7, 8},
+        {9, 10, 11, 12}
+    };
+    
+    for (int row = 0; row < 3; row++) {
+        int rowSum = 0;
+        for (int col = 0; col < 4; col++) {
+            rowSum += matrix[row][col];
+        }
+        printf("Row %d sum: %d\n", row, rowSum);
+    }
+    
+    return 0;
+}
+
+// Output:
+// Row 0 sum: 10  (1+2+3+4)
+// Row 1 sum: 26  (5+6+7+8)
+// Row 2 sum: 42  (9+10+11+12)</pre>
+                    </div>
+                </section>
+
+                <!-- ============= -->
+                <!-- KEY TAKEAWAYS-->
+                <!-- ============= -->
+                <section class="topic-section highlight-section">
+                    <h2><i class="fas fa-star"></i> Key Takeaways</h2>
+                    <ul class="takeaways-list">
+                        <li>Arrays store multiple values of the same data type in contiguous memory</li>
+                        <li>Array indexing starts at 0; last index is size - 1</li>
+                        <li>Declaration syntax: <code>data_type array_name[size];</code></li>
+                        <li>Use #define for array sizes to improve readability and maintainability</li>
+                        <li>Arrays are passed to functions by reference (address), not by value</li>
+                        <li>sizeof returns total bytes; divide by element size to get array length</li>
+                        <li>2D arrays are declared as: <code>data_type array[rows][columns];</code></li>
+                        <li>Access 2D array elements using two indices: <code>array[row][col]</code></li>
+                        <li>Use nested loops to process 2D arrays (outer for rows, inner for columns)</li>
+                        <li>Modifying a row: loop through columns of that specific row</li>
+                    </ul>
+                </section>
+
+            </div>
+            <!-- END NOTES CONTENT -->
+
+            <!-- Start Exercise Button -->
+            <div class="start-exercise-section">
+                <div class="ready-box">
+                    <i class="fas fa-dumbbell"></i>
+                    <h3>Ready to Practice?</h3>
+                    <p>Test your understanding with 14 exercises covering 1D and 2D arrays. Take your time, there's no timer!</p>
+                </div>
+                <button id="startExerciseBtn" class="btn btn-start">
+                    <i class="fas fa-play"></i>
+                    Start Exercises
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ============================= -->
+    <!-- ===== EXERCISE SCREEN ======= -->
+    <!-- ============================= -->
+
+    <div class="exercise-screen" id="exerciseScreen">
+        <div class="exercise-container">
+            <div class="exercise-header">
+                <div class="exercise-info">
+                    <h1>Chapter 6: Arrays (1D & 2D) — Exercises</h1>
+                    <div class="progress-info">
+                        <span class="question-counter">
+                            Question <span id="currentQuestion">1</span> of <span id="totalQuestions">10</span>
+                        </span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="no-timer-badge">
+                    <i class="fas fa-infinity"></i>
+                    <span>No Time Limit</span>
+                </div>
+            </div>
+
+            <div class="question-container" id="questionContainer"></div>
+
+            <div class="exercise-navigation">
+                <button id="prevBtn" class="btn btn-outline" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                    Previous
+                </button>
+                <button id="nextBtn" class="btn btn-primary">
+                    Next
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button id="submitBtn" class="btn btn-submit" style="display: none;">
+                    <i class="fas fa-check-circle"></i>
+                    Submit Exercises
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================= -->
+    <!-- ===== RESULTS SCREEN ======== -->
+    <!-- ============================= -->
+
+    <div class="results-screen" id="resultsScreen">
+        <div class="results-container">
+            <div class="results-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h1>Exercises Complete!</h1>
+            <div class="score-display">
+                <div class="score-circle">
+                    <span class="score-number" id="scoreNumber">0</span>
+                    <span class="score-total">/ <span id="scoreTotalDisplay">10</span></span>
+                </div>
+                <p class="score-label">Correct Answers</p>
+            </div>
+            <div class="results-stats">
+                <div class="stat-item">
+                    <i class="fas fa-percent"></i>
+                    <span class="stat-label">Score</span>
+                    <span class="stat-value" id="percentageScore">0%</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-check-double"></i>
+                    <span class="stat-label">Status</span>
+                    <span class="stat-value" id="statusText">Good Job!</span>
+                </div>
+            </div>
+            <div class="results-actions">
+                <button class="btn btn-primary" onclick="window.location.href='../../index.html'">
+                    <i class="fas fa-home"></i>
+                    Back to Home
+                </button>
+                <button class="btn btn-outline" onclick="location.reload()">
+                    <i class="fas fa-redo"></i>
+                    Retry Exercises
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="main6.js"></script>
+</body>
+</html>

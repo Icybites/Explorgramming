@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Chapter 2: Algorithm</title>
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- ========================== -->
+    <!-- ===== NAVIGATION BAR ===== -->
+    <!-- ========================== -->
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#" class="logo">
+                    <span class="logo-text1">Explor</span>
+                    <span class="logo-text2">gramming</span>
+                </a>
+            </div>
+            <a href="../../index.html" class="btn-back">
+                <i class="fas fa-arrow-left"></i>
+                Back to Home
+            </a>
+        </div>
+    </nav>
+
+    <!-- ============================= -->
+    <!-- ===== NOTES/STUDY SCREEN ==== -->
+    <!-- ============================= -->
+
+    <div class="notes-screen" id="notesScreen">
+        <div class="notes-container">
+
+            <!-- Chapter Header -->
+            <div class="chapter-header">
+                <span class="chapter-tag">Chapter 2</span>
+                <h1>Algorithm</h1>
+                <p class="chapter-subtitle">Master the art of problem-solving through structured step-by-step procedures</p>
+                <div class="chapter-meta">
+                    <span class="meta-item">
+                        <i class="fas fa-book"></i>
+                        7 Topics
+                    </span>
+                    <span class="meta-item">
+                        <i class="fas fa-dumbbell"></i>
+                        10 Exercises
+                    </span>
+                    <span class="meta-item">
+                        <i class="fas fa-clock"></i>
+                        ~25 min
+                    </span>
+                </div>
+            </div>
+
+            <!-- ======================== -->
+            <!-- ===== NOTES CONTENT ==== -->
+            <!-- ======================== -->
+
+            <div class="notes-content">
+
+                <!-- ================================== -->
+                <!-- TOPIC 1: Introduction to Algorithm -->
+                <!-- ================================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> What is an Algorithm?</h2>
+                    <p>An <strong>algorithm</strong> is a list of step-by-step instructions that a computer program follows to solve a problem. </p>
+                    
+                    <p>Think of an algorithm as a recipe in cooking: you follow specific steps in a specific order to create a dish.
+                         In programming, algorithms guide the computer on how to process data and make decisions.</p>
+                </section>
+
+                <!-- ================================= -->
+                <!-- TOPIC 2: Key Aspects of Algorithm -->
+                <!-- ================================= -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Key Aspects of an Algorithm</h2>
+                    <p>For a procedure to be considered a valid algorithm, it must satisfy three essential properties:</p>
+
+                    <div class="aspect-grid">
+                        <div class="aspect-card">
+                            <div class="aspect-icon"><i class="fas fa-sort-numeric-down"></i></div>
+                            <h3>Well-Ordered</h3>
+                            <p>The steps must be arranged in a clear, logical sequence. Each step follows the previous one in a precise order.</p>
+                            <div class="example-box">
+                                <div class="example-label">Example:</div>
+                                <code>Step 1 → Step 2 → Step 3 (not Step 2 → Step 1 → Step 3)</code>
+                            </div>
+                        </div>
+                        <div class="aspect-card">
+                            <div class="aspect-icon"><i class="fas fa-check-double"></i></div>
+                            <h3>Unambiguous</h3>
+                            <p>Each instruction must be clear and precise. There should be no confusion about what each step means or how to execute it.</p>
+                            <div class="example-box">
+                                <div class="example-label">Good:</div>
+                                <code>"Add 5 to the number"</code>
+                                <div class="example-label">Bad:</div>
+                                <code>"Add some amount to the number"</code>
+                            </div>
+                        </div>
+                        <div class="aspect-card">
+                            <div class="aspect-icon"><i class="fas fa-cogs"></i></div>
+                            <h3>Effectively Computable</h3>
+                            <p>Each step must be achievable and executable in a finite amount of time. The algorithm must eventually terminate and produce a result, it cannot run forever.</p>
+                            <div class="example-box">
+                                <div class="example-label">Example:</div>
+                                <code>Calculate 2 + 3 ✓ (computable)<br>Find the last digit of pi ✗ (infinite)</code>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================================= -->
+                <!-- TOPIC 3: Simple Algorithm Example -->
+                <!-- ================================= -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Simple Algorithm Example</h2>
+                    <p>Let's look at an everyday algorithm: <strong>Morning Routine</strong>. This is a sequence of steps you follow every morning to get ready for work or school.</p>
+
+                    <div class="algorithm-example">
+                        <div class="algorithm-title">
+                            <i class="fas fa-sun"></i>
+                            <strong>Morning Routine Algorithm</strong>
+                        </div>
+                        <ol class="algorithm-steps">
+                            <li><strong>START</strong></li>
+                            <li>Get out of bed</li>
+                            <li>Take off pajamas</li>
+                            <li>Take a shower</li>
+                            <li>Get dressed</li>
+                            <li>Eat breakfast</li>
+                            <li>Carpool to work</li>
+                            <li><strong>END</strong></li>
+                        </ol>
+                    </div>
+
+                    <p>Notice how this algorithm is <strong>well-ordered</strong> (you don't get dressed before take a shower), <strong>unambiguous</strong> (each step is clear), and <strong>effectively computable</strong> (each step can be completed in finite time).</p>
+                </section>
+
+                <!-- ================================= -->
+                <!-- TOPIC 4: Algorithm Representation -->
+                <!-- ================================= -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Algorithm Representation</h2>
+                    <p>Algorithms can be represented in different ways to make them easier to understand and communicate. The two most common methods are <strong>Pseudocode</strong> and <strong>Flowcharts</strong>.</p>
+
+                    <!-- ===== PSEUDOCODE ===== -->
+                    <h3 class="subtopic-heading">1. Pseudocode</h3>
+                    <p><strong>Pseudocode</strong> is a simplified way of writing an algorithm using plain language that resembles programming code but is easier to read.
+                         It uses a mix of natural language and programming-like syntax to describe the logic.</p>
+
+                    <div class="info-box">
+                        <i class="fas fa-lightbulb"></i>
+                        <div>
+                            <strong>Why use Pseudocode?</strong>
+                            <p>Pseudocode allows you to focus on the logic of the algorithm without worrying about the syntax rules of a specific programming language.
+                                 It's a planning tool before writing actual code.</p>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Pseudocode Example: Calculate Sum of Two Numbers</h4>
+                    <div class="code-block">
+<pre>START
+    INPUT number1
+    INPUT number2
+    sum = number1 + number2
+    OUTPUT sum
+END</pre>
+                    </div>
+
+                    <div class="explanation-box">
+                        <strong>Explanation:</strong>
+                        <ul>
+                            <li><code>START</code> and <code>END</code> mark the beginning and end of the algorithm</li>
+                            <li><code>INPUT</code> means we're receiving values from the user</li>
+                            <li><code>sum = number1 + number2</code> performs the calculation</li>
+                            <li><code>OUTPUT</code> displays the result to the user</li>
+                        </ul>
+                    </div>
+
+                    <!-- ===== FLOWCHART ===== -->
+                    <h3 class="subtopic-heading">2. Flowchart</h3>
+                    <p><strong>Flowchart</strong> is a visual representation of an algorithm using shapes and arrows. Each shape represents a specific type of action or decision, and arrows show the flow of control from one step to the next.</p>
+
+                    <div class="info-box">
+                        <i class="fas fa-lightbulb"></i>
+                        <div>
+                            <strong>Why use Flowcharts?</strong>
+                            <p>Flowcharts make it easy to see the overall structure and flow of an algorithm at a glance. They're especially useful for understanding decision points and loops visually.</p>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Flowchart Example: Calculate Sum of Two Numbers</h4>
+                    <p>The same algorithm shown as a flowchart uses different shapes connected by arrows to represent each step.</p>
+
+                    <div class="flowchart-representation">
+                        <p><em>(Visual representation: Start → Input number1 → Input number2 → Process: sum = number1 + number2 → Output sum → End)</em></p>
+                        <p>Each step in the pseudocode above corresponds to a shape in the flowchart, connected by directional arrows showing the sequence of execution.</p>
+                    </div>
+
+                </section>
+
+                <!-- ==================================== -->
+                <!-- TOPIC 5: Tips for Writing Pseudocode -->
+                <!-- ==================================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Tips for Writing Pseudocode</h2>
+                    <p>Follow these guidelines to write clear and effective pseudocode:</p>
+
+                    <div class="tips-list">
+
+                        <div class="tip-card">
+                            <div class="tip-number">1</div>
+                            <div class="tip-content">
+                                <strong>Write Only One Statement Per Line</strong>
+                                <p>Each line should contain only one instruction. This makes the pseudocode easier to read and follow.</p>
+                                <div class="tip-example">
+                                    <div class="example-label">✓ Good:</div>
+                                    <div class="code-block">
+<pre>INPUT age
+IF age >= 18 THEN
+    OUTPUT "You are an adult"
+END IF</pre>
+                                    </div>
+                                    <div class="example-label">✗ Bad:</div>
+                                    <div class="code-block">
+<pre>INPUT age IF age >= 18 THEN OUTPUT "You are an adult" END IF</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tip-card">
+                            <div class="tip-number">2</div>
+                            <div class="tip-content">
+                                <strong>Capitalize the Initial Keyword</strong>
+                                <p>Write keywords (like IF, THEN, ELSE, FOR, WHILE, INPUT, OUTPUT) in uppercase to distinguish them from variable names.</p>
+                                <div class="tip-example">
+                                    <div class="code-block">
+<pre>INPUT username
+IF username == "admin" THEN
+    OUTPUT "Welcome, Administrator"
+ELSE
+    OUTPUT "Welcome, User"
+END IF</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tip-card">
+                            <div class="tip-number">3</div>
+                            <div class="tip-content">
+                                <strong>Use Indentation to Show Dependency</strong>
+                                <p>Indent statements that are inside loops, conditions, or functions. This visually shows which statements belong together.</p>
+                                <div class="tip-example">
+                                    <div class="code-block">
+<pre>FOR i = 1 TO 5 DO
+    OUTPUT i
+    total = total + i
+END FOR</pre>
+                                    </div>
+                                    <p class="tip-note">The indented lines (<code>OUTPUT i</code> and <code>total = total + i</code>) are executed as part of the FOR loop.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tip-card">
+                            <div class="tip-number">4</div>
+                            <div class="tip-content">
+                                <strong>End Multiline Structures</strong>
+                                <p>Always close multiline structures (IF, FOR, WHILE) with an END statement to clearly mark where they finish.</p>
+                                <div class="tip-example">
+                                    <div class="code-block">
+<pre>WHILE count < 10 DO
+    OUTPUT count
+    count = count + 1
+END WHILE
+
+IF score > 50 THEN
+    OUTPUT "Pass"
+ELSE
+    OUTPUT "Fail"
+END IF</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ========================== -->
+                <!-- TOPIC 6: Flowchart Details -->
+                <!-- ========================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Understanding Flowcharts</h2>
+                    <p>A <strong>flowchart</strong> is a diagram that uses standardized symbols to represent different types of actions or steps in a process. Arrows connect these symbols to show the flow of execution.</p>
+
+                    <h3 class="subtopic-heading">Software for Creating Flowcharts</h3>
+                    <p>There are many tools available for drawing flowcharts:</p>
+
+                    <div class="tags-grid">
+                        <div class="tag-card">
+                            <code>RAPTOR</code>
+                            <p>Educational tool designed specifically for learning algorithms</p>
+                        </div>
+                        <div class="tag-card">
+                            <code>Microsoft Visio</code>
+                            <p>Professional diagramming software with flowchart templates</p>
+                        </div>
+                        <div class="tag-card">
+                            <code>Draw.io</code>
+                            <p>Free online flowchart tool, easy to use</p>
+                        </div>
+                    </div>
+
+                    <h3 class="subtopic-heading">Commonly Used Flowchart Symbols</h3>
+                    <p>Each symbol in a flowchart has a specific meaning:</p>
+
+                    <div class="flowchart-symbols">
+                        <div class="symbol-card">
+                            <div class="symbol-shape symbol-oval">
+                                <span>Oval</span>
+                            </div>
+                            <div class="symbol-description">
+                                <strong>Start / End</strong>
+                                <p>Marks the beginning or ending point of the algorithm</p>
+                            </div>
+                        </div>
+
+                        <div class="symbol-card">
+                            <div class="symbol-shape symbol-arrow">
+                                <span>→</span>
+                            </div>
+                            <div class="symbol-description">
+                                <strong>Arrow / Flowline</strong>
+                                <p>Shows the direction of flow from one step to the next</p>
+                            </div>
+                        </div>
+
+                        <div class="symbol-card">
+                            <div class="symbol-shape symbol-parallelogram">
+                                <span>Parallelogram</span>
+                            </div>
+                            <div class="symbol-description">
+                                <strong>Input / Output</strong>
+                                <p>Represents data entering or leaving the system (INPUT, OUTPUT, PRINT, READ)</p>
+                            </div>
+                        </div>
+
+                        <div class="symbol-card">
+                            <div class="symbol-shape symbol-rectangle">
+                                <span>Rectangle</span>
+                            </div>
+                            <div class="symbol-description">
+                                <strong>Process</strong>
+                                <p>Represents a processing step, calculation, or assignment (e.g., sum = a + b)</p>
+                            </div>
+                        </div>
+
+                        <div class="symbol-card">
+                            <div class="symbol-shape symbol-diamond">
+                                <span>Diamond</span>
+                            </div>
+                            <div class="symbol-description">
+                                <strong>Decision</strong>
+                                <p>Represents a yes/no question or condition (IF statements, loops)</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- =========================================== -->
+                <!-- TOPIC 7: Purpose of Pseudocode & Flowcharts -->
+                <!-- =========================================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> What Are Pseudocode and Flowcharts For?</h2>
+                    <p>Both pseudocode and flowcharts serve important purposes in algorithm design and communication:</p>
+
+                    <div class="purpose-grid">
+                        <div class="purpose-card">
+                            <div class="purpose-icon"><i class="fas fa-eye"></i></div>
+                            <strong>Visualization of Logic</strong>
+                            <p>Flowcharts provide a visual roadmap of the algorithm, making it easy to see the overall structure and flow at a glance. Pseudocode provides a textual blueprint.</p>
+                        </div>
+                        <div class="purpose-card">
+                            <div class="purpose-icon"><i class="fas fa-lightbulb"></i></div>
+                            <strong>Ease Understanding</strong>
+                            <p>Both methods break down complex problems into simple, manageable steps. This makes it easier for anyone to understand the solution.</p>
+                        </div>
+                        <div class="purpose-card">
+                            <div class="purpose-icon"><i class="fas fa-book-open"></i></div>
+                            <strong>Readability and Clarity</strong>
+                            <p>They use simple, clear language and symbols that are universally understood, making algorithms accessible to both programmers and non-programmers.</p>
+                        </div>
+                        <div class="purpose-card">
+                            <div class="purpose-icon"><i class="fas fa-users"></i></div>
+                            <strong>Communication Tool</strong>
+                            <p>They serve as a common language for discussing solutions with team members before writing any code.</p>
+                        </div>
+                        <div class="purpose-card">
+                            <div class="purpose-icon"><i class="fas fa-pencil-ruler"></i></div>
+                            <strong>Planning and Design</strong>
+                            <p>Writing pseudocode or drawing flowcharts helps you plan and organize your thoughts before coding. This reduces errors and saves time.</p>
+                        </div>
+                        <div class="purpose-card">
+                            <div class="purpose-icon"><i class="fas fa-bug"></i></div>
+                            <strong>Debugging and Testing</strong>
+                            <p>It's easier to spot logical errors in pseudocode or flowcharts than in complex code. You can verify the algorithm's correctness before implementation.</p>
+                        </div>
+                        <div class="purpose-card">
+                            <div class="purpose-icon"><i class="fas fa-file-alt"></i></div>
+                            <strong>Documentation</strong>
+                            <p>They serve as excellent documentation for programs, helping others (or your future self) understand how the program works.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================================ -->
+                <!-- KEY TAKEAWAYS                   -->
+                <!-- ================================ -->
+                <section class="topic-section highlight-section">
+                    <h2><i class="fas fa-star"></i> Key Takeaways</h2>
+                    <ul class="takeaways-list">
+                        <li>An algorithm is a step-by-step procedure to solve a problem or complete a task</li>
+                        <li>Algorithms must be well-ordered, unambiguous, and effectively computable</li>
+                        <li>Pseudocode uses plain language with programming-like structure to describe algorithms</li>
+                        <li>Flowcharts use standardized symbols (oval, rectangle, diamond, parallelogram, arrows) to visualize algorithms</li>
+                        <li>Write one statement per line in pseudocode and capitalize keywords like IF, WHILE, FOR</li>
+                        <li>Use indentation to show which statements belong inside loops or conditions</li>
+                        <li>Tools like RAPTOR, Draw.io, and Microsoft Visio can create professional flowcharts</li>
+                        <li>Both pseudocode and flowcharts help with planning, communication, debugging, and documentation</li>
+                    </ul>
+                </section>
+
+            </div>
+            <!-- END NOTES CONTENT -->
+
+            <!-- Start Exercise Button -->
+            <div class="start-exercise-section">
+                <div class="ready-box">
+                    <i class="fas fa-dumbbell"></i>
+                    <h3>Ready to Practice?</h3>
+                    <p>Test your understanding with 10 exercises on algorithms, pseudocode, and flowcharts. Take your time, there's no timer!</p>
+                </div>
+                <button id="startExerciseBtn" class="btn btn-start">
+                    <i class="fas fa-play"></i>
+                    Start Exercises
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================= -->
+    <!-- ===== EXERCISE SCREEN ======= -->
+    <!-- ============================= -->
+
+    <div class="exercise-screen" id="exerciseScreen">
+        <div class="exercise-container">
+            <div class="exercise-header">
+                <div class="exercise-info">
+                    <h1>Chapter 2: Algorithm — Exercises</h1>
+                    <div class="progress-info">
+                        <span class="question-counter">
+                            Question <span id="currentQuestion">1</span> of <span id="totalQuestions">10</span>
+                        </span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="no-timer-badge">
+                    <i class="fas fa-infinity"></i>
+                    <span>No Time Limit</span>
+                </div>
+            </div>
+
+            <div class="question-container" id="questionContainer"></div>
+
+            <div class="exercise-navigation">
+                <button id="prevBtn" class="btn btn-outline" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                    Previous
+                </button>
+                <button id="nextBtn" class="btn btn-primary">
+                    Next
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button id="submitBtn" class="btn btn-submit" style="display: none;">
+                    <i class="fas fa-check-circle"></i>
+                    Submit Exercises
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================= -->
+    <!-- ===== RESULTS SCREEN ======== -->
+    <!-- ============================= -->
+
+    <div class="results-screen" id="resultsScreen">
+        <div class="results-container">
+            <div class="results-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h1>Exercises Complete!</h1>
+            <div class="score-display">
+                <div class="score-circle">
+                    <span class="score-number" id="scoreNumber">0</span>
+                    <span class="score-total">/ <span id="scoreTotalDisplay">10</span></span>
+                </div>
+                <p class="score-label">Correct Answers</p>
+            </div>
+            <div class="results-stats">
+                <div class="stat-item">
+                    <i class="fas fa-percent"></i>
+                    <span class="stat-label">Score</span>
+                    <span class="stat-value" id="percentageScore">0%</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-check-double"></i>
+                    <span class="stat-label">Status</span>
+                    <span class="stat-value" id="statusText">Good Job!</span>
+                </div>
+            </div>
+            <div class="results-actions">
+                <button class="btn btn-primary" onclick="window.location.href='../../index.html'">
+                    <i class="fas fa-home"></i>
+                    Back to Home
+                </button>
+                <button class="btn btn-outline" onclick="location.reload()">
+                    <i class="fas fa-redo"></i>
+                    Retry Exercises
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="main2.js"></script>
+</body>
+</html>

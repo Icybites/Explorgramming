@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Chapter 5: Modularity Using Functions</title>
+    <link rel="stylesheet" href="style5.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- ========================== -->
+    <!-- ===== NAVIGATION BAR ===== -->
+    <!-- ========================== -->
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#" class="logo">
+                    <span class="logo-text1">Explor</span>
+                    <span class="logo-text2">gramming</span>
+                </a>
+            </div>
+            <a href="../../index.html" class="btn-back">
+                <i class="fas fa-arrow-left"></i>
+                Back to Home
+            </a>
+        </div>
+    </nav>
+
+    <!-- ============================= -->
+    <!-- ===== NOTES/STUDY SCREEN ==== -->
+    <!-- ============================= -->
+
+    <div class="notes-screen" id="notesScreen">
+        <div class="notes-container">
+
+            <!-- Chapter Header -->
+            <div class="chapter-header">
+                <span class="chapter-tag">Chapter 5</span>
+                <h1>Modularity Using Functions</h1>
+                <p class="chapter-subtitle">Learn how to break down complex programs into manageable, reusable functions</p>
+                <div class="chapter-meta">
+                    <span class="meta-item">
+                        <i class="fas fa-book"></i>
+                        10 Topics
+                    </span>
+                    <span class="meta-item">
+                        <i class="fas fa-dumbbell"></i>
+                        15 Exercises
+                    </span>
+                    <span class="meta-item">
+                        <i class="fas fa-clock"></i>
+                        ~40 min
+                    </span>
+                </div>
+            </div>
+
+            <!-- ======================== -->
+            <!-- ===== NOTES CONTENT ==== -->
+            <!-- ======================== -->
+
+            <div class="notes-content">
+
+                <!-- =========================== -->
+                <!-- PART 1: MODULAR PROGRAMMING -->
+                <!-- =========================== -->
+
+                <div class="part-divider">
+                    <span class="part-tag">Part 1</span>
+                    <h2>Modular Programming Concepts</h2>
+                </div>
+
+                <!-- ============================ -->
+                <!-- TOPIC 1: Modular Programming -->
+                <!-- ============================ -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> What is Modular Programming?</h2>
+                    <p><strong>Modular programming</strong> is a software design technique that separates a program into independent, interchangeable modules or functions. Each module performs a specific task and can be developed, tested, and debugged independently.</p>
+
+                    <div class="modular-visual">
+                        <div class="modular-box">
+                            <div class="modular-header">
+                                <i class="fas fa-file-code"></i>
+                                <strong>Monolithic Program</strong>
+                            </div>
+                            <div class="modular-content monolithic">
+                                <div class="code-line">All code in main()</div>
+                                <div class="code-line">Thousands of lines</div>
+                                <div class="code-line">Hard to understand</div>
+                                <div class="code-line">Difficult to debug</div>
+                                <div class="code-line">Cannot reuse code</div>
+                            </div>
+                        </div>
+
+                        <div class="modular-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                            <span style="font-weight: 700;">Break</span>
+                        </div>
+
+                        <div class="modular-box">
+                            <div class="modular-header">
+                                <i class="fas fa-cubes"></i>
+                                <strong>Modular Program</strong>
+                            </div>
+                            <div class="modular-content modular">
+                                <div class="module-piece">Function 1</div>
+                                <div class="module-piece">Function 2</div>
+                                <div class="module-piece">Function 3</div>
+                                <div class="module-piece">Function 4</div>
+                                <div class="module-piece">main()</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="subtopic-heading">Divide and Conquer Approach</h3>
+                    <p>The <strong>"divide and conquer"</strong> strategy breaks a large, complex problem into smaller, manageable sub-problems. Each sub-problem is solved by a separate function, making the overall solution easier to develop and maintain.</p>
+
+                    <div class="divide-conquer-steps">
+                        <div class="dc-step">
+                            <div class="dc-number">1</div>
+                            <div class="dc-content">
+                                <strong>Divide</strong>
+                                <p>Break the problem into smaller sub-problems</p>
+                            </div>
+                        </div>
+                        <div class="dc-step">
+                            <div class="dc-number">2</div>
+                            <div class="dc-content">
+                                <strong>Conquer</strong>
+                                <p>Solve each sub-problem independently with functions</p>
+                            </div>
+                        </div>
+                        <div class="dc-step">
+                            <div class="dc-number">3</div>
+                            <div class="dc-content">
+                                <strong>Combine</strong>
+                                <p>Integrate all solutions to solve the original problem</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="subtopic-heading">Benefits of Modular Programming</h3>
+                    <div class="benefits-grid">
+                        <div class="benefit-card">
+                            <div class="benefit-icon"><i class="fas fa-check-circle"></i></div>
+                            <strong>Code Reusability</strong>
+                            <p>Write once, use multiple times. Functions can be called from anywhere in the program.</p>
+                        </div>
+
+                        <div class="benefit-card">
+                            <div class="benefit-icon"><i class="fas fa-book-reader"></i></div>
+                            <strong>Improved Readability</strong>
+                            <p>Smaller, focused functions are easier to read and understand than one large block of code.</p>
+                        </div>
+
+                        <div class="benefit-card">
+                            <div class="benefit-icon"><i class="fas fa-bug"></i></div>
+                            <strong>Easier Debugging</strong>
+                            <p>Isolate and fix errors in specific functions without affecting the entire program.</p>
+                        </div>
+
+                        <div class="benefit-card">
+                            <div class="benefit-icon"><i class="fas fa-users"></i></div>
+                            <strong>Team Collaboration</strong>
+                            <p>Different team members can work on different functions simultaneously.</p>
+                        </div>
+
+                        <div class="benefit-card">
+                            <div class="benefit-icon"><i class="fas fa-wrench"></i></div>
+                            <strong>Easy Maintenance</strong>
+                            <p>Update or modify individual functions without rewriting the entire program.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- =========================== -->
+                <!-- TOPIC 2: Built-in Functions -->
+                <!-- =========================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Built-in Functions (Library Functions)</h2>
+                    <p><strong>Built-in functions</strong> (also called <strong>library functions</strong>) are pre-written functions provided by C's standard libraries. These functions are already tested, optimized, and ready to use by including the appropriate header file.</p>
+
+                    <div class="info-box">
+                        <i class="fas fa-lightbulb"></i>
+                        <div>
+                            <strong>Why Use Library Functions?</strong>
+                            <p>Library functions save time and effort. Instead of writing code from scratch, you can use reliable, efficient functions that have been tested by millions of programmers worldwide.</p>
+                        </div>
+                    </div>
+
+                    <h3 class="subtopic-heading">Commonly Used Header Files</h3>
+
+                    <div class="header-files">
+                        <div class="header-card">
+                            <div class="header-title">
+                                <code>#include &lt;stdio.h&gt;</code>
+                                <span class="header-badge">Input/Output</span>
+                            </div>
+                            <p><strong>Purpose:</strong> Provides functions for standard input and output operations.</p>
+                            <div class="header-functions">
+                                <strong>Common Functions:</strong>
+                                <ul>
+                                    <li><code>printf()</code> - Display output</li>
+                                    <li><code>scanf()</code> - Read input</li>
+                                    <li><code>getchar()</code> - Read a character</li>
+                                    <li><code>putchar()</code> - Print a character</li>
+                                </ul>
+                            </div>
+                            <div class="header-example">
+                                <strong>Example:</strong>
+                                <div class="code-block">
+<pre>printf("Hello, World!\n");
+scanf("%d", &num);</pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="header-card">
+                            <div class="header-title">
+                                <code>#include &lt;math.h&gt;</code>
+                                <span class="header-badge">Mathematics</span>
+                            </div>
+                            <p><strong>Purpose:</strong> Provides mathematical functions for complex calculations.</p>
+                            <div class="header-functions">
+                                <strong>Common Functions:</strong>
+                                <ul>
+                                    <li><code>sqrt()</code> - Square root</li>
+                                    <li><code>pow()</code> - Power (x<sup>y</sup>)</li>
+                                    <li><code>ceil()</code> - Round up</li>
+                                    <li><code>floor()</code> - Round down</li>
+                                    <li><code>sin()</code>, <code>cos()</code>, <code>tan()</code> - Trigonometry</li>
+                                </ul>
+                            </div>
+                            <div class="header-example">
+                                <strong>Example:</strong>
+                                <div class="code-block">
+<pre>double result = sqrt(25);    // 5.0
+double power = pow(2, 3);    // 8.0</pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="header-card">
+                            <div class="header-title">
+                                <code>#include &lt;stdlib.h&gt;</code>
+                                <span class="header-badge">General Utilities</span>
+                            </div>
+                            <p><strong>Purpose:</strong> Provides utility functions for memory allocation, conversion, and random numbers.</p>
+                            <div class="header-functions">
+                                <strong>Common Functions:</strong>
+                                <ul>
+                                    <li><code>malloc()</code> - Allocate memory</li>
+                                    <li><code>rand()</code> - Generate random number</li>
+                                    <li><code>exit()</code> - Terminate program</li>
+                                </ul>
+                            </div>
+                            <div class="header-example">
+                                <strong>Example:</strong>
+                                <div class="code-block">
+<pre>int randomNum = rand() % 100;  // 0-99
+int num = atoi("123");         // 123</pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="header-card">
+                            <div class="header-title">
+                                <code>#include &lt;time.h&gt;</code>
+                                <span class="header-badge">Date & Time</span>
+                            </div>
+                            <p><strong>Purpose:</strong> Provides functions for manipulating and formatting time and date.</p>
+                            <div class="header-functions">
+                                <strong>Common Functions:</strong>
+                                <ul>
+                                    <li><code>time()</code> - Get current time</li>
+                                    <li><code>clock()</code> - Get processor time</li>
+                                    <li><code>difftime()</code> - Time difference</li>
+                                </ul>
+                            </div>
+                            <div class="header-example">
+                                <strong>Example:</strong>
+                                <div class="code-block">
+<pre>time_t now = time(NULL);
+srand(time(NULL));  // Seed random</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================== -->
+                <!-- PART 2: USER-DEFINED FUNCTIONS -->
+                <!-- ============================== -->
+
+                <div class="part-divider">
+                    <span class="part-tag">Part 2</span>
+                    <h2>User-Defined Functions</h2>
+                </div>
+
+                <!-- =============================== -->
+                <!-- TOPIC 3: User-Defined Functions -->
+                <!-- =============================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> What are User-Defined Functions?</h2>
+                    <p><strong>User-defined functions</strong> are functions created by the programmer to perform specific tasks. Unlike built-in functions, you design and implement these functions yourself based on your program's needs.</p>
+
+                    <div class="info-box">
+                        <i class="fas fa-info-circle"></i>
+                        <div>
+                            <strong>Why Create Your Own Functions?</strong>
+                            <p>When library functions don't meet your specific requirements, you create custom functions. This allows you to organize code logically and create reusable components tailored to your application.</p>
+                        </div>
+                    </div>
+
+                    <h3 class="subtopic-heading">Function Definition vs Function Call</h3>
+                    <div class="two-column">
+                        <div class="concept-card">
+                            <h4><i class="fas fa-code"></i> Function Definition</h4>
+                            <p>The <strong>function definition</strong> is where you write the actual code that performs the task. It specifies what the function does.</p>
+                            <div class="code-block">
+<pre>// Function Definition
+int add(int a, int b) { 
+    int sum = a + b;
+    return sum;
+}</pre>
+                            </div>
+                        </div>
+
+                        <div class="concept-card">
+                            <h4><i class="fas fa-phone"></i> Function Call</h4>
+                            <p>The <strong>function call</strong> is where you execute the function. It invokes the function to perform its task.</p>
+                            <div class="code-block">
+<pre>// Function Call
+int main() {
+    int result = add(5, 3);
+    printf("%d", result);
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ======================== -->
+                <!-- TOPIC 4: Function Header -->
+                <!-- ======================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Function Header (Signature)</h2>
+                    <p>The <strong>function header</strong> defines the function's interface. It tells the compiler and other programmers how to use the function.</p>
+
+                    <div class="function-anatomy">
+                        <div class="anatomy-syntax">
+                            <div class="code-block">
+<pre>return-value-type function-name(parameter-list) { 
+    statements;
+}</pre>
+                            </div>
+                        </div>
+
+                        <div class="anatomy-parts">
+                            <div class="anatomy-part">
+                                <div class="anatomy-label">1. Return Value Type</div>
+                                <div class="anatomy-description">
+                                    <p>Specifies the data type of the value the function returns. Common types: <code>int</code>, <code>float</code>, <code>double</code>, <code>char</code>, or <code>void</code> (no return).</p>
+                                </div>
+                            </div>
+
+                            <div class="anatomy-part">
+                                <div class="anatomy-label">2. Function Name</div>
+                                <div class="anatomy-description">
+                                    <p>The identifier used to call the function. Should be follow C naming conventions (lowercase, underscores).</p>
+                                    <code>calculateSum, findMax, isEven</code>
+                                </div>
+                            </div>
+
+                            <div class="anatomy-part">
+                                <div class="anatomy-label">3. Parameter List</div>
+                                <div class="anatomy-description">
+                                    <p>Variables that receive values when the function is called (inputs). Can be empty if no input is needed.</p>
+                                    <code>(int a, int b, float c)</code>
+                                </div>
+                            </div>
+
+                            <div class="anatomy-part">
+                                <div class="anatomy-label">4. Function Body</div>
+                                <div class="anatomy-description">
+                                    <p>The block of code between <code>{ }</code> that contains the statements to be executed. This is where the function's logic resides.</p>
+                                    <code>{ statements; return value; }</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Complete Example:</h4>
+                    <div class="code-block">
+<pre>#include &lt;stdio.h&gt;
+
+// Function Header: int multiply(int x, int y)
+int multiply(int x, int y) {    // Return type: int
+                                // Function name: multiply
+                                // Parameters: int x, int y
+    int result = x * y;         // Function body (statements)
+    return result;              // Return statement
+}
+
+int main() {    // Function call
+    int answer = multiply(5, 4); 
+    printf("5 x 4 = %d\n", answer);
+    return 0;
+}
+
+// Output: 5 x 4 = 20</pre>
+                    </div>
+                </section>
+
+                <!-- ========================= -->
+                <!-- TOPIC 5: Void vs Non-Void -->
+                <!-- ========================= -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Void Functions vs Non-Void Functions</h2>
+                    <p>Functions can be classified based on whether they return a value:</p>
+
+                    <div class="void-comparison">
+                        <div class="void-card void-card--nonvoid">
+                            <div class="void-header">
+                                <i class="fas fa-reply"></i>
+                                <strong>Non-Void Functions</strong>
+                            </div>
+                            <p>Functions that <strong>return a value</strong> after execution. The return type specifies what type of data is returned.</p>
+                            <div class="code-block">
+<pre>// Non-void function (returns int)
+int square(int num) {
+    return num * num;
+}
+
+int main() {
+    int result = square(5);  // result = 25
+    printf("Square: %d\n", result);
+    return 0;
+}</pre>
+                            </div>
+                            <div class="void-explanation">
+                                <strong>Key Points:</strong>
+                                <ul>
+                                    <li>Must have a <code>return</code> statement</li>
+                                    <li>Returns a value to the caller</li>
+                                    <li>The returned value can be stored, used in expressions, or printed</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="void-card void-card--void">
+                            <div class="void-header">
+                                <i class="fas fa-ban"></i>
+                                <strong>Void Functions</strong>
+                            </div>
+                            <p>Functions that <strong>do not return a value</strong>. They perform an action but don't give back any result.</p>
+                            <div class="code-block">
+<pre>// Void function (returns nothing)
+void printMessage(char name[]) {
+    printf("Hello, %s!\n", name);
+    // No return statement needed
+}
+
+int main() {
+    printMessage("Alice");  // Output: Hello, Alice!
+    printMessage("Bob");    // Output: Hello, Bob!
+    return 0;
+}</pre>
+                            </div>
+                            <div class="void-explanation">
+                                <strong>Key Points:</strong>
+                                <ul>
+                                    <li>Does NOT need a <code>return</code> statement (or use <code>return;</code> without a value)</li>
+                                    <li>Performs an action (print, modify variables, etc.)</li>
+                                    <li>Cannot be used in expressions or assignments</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ======================= -->
+                <!-- TOPIC 6: Function Calls -->
+                <!-- ======================= -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Function Prototype and Multiple Function Calls</h2>
+                    <p>A <strong>function prototype</strong> (also called function declaration) tells the compiler about a function's existence before it's actually defined. This allows functions to be defined in any order and called from anywhere.</p>
+
+                    <div class="syntax-box">
+                        <div class="syntax-label">Syntax:</div>
+                        <div class="code-block">
+<pre>return-type function-name(parameter-types); </pre>
+                        </div>
+                    </div>
+
+                    <h4 class="example-heading">Example: Functions Calling Other Functions</h4>
+                    <div class="code-block">
+<pre>#include &lt;stdio.h&gt;
+
+// Function Prototypes (Declarations)
+int add(int a, int b);
+int multiply(int a, int b);
+int calculate(int x, int y);
+
+// Main function
+int main() {
+    int result = calculate(5, 3);
+    printf("Final Result: %d\n", result);
+    return 0;
+}
+
+// Function that calls other functions
+int calculate(int x, int y) {
+    int sum = add(x, y);          // Call add function
+    int product = multiply(x, y); // Call multiply function
+    return sum + product;         // Return combined result
+}
+
+// Function definitions
+int add(int a, int b) {
+    return a + b;  // Returns 8
+}
+
+int multiply(int a, int b) {
+    return a * b;  // Returns 15
+}
+
+// Output: Final Result: 23
+// Explanation: (5+3) + (5*3) = 8 + 15 = 23</pre>
+                    </div>
+
+                    <div class="call-hierarchy">
+                        <div class="call-level">
+                            <div class="call-box call-main">main()</div>
+                            <div class="call-arrow">↓ calls</div>
+                        </div>
+                        <div class="call-level">
+                            <div class="call-box call-function">calculate()</div>
+                            <div class="call-arrow">↓ calls</div>
+                        </div>
+                        <div class="call-level call-multiple">
+                            <div class="call-box call-function">add()</div>
+                            <div class="call-box call-function">multiply()</div>
+                        </div>
+                        <div class="call-level">
+                            <div class="call-arrow">↑ return values</div>
+                        </div>
+                    </div>
+
+                    <h3 class="subtopic-heading">The Return Statement</h3>
+                    <p>The <code>return</code> statement serves two purposes:</p>
+                    <div class="info-box">
+                        <i class="fas fa-info-circle"></i>
+                        <div>
+                            <ul>
+                                <li><strong>Send a value back</strong> to the function caller</li>
+                                <li><strong>Exit the function</strong> immediately (any code after return is not executed)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="code-block">
+<pre>int findMax(int a, int b) {
+    if (a > b) {
+        return a;  // Exit immediately, return a
+    } else {
+        return b;  // Exit immediately, return b
+    }
+    // Code here would never execute
+}</pre>
+                    </div>
+                </section>
+
+                <!-- ======================= -->
+                <!-- TOPIC 7: Passing Values -->
+                <!-- ======================= -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Passing Values to Functions</h2>
+                    <p>When you call a function, you can pass data to it through <strong>arguments</strong>. The function receives these values through its <strong>parameters</strong>.</p>
+
+                    <div class="parameter-concepts">
+                        <div class="param-card">
+                            <h4>Parameters (Formal Parameters)</h4>
+                            <p>Variables listed in the function definition that receive values.</p>
+                            <div class="code-block">
+<pre>int add(int a, int b) {  // a and b are parameters
+    return a + b;
+}</pre>
+                            </div>
+                        </div>
+
+                        <div class="param-card">
+                            <h4>Arguments (Actual Parameters)</h4>
+                            <p>The actual values passed to the function when it's called.</p>
+                            <div class="code-block">
+<pre>int result = add(5, 3);  // 5 and 3 are arguments</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="subtopic-heading">Pass by Value</h3>
+                    <p>In C, arguments are passed <strong>by value</strong>. This means the function receives a <strong>copy</strong> of the data, not the original. Changes made to parameters inside the function do NOT affect the original variables.</p>
+
+                    <div class="code-block">
+<pre>#include &lt;stdio.h&gt;
+
+void modifyValue(int num) {
+    num = num + 10;  // Modifies the COPY, not the original
+    printf("Inside function: %d\n", num);
+}
+
+int main() {
+    int x = 5;
+    
+    printf("Before function call: %d\n", x);  // 5
+    modifyValue(x);                           // Inside function: 15
+    printf("After function call: %d\n", x);   // 5 (unchanged!)
+    
+    return 0;
+}
+
+// Output:
+// Before function call: 5
+// Inside function: 15
+// After function call: 5</pre>
+                    </div>
+
+                    <div class="explanation-box">
+                        <strong>Explanation:</strong>
+                        <ul>
+                            <li>The variable <code>x</code> has the value 5</li>
+                            <li>When <code>modifyValue(x)</code> is called, a copy of 5 is passed</li>
+                            <li>The function modifies the copy (5 + 10 = 15)</li>
+                            <li>The original variable <code>x</code> remains unchanged (still 5)</li>
+                        </ul>
+                    </div>
+
+                    <h4 class="example-heading">Example: Multiple Parameters</h4>
+                    <div class="code-block">
+<pre>float calculateArea(float length, float width) {
+    return length * width;
+}
+
+int main() {
+    float l = 5.5, w = 3.2;
+    float area = calculateArea(l, w);  // Pass l and w as arguments
+    printf("Area: %.2f\n", area);      // Output: Area: 17.60
+    return 0;
+}</pre>
+                    </div>
+                </section>
+
+                <!-- ====================== -->
+                <!-- PART 3: VARIABLE SCOPE -->
+                <!-- ====================== -->
+
+                <div class="part-divider">
+                    <span class="part-tag">Part 3</span>
+                    <h2>Variable Scope</h2>
+                </div>
+
+                <!-- ======================== -->
+                <!-- TOPIC 8: Local vs Global -->
+                <!-- ======================== -->
+                <section class="topic-section">
+                    <h2><i class="fas fa-circle-notch"></i> Local and Global Variables</h2>
+                    <p>The <strong>scope</strong> of a variable determines where in the program it can be accessed. Variables can be either local or global.</p>
+
+                    <div class="scope-comparison">
+                        <div class="scope-card scope-local">
+                            <div class="scope-header">
+                                <i class="fas fa-lock"></i>
+                                <strong>Local Variables</strong>
+                            </div>
+                            <p>Variables declared <strong>inside a function</strong>. They exist only within that function and cannot be accessed from outside.</p>
+                            
+                            <div class="scope-properties">
+                                <h5>Characteristics:</h5>
+                                <ul>
+                                    <li>Declared inside a function or block</li>
+                                    <li>Only accessible within that function/block</li>
+                                    <li>Created when function is called</li>
+                                    <li>Destroyed when function exits</li>
+                                    <li>Each function call gets its own copy</li>
+                                </ul>
+                            </div>
+
+                            <div class="code-block">
+<pre>void myFunction() {
+    int x = 10;  // Local variable
+    printf("%d", x);
+}  // x is destroyed here
+
+int main() {
+    int y = 5;   // Local to main
+    myFunction();
+    // printf("%d", x); // ERROR! x doesn't exist here
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+
+                        <div class="scope-card scope-global">
+                            <div class="scope-header">
+                                <i class="fas fa-globe"></i>
+                                <strong>Global Variables</strong>
+                            </div>
+                            <p>Variables declared <strong>outside all functions</strong>. They can be accessed from any function in the program.</p>
+                            
+                            <div class="scope-properties">
+                                <h5>Characteristics:</h5>
+                                <ul>
+                                    <li>Declared outside all functions (usually at top)</li>
+                                    <li>Accessible from any function in the file</li>
+                                    <li>Created when program starts</li>
+                                    <li>Destroyed when program ends</li>
+                                    <li>Automatically initialized to 0 if not explicitly initialized</li>
+                                </ul>
+                            </div>
+
+                            <div class="code-block">
+<pre>int globalVar = 100;  // Global variable
+
+void function1() {
+    printf("Function1: %d\n", globalVar);
+}
+
+void function2() {
+    globalVar = 200;  // Can modify global
+    printf("Function2: %d\n", globalVar);
+}
+
+int main() {
+    function1();  // Output: Function1: 100
+    function2();  // Output: Function2: 200
+    printf("Main: %d\n", globalVar);  // Output: Main: 200
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="subtopic-heading">Complete Example: Local vs Global</h3>
+                    <div class="code-block">
+<pre>#include &lt;stdio.h&gt;
+
+// Global variable
+int globalCount = 0;
+
+void increment() {
+    int localCount = 0;  // Local variable
+    
+    localCount++;        // Increment local
+    globalCount++;       // Increment global
+    
+    printf("Local: %d, Global: %d\n", localCount, globalCount);
+}
+
+int main() {
+    increment();  // Output: Local: 1, Global: 1
+    increment();  // Output: Local: 1, Global: 2
+    increment();  // Output: Local: 1, Global: 3
+    
+    // localCount doesn't exist here
+    printf("Final Global: %d\n", globalCount);  // Output: Final Global: 3
+    
+    return 0;
+}</pre>
+                    </div>
+
+                    <div class="explanation-box">
+                        <strong>Explanation:</strong>
+                        <ul>
+                            <li><code>localCount</code> is created fresh each time <code>increment()</code> is called, so it always starts at 0</li>
+                            <li><code>globalCount</code> persists across all function calls, so it accumulates: 1, 2, 3</li>
+                            <li><code>localCount</code> cannot be accessed from <code>main()</code></li>
+                        </ul>
+                    </div>
+
+                    <div class="warning-box">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <strong>⚠️ Best Practice:</strong>
+                            <p>Use local variables whenever possible. Global variables can make programs harder to debug and maintain because any function can modify them. Only use globals when you truly need to share data across many functions.</p>
+                        </div>
+                    </div>
+
+                    <!-- <h4 class="example-heading">Local Variable Shadowing:</h4>
+                    <div class="code-block">
+<pre>int x = 10;  // Global variable
+
+void test() {
+    int x = 5;  // Local variable (shadows global)
+    printf("Local x: %d\n", x);  // Prints 5
+}
+
+int main() {
+    printf("Global x: %d\n", x);  // Prints 10
+    test();                        // Prints 5
+    printf("Global x: %d\n", x);  // Prints 10
+    return 0;
+}</pre>
+                    </div>
+
+                    <div class="explanation-box">
+                        <strong>Note:</strong>
+                        <p>When a local variable has the same name as a global variable, the local variable "shadows" (hides) the global one within that function. The global variable remains accessible in other functions.</p>
+                    </div> -->
+                </section>
+
+                <!-- ============= -->
+                <!-- KEY TAKEAWAYS -->
+                <!-- ============= -->
+                <section class="topic-section highlight-section">
+                    <h2><i class="fas fa-star"></i> Key Takeaways</h2>
+                    <ul class="takeaways-list">
+                        <li>Modular programming breaks programs into independent functions</li>
+                        <li>Divide and conquer: split complex problems into smaller, manageable sub-problems</li>
+                        <li>Built-in functions: stdio.h (I/O), math.h (calculations), stdlib.h (utilities), time.h (date/time)</li>
+                        <li>User-defined functions allow you to create custom functionality</li>
+                        <li>Function header: return-type function-name(parameters) { body }</li>
+                        <li>Void functions perform actions without returning values</li>
+                        <li>Non-void functions return a value that can be used in expressions</li>
+                        <li>Return statement sends a value back and exits the function</li>
+                        <li>Arguments are passed by value (copy of data, not original)</li>
+                        <li>Local variables: accessible only within their function, destroyed after execution</li>
+                        <li>Global variables: accessible from any function, exist throughout program lifetime</li>
+                        <li>Prefer local variables; use globals sparingly to avoid debugging complexity</li>
+                    </ul>
+                </section>
+
+            </div>
+            <!-- END NOTES CONTENT -->
+
+            <!-- Start Exercise Button -->
+            <div class="start-exercise-section">
+                <div class="ready-box">
+                    <i class="fas fa-dumbbell"></i>
+                    <h3>Ready to Practice?</h3>
+                    <p>Test your understanding with 15 exercises covering functions, modularity, and variable scope. Take your time, there's no timer!</p>
+                </div>
+                <button id="startExerciseBtn" class="btn btn-start">
+                    <i class="fas fa-play"></i>
+                    Start Exercises
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ============================= -->
+    <!-- ===== EXERCISE SCREEN ======= -->
+    <!-- ============================= -->
+
+    <div class="exercise-screen" id="exerciseScreen">
+        <div class="exercise-container">
+            <div class="exercise-header">
+                <div class="exercise-info">
+                    <h1>Chapter 5: Modularity Using Functions — Exercises</h1>
+                    <div class="progress-info">
+                        <span class="question-counter">
+                            Question <span id="currentQuestion">1</span> of <span id="totalQuestions">10</span>
+                        </span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="no-timer-badge">
+                    <i class="fas fa-infinity"></i>
+                    <span>No Time Limit</span>
+                </div>
+            </div>
+
+            <div class="question-container" id="questionContainer"></div>
+
+            <div class="exercise-navigation">
+                <button id="prevBtn" class="btn btn-outline" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                    Previous
+                </button>
+                <button id="nextBtn" class="btn btn-primary">
+                    Next
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button id="submitBtn" class="btn btn-submit" style="display: none;">
+                    <i class="fas fa-check-circle"></i>
+                    Submit Exercises
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================= -->
+    <!-- ===== RESULTS SCREEN ======== -->
+    <!-- ============================= -->
+
+    <div class="results-screen" id="resultsScreen">
+        <div class="results-container">
+            <div class="results-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h1>Exercises Complete!</h1>
+            <div class="score-display">
+                <div class="score-circle">
+                    <span class="score-number" id="scoreNumber">0</span>
+                    <span class="score-total">/ <span id="scoreTotalDisplay">10</span></span>
+                </div>
+                <p class="score-label">Correct Answers</p>
+            </div>
+            <div class="results-stats">
+                <div class="stat-item">
+                    <i class="fas fa-percent"></i>
+                    <span class="stat-label">Score</span>
+                    <span class="stat-value" id="percentageScore">0%</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-check-double"></i>
+                    <span class="stat-label">Status</span>
+                    <span class="stat-value" id="statusText">Good Job!</span>
+                </div>
+            </div>
+            <div class="results-actions">
+                <button class="btn btn-primary" onclick="window.location.href='../../index.html'">
+                    <i class="fas fa-home"></i>
+                    Back to Home
+                </button>
+                <button class="btn btn-outline" onclick="location.reload()">
+                    <i class="fas fa-redo"></i>
+                    Retry Exercises
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="main5.js"></script>
+</body>
+</html>
