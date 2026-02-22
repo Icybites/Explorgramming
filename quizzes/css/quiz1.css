@@ -574,6 +574,7 @@ body {
     gap: 0.5rem;
     transition: all 0.2s ease;
     font-family: inherit;
+    margin-top: 1rem;
 }
 
 .btn-check:hover:not(:disabled) {
@@ -881,4 +882,13 @@ body {
     .logo-text2 {
         margin-left: 1px;
     }
+}
+
+.question-code {
+    white-space: pre;
+    font-family: Consolas, monospace;
+    background: #f1f5f9;
+    padding: 10px;
+    border-radius: 12px;
+    margin-bottom: 1rem;
 }

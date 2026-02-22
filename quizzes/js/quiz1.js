@@ -42,22 +42,26 @@ const quizData = [
         ]
     },
     
-    // Question 4: Multi-Attempt Question (5 marks max)
+    // Question 4: Multi-Attempt Code Question (5 marks max)
     {
         type: "multi-attempt",
-        question: "Kucing menggunakan _______ untuk keseimbangan dan _______ untuk menangkap bunyi",
+        question: "Write C statements to declare an integer variable named score with value 10, then print it using printf.\n\n// Fill in the two statements below:",
         maxAttempts: 5,
         maxMarks: 5,
         fields: [
             {
-                label: "Anggota Badan 1",
-                placeholder: "Answer 1",
-                keywords: ["ekor"] // All must be present
+                label: "Statement 1",
+                placeholder: "e.g.  int score = 10;",
+                // correctAnswer is the canonical answer shown when out of attempts
+                correctAnswer: "int score = 10;",
+                // tokens: each token must appear in the student's answer (order-aware diff)
+                tokens: ["int", "score", "=", "10", ";"]
             },
             {
-                label: "Anggota Badan 2",
-                placeholder: "Answer 2",
-                keywords: ["telinga"] // All must be present
+                label: "Statement 2",
+                placeholder: "e.g.  printf(...);",
+                correctAnswer: "printf('%d', score);",
+                tokens: ["printf", "(", "'%d'", ",", "score", ")", ";"]
             }
         ]
     },
@@ -145,8 +149,9 @@ const state = {
     startTime: null,
     timerInterval: null,
     score: 0,
-    questionAttempts: {}, // Track attempts for multi-attempt questions
-    questionMarks: {} // Track marks for each question
+    questionAttempts: {},  // Track attempt count per question
+    questionMarks: {},     // Track current marks per question
+    questionSolved: {}     // Track if question is solved
 };
 
 // ===== INITIALIZATION =====
@@ -161,11 +166,8 @@ function initPasswordScreen() {
     const errorMessage = document.getElementById('errorMessage');
 
     passwordInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            checkPassword();
-        }
+        if (e.key === 'Enter') checkPassword();
     });
-
     unlockBtn.addEventListener('click', checkPassword);
 
     function checkPassword() {
@@ -179,16 +181,13 @@ function initPasswordScreen() {
             errorMessage.textContent = 'Incorrect password. Please try again.';
             passwordInput.value = '';
             passwordInput.focus();
-            
             passwordInput.style.animation = 'shake 0.5s';
-            setTimeout(() => {
-                passwordInput.style.animation = '';
-            }, 500);
+            setTimeout(() => { passwordInput.style.animation = ''; }, 500);
         }
     }
 }
 
-// Add shake animation
+// Shake animation
 const style = document.createElement('style');
 style.textContent = `
     @keyframes shake {
@@ -196,6 +195,163 @@ style.textContent = `
         10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
         20%, 40%, 60%, 80% { transform: translateX(10px); }
     }
+
+    /* ===== MULTI-ATTEMPT HISTORY STYLES ===== */
+    .attempt-history {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .attempt-history-item {
+        border-radius: 12px;
+        padding: 1rem 1.25rem;
+        border: 2px solid #e2e8f0;
+        background: #f8fafc;
+    }
+
+    .attempt-history-item.has-error {
+        border-color: #fca5a5;
+        background: #fff5f5;
+    }
+
+    .attempt-history-label {
+        font-size: 0.8125rem;
+        font-weight: 700;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.75rem;
+    }
+
+    .attempt-history-fields {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .attempt-history-field {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.9375rem;
+    }
+
+    .attempt-history-field .field-name {
+        font-weight: 600;
+        color: #475569;
+        min-width: 120px;
+    }
+
+    .attempt-history-field .field-value {
+        font-family: Consolas, monospace;
+        padding: 0.25rem 0.75rem;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        flex: 1;
+    }
+
+    .attempt-history-field.correct .field-value {
+        background: #dcfce7;
+        color: #166534;
+        border: 1px solid #86efac;
+    }
+
+    .attempt-history-field.incorrect .field-value {
+        background: #fee2e2;
+        color: #991b1b;
+        border: 1px solid #fca5a5;
+    }
+
+    .attempt-history-field .field-icon {
+        font-size: 1rem;
+        flex-shrink: 0;
+    }
+
+    .attempt-history-field.correct .field-icon { color: #16a34a; }
+    .attempt-history-field.incorrect .field-icon { color: #dc2626; }
+
+    .attempt-hint {
+        margin-top: 0.75rem;
+        font-size: 0.875rem;
+        color: #64748b;
+        font-style: italic;
+    }
+
+    /* New attempt section */
+    .new-attempt-section {
+        border-top: 2px dashed #e2e8f0;
+        padding-top: 1.25rem;
+        margin-top: 0.5rem;
+    }
+
+    .new-attempt-label {
+        font-size: 0.875rem;
+        font-weight: 700;
+        color: #2563eb;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    /* Pre-filled correct fields in new attempt */
+    .attempt-input.field-correct {
+        background: #dcfce7 !important;
+        border-color: #86efac !important;
+        color: #166534 !important;
+        cursor: not-allowed;
+    }
+
+    /* Solved state */
+    .multi-attempt-container.solved .new-attempt-section {
+        display: none;
+    }
+
+    .marks-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.25rem 0.75rem;
+        border-radius: 100px;
+        font-size: 0.875rem;
+        font-weight: 700;
+    }
+
+    .marks-badge.marks-full { background: #dcfce7; color: #166534; }
+    .marks-badge.marks-high { background: #d1fae5; color: #065f46; }
+    .marks-badge.marks-mid  { background: #fef9c3; color: #854d0e; }
+    .marks-badge.marks-low  { background: #ffedd5; color: #9a3412; }
+    .marks-badge.marks-zero { background: #fee2e2; color: #991b1b; }
+
+    /* ===== PARTIAL FIELD STATE ===== */
+    .attempt-history-field.partial .field-value {
+        background: #fef9c3;
+        color: #854d0e;
+        border: 1px solid #fde047;
+    }
+
+    .attempt-history-field.partial .field-icon { color: #d97706; }
+
+    .partial-tag {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: #92400e;
+        background: #fef3c7;
+        border: 1px solid #fcd34d;
+        border-radius: 100px;
+        padding: 0.15rem 0.6rem;
+        white-space: nowrap;
+    }
+
+    .attempt-input.field-partial {
+        background: #fffbeb !important;
+        border-color: #fcd34d !important;
+        color: #92400e !important;
+    }
+
+
 `;
 document.head.appendChild(style);
 
@@ -203,13 +359,13 @@ document.head.appendChild(style);
 function initQuiz() {
     state.userAnswers = new Array(quizData.length).fill(null);
     
-    // Initialize attempts and marks for multi-attempt questions
     quizData.forEach((q, index) => {
         if (q.type === 'multi-attempt') {
             state.questionAttempts[index] = 0;
             state.questionMarks[index] = q.maxMarks;
+            state.questionSolved[index] = false;
         } else {
-            state.questionMarks[index] = 1; // Standard questions worth 1 mark
+            state.questionMarks[index] = 1;
         }
     });
     
@@ -224,15 +380,38 @@ function initQuiz() {
 function renderQuestions() {
     const container = document.getElementById('questionContainer');
     container.innerHTML = '';
-    
+
     quizData.forEach((q, index) => {
         const questionDiv = document.createElement('div');
         questionDiv.className = 'question';
         questionDiv.id = `question-${index}`;
-        
-        let marksText = q.type === 'multi-attempt' ? `(${q.maxMarks} marks)` : '(1 mark)';
-        let questionHTML = `<div class="question-text">${index + 1}. ${q.question} ${marksText}</div>`;
-        
+
+        const marksText = q.type === 'multi-attempt'
+            ? `(${q.maxMarks} marks)`
+            : '(1 mark)';
+
+        // Split question into label text and optional embedded code.
+        // If q.question contains \n\n, everything before it is the readable sentence
+        // and everything after is treated as a code snippet to render in a <pre> block.
+        const doubleNewlineIdx = q.question.indexOf('\n\n');
+        const questionLabel = doubleNewlineIdx !== -1
+            ? q.question.slice(0, doubleNewlineIdx)
+            : q.question;
+        const embeddedCode = doubleNewlineIdx !== -1
+            ? q.question.slice(doubleNewlineIdx + 2)
+            : null;
+
+        let questionHTML = `
+            <div class="question-text">
+                ${index + 1}. ${questionLabel} <span style="color:#64748b;font-weight:500;">${marksText}</span>
+            </div>
+        `;
+
+        // Render a code block if the question embeds code (via \n\n separator) or has an explicit q.code property
+        if (embeddedCode || q.code) {
+            questionHTML += `<pre class="question-code" id="code-${index}"></pre>`;
+        }
+
         if (q.image) {
             questionHTML += `
                 <div class="question-image">
@@ -240,8 +419,7 @@ function renderQuestions() {
                 </div>
             `;
         }
-        
-        // Render based on question type
+
         if (q.type === 'multiple-choice') {
             questionHTML += '<div class="options">';
             q.options.forEach((option, optIndex) => {
@@ -253,40 +431,33 @@ function renderQuestions() {
                 `;
             });
             questionHTML += '</div>';
-            
+
         } else if (q.type === 'fill-blank') {
             questionHTML += `
-                <input 
-                    type="text" 
-                    class="text-input" 
-                    data-question="${index}"
-                    placeholder="Type your answer here..."
-                    autocomplete="off"
-                >
+                <input type="text" class="text-input" data-question="${index}"
+                    placeholder="Type your answer here..." autocomplete="off">
             `;
-            
+
         } else if (q.type === 'multiple-fill-blank') {
             questionHTML += '<div class="multiple-blanks">';
-            q.blanks.forEach((blank, blankIndex) => {
+            q.blanks.forEach((_, blankIndex) => {
                 questionHTML += `
                     <div class="blank-item">
                         <label class="blank-label">Blank ${blankIndex + 1}:</label>
-                        <input 
-                            type="text" 
-                            class="text-input blank-input" 
-                            data-question="${index}"
-                            data-blank="${blankIndex}"
-                            placeholder="Fill in blank ${blankIndex + 1}..."
-                            autocomplete="off"
-                        >
+                        <input type="text" class="text-input blank-input"
+                            data-question="${index}" data-blank="${blankIndex}"
+                            placeholder="Fill in blank ${blankIndex + 1}..." autocomplete="off">
                     </div>
                 `;
             });
             questionHTML += '</div>';
-            
+
         } else if (q.type === 'multi-attempt') {
+            // Render the multi-attempt container with:
+            // - attempt-history (populated dynamically)
+            // - new-attempt-section (the current input fields)
             questionHTML += `
-                <div class="multi-attempt-container">
+                <div class="multi-attempt-container" id="ma-container-${index}">
                     <div class="attempt-info">
                         <span class="attempts-remaining">
                             <i class="fas fa-redo"></i>
@@ -297,50 +468,60 @@ function renderQuestions() {
                             Current Marks: <strong><span id="marks-${index}">${q.maxMarks}</span>/${q.maxMarks}</strong>
                         </span>
                     </div>
-                    <div class="multi-attempt-fields">
+
+                    <!-- History of past attempts -->
+                    <div class="attempt-history" id="history-${index}"></div>
+
+                    <!-- Active input section -->
+                    <div class="new-attempt-section" id="new-attempt-${index}">
+                        <div class="new-attempt-label">
+                            <i class="fas fa-pencil-alt"></i>
+                            <span id="attempt-label-text-${index}">Attempt 1</span>
+                        </div>
+                        <div class="multi-attempt-fields" id="fields-${index}">
             `;
-            
+
             q.fields.forEach((field, fieldIndex) => {
                 questionHTML += `
                     <div class="attempt-field">
                         <label class="field-label">${field.label}:</label>
-                        <input 
-                            type="text" 
-                            class="text-input attempt-input" 
-                            data-question="${index}"
-                            data-field="${fieldIndex}"
+                        <input type="text" class="text-input attempt-input"
+                            data-question="${index}" data-field="${fieldIndex}"
                             placeholder="${field.placeholder || 'Type your answer...'}"
-                            autocomplete="off"
-                        >
+                            autocomplete="off">
                     </div>
                 `;
             });
-            
+
             questionHTML += `
+                        </div>
+                        <button class="btn btn-check" data-question="${index}" id="check-btn-${index}">
+                            <i class="fas fa-check"></i>
+                            Check Answer
+                        </button>
+                        <div class="attempt-feedback" id="feedback-${index}"></div>
                     </div>
-                    <button class="btn btn-check" data-question="${index}">
-                        <i class="fas fa-check"></i>
-                        Check Answer
-                    </button>
-                    <div class="attempt-feedback" id="feedback-${index}"></div>
                 </div>
             `;
-            
+
         } else if (q.type === 'short-answer') {
             questionHTML += `
-                <textarea 
-                    class="short-answer" 
-                    data-question="${index}"
-                    placeholder="Type your answer here..."
-                    rows="5"
-                ></textarea>
+                <textarea class="short-answer" data-question="${index}"
+                    placeholder="Type your answer here..." rows="5"></textarea>
             `;
         }
-        
+
         questionDiv.innerHTML = questionHTML;
+
+        // Inject code text safely via textContent (preserves formatting, prevents XSS)
+        if (embeddedCode || q.code) {
+            const codeBlock = questionDiv.querySelector(`#code-${index}`);
+            if (codeBlock) codeBlock.textContent = embeddedCode || q.code;
+        }
+
         container.appendChild(questionDiv);
     });
-    
+
     addAnswerListeners();
 }
 
@@ -348,174 +529,272 @@ function renderQuestions() {
 function addAnswerListeners() {
     // Multiple choice
     document.querySelectorAll('.option').forEach(option => {
-        option.addEventListener('click', function() {
-            const questionIndex = parseInt(this.dataset.question);
-            const optionIndex = parseInt(this.dataset.option);
+        option.addEventListener('click', () => {
+            const questionIndex = parseInt(option.dataset.question);
+            const optionIndex = parseInt(option.dataset.option);
             
-            document.querySelectorAll(`.option[data-question="${questionIndex}"]`).forEach(opt => {
-                opt.classList.remove('selected');
-            });
-            
-            this.classList.add('selected');
+            document.querySelectorAll(`.option[data-question="${questionIndex}"]`)
+                .forEach(o => o.classList.remove('selected'));
+            option.classList.add('selected');
             state.userAnswers[questionIndex] = optionIndex;
         });
     });
-    
-    // Single text inputs
+
+    // Fill blank
     document.querySelectorAll('.text-input:not(.blank-input):not(.attempt-input)').forEach(input => {
-        input.addEventListener('input', function() {
-            const questionIndex = parseInt(this.dataset.question);
-            state.userAnswers[questionIndex] = this.value.trim();
+        input.addEventListener('input', () => {
+            const questionIndex = parseInt(input.dataset.question);
+            state.userAnswers[questionIndex] = input.value;
         });
     });
-    
-    // Multiple fill-blank inputs
+
+    // Multiple fill blank
     document.querySelectorAll('.blank-input').forEach(input => {
-        input.addEventListener('input', function() {
-            const questionIndex = parseInt(this.dataset.question);
-            const blankIndex = parseInt(this.dataset.blank);
+        input.addEventListener('input', () => {
+            const questionIndex = parseInt(input.dataset.question);
+            const blankIndex = parseInt(input.dataset.blank);
             
-            if (!state.userAnswers[questionIndex]) {
-                state.userAnswers[questionIndex] = [];
+            if (!Array.isArray(state.userAnswers[questionIndex])) {
+                state.userAnswers[questionIndex] = new Array(quizData[questionIndex].blanks.length).fill('');
             }
-            state.userAnswers[questionIndex][blankIndex] = this.value.trim();
+            state.userAnswers[questionIndex][blankIndex] = input.value;
         });
     });
-    
+
+    // Short answer
+    document.querySelectorAll('.short-answer').forEach(textarea => {
+        textarea.addEventListener('input', () => {
+            const questionIndex = parseInt(textarea.dataset.question);
+            state.userAnswers[questionIndex] = textarea.value;
+        });
+    });
+
     // Multi-attempt check buttons
     document.querySelectorAll('.btn-check').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const questionIndex = parseInt(this.dataset.question);
+        btn.addEventListener('click', () => {
+            const questionIndex = parseInt(btn.dataset.question);
             checkMultiAttemptAnswer(questionIndex);
-        });
-    });
-    
-    // Short answer
-    document.querySelectorAll('.short-answer').forEach(input => {
-        input.addEventListener('input', function() {
-            const questionIndex = parseInt(this.dataset.question);
-            state.userAnswers[questionIndex] = this.value.trim();
         });
     });
 }
 
 // ===== CHECK MULTI-ATTEMPT ANSWER =====
-function checkMultiAttemptAnswer(questionIndex) {
-    const question = quizData[questionIndex];
-    const inputs = document.querySelectorAll(`.attempt-input[data-question="${questionIndex}"]`);
-    const feedback = document.getElementById(`feedback-${questionIndex}`);
-    const attemptsDisplay = document.getElementById(`attempts-${questionIndex}`);
-    const marksDisplay = document.getElementById(`marks-${questionIndex}`);
-    
-    // Increment attempts
-    state.questionAttempts[questionIndex]++;
-    attemptsDisplay.textContent = state.questionAttempts[questionIndex];
-    
-    // Collect answers
-    const userAnswers = [];
-    inputs.forEach(input => {
-        userAnswers.push(input.value.trim());
-    });
-    
-    // Check if all fields are answered
-    let allCorrect = true;
-    const results = [];
-    
-    question.fields.forEach((field, fieldIndex) => {
-        const userAnswer = userAnswers[fieldIndex].toLowerCase();
-        const isCorrect = field.keywords.every(keyword => 
-            userAnswer.includes(keyword.toLowerCase())
-        );
-        
-        results.push(isCorrect);
-        if (!isCorrect) allCorrect = false;
-    });
-    
-    // Update marks (deduct 1 for each wrong attempt)
-    if (!allCorrect) {
-        state.questionMarks[questionIndex] = Math.max(0, question.maxMarks - state.questionAttempts[questionIndex]);
-        marksDisplay.textContent = state.questionMarks[questionIndex];
+
+/**
+ * Tokenises a string into meaningful chunks so we can do a
+ * character/token-level diff between the student's answer and the
+ * expected tokens list.
+ *
+ * Splits on whitespace but keeps every non-space run as one token,
+ * AND individually splits common punctuation so  "printf(...);"
+ * becomes ["printf", "(", "...", ")", ";"] etc.
+ */
+function tokenise(str) {
+    const tokens = [];
+    // Regex: match single-quoted strings, double-quoted strings, identifiers/numbers, or individual punctuation
+    const re = /'[^']*'|"[^"]*"|[A-Za-z0-9_%]+|[^A-Za-z0-9_\s]/g;
+    let m;
+    while ((m = re.exec(str.trim())) !== null) {
+        tokens.push(m[0]);
     }
-    
-    // Show feedback
+    return tokens;
+}
+
+/**
+ * Given the student's raw answer string and the expected tokens array,
+ * returns an array of objects:
+ *   { token, found: true|false }
+ * representing each expected token and whether it appeared (in order)
+ * in the student's tokenised answer.
+ */
+function diffTokens(userAnswer, expectedTokens) {
+    const userTokens = tokenise(userAnswer.toLowerCase());
+    let userIdx = 0;
+
+    const result = expectedTokens.map(expected => {
+        const exp = expected.toLowerCase();
+        while (userIdx < userTokens.length) {
+            if (userTokens[userIdx] === exp) {
+                userIdx++;
+                return { token: expected, found: true };
+            }
+            userIdx++;
+        }
+        return { token: expected, found: false };
+    });
+
+    const foundCount = result.filter(r => r.found).length;
+    // isPartial: some tokens matched but not all
+    const isPartial = foundCount > 0 && foundCount < expectedTokens.length;
+    const isCorrect = foundCount === expectedTokens.length;
+
+    return { tokens: result, isPartial, isCorrect };
+}
+
+// renderTokenDiff removed — we no longer show token chips to students.
+
+function escapeHtml(str) {
+    return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+}
+
+function checkMultiAttemptAnswer(questionIndex) {
+    const question        = quizData[questionIndex];
+    const currentAttemptNum = state.questionAttempts[questionIndex] + 1;
+
+    // Collect current answers from the active (non-disabled) input fields
+    const inputs      = document.querySelectorAll(`.attempt-input[data-question="${questionIndex}"]`);
+    const userAnswers = [];
+    inputs.forEach(input => userAnswers.push(input.value.trim()));
+
+    // ── Determine correctness per field ──────────────────────────────────────
+    const fieldResults = question.fields.map((field, idx) => {
+        const userAnswer = userAnswers[idx];
+
+        let isCorrect = false;
+        let isPartial = false;
+        let diff      = null;
+
+        if (field.tokens) {
+            diff      = diffTokens(userAnswer, field.tokens);
+            isCorrect = diff.isCorrect;
+            isPartial = diff.isPartial;
+        } else {
+            // Legacy keyword check
+            const lower = userAnswer.toLowerCase();
+            isCorrect   = (field.keywords || []).every(k => lower.includes(k.toLowerCase()));
+        }
+
+        return { isCorrect, isPartial, userAnswer, diff };
+    });
+
+    const allCorrect = fieldResults.every(r => r.isCorrect);
+
+    // Increment attempt count
+    state.questionAttempts[questionIndex] = currentAttemptNum;
+    document.getElementById(`attempts-${questionIndex}`).textContent = currentAttemptNum;
+
+    // Deduct marks if wrong
+    if (!allCorrect) {
+        state.questionMarks[questionIndex] = Math.max(0, question.maxMarks - currentAttemptNum);
+        document.getElementById(`marks-${questionIndex}`).textContent = state.questionMarks[questionIndex];
+    }
+
+    // Save answer state
+    state.userAnswers[questionIndex] = {
+        answers : userAnswers,
+        correct : allCorrect,
+        attempts: currentAttemptNum,
+        marks   : allCorrect ? state.questionMarks[questionIndex] : 0
+    };
+
+    // ── Build history entry ──────────────────────────────────────────────────
+    const historyContainer = document.getElementById(`history-${questionIndex}`);
+    const historyItem      = document.createElement('div');
+    historyItem.className  = `attempt-history-item${allCorrect ? '' : ' has-error'}`;
+
+    let historyHTML = `<div class="attempt-history-label">Attempt ${currentAttemptNum}</div>`;
+    historyHTML    += `<div class="attempt-history-fields">`;
+
+    fieldResults.forEach((result, idx) => {
+        const field     = question.fields[idx];
+        const statusCls = result.isCorrect ? 'correct' : result.isPartial ? 'partial' : 'incorrect';
+        const icon      = result.isCorrect ? 'fa-check-circle' : result.isPartial ? 'fa-circle-half-stroke' : 'fa-times-circle';
+        const display   = result.userAnswer || '<em>left blank</em>';
+
+        historyHTML += `<div class="attempt-history-field ${statusCls}">`;
+        historyHTML += `<span class="field-name">${field.label}:</span>`;
+        historyHTML += `<span class="field-value">${escapeHtml(display)}</span>`;
+        if (result.isPartial) {
+            historyHTML += `<span class="partial-tag">on track</span>`;
+        }
+        historyHTML += `<i class="fas ${icon} field-icon"></i>`;
+        historyHTML += `</div>`;
+    });
+
+    historyHTML += `</div>`;
+
     if (allCorrect) {
-        feedback.innerHTML = `
-            <div class="feedback-success">
-                <i class="fas fa-check-circle"></i>
-                Correct! You earned ${state.questionMarks[questionIndex]} mark(s).
-            </div>
-        `;
-        feedback.style.display = 'block';
-        
-        // Save answer
-        state.userAnswers[questionIndex] = {
-            answers: userAnswers,
-            correct: true,
-            attempts: state.questionAttempts[questionIndex],
-            marks: state.questionMarks[questionIndex]
-        };
-        
-        // Disable inputs and button
-        inputs.forEach(input => input.disabled = true);
-        document.querySelector(`.btn-check[data-question="${questionIndex}"]`).disabled = true;
-        
-    } else if (state.questionAttempts[questionIndex] >= question.maxAttempts) {
-        // Out of attempts - show correct answers
-        const correctAnswersHTML = question.fields.map((field, idx) => 
-            `<div><strong>${field.label}:</strong> ${field.keywords[0]}</div>`
-        ).join('');
-        
-        feedback.innerHTML = `
-            <div class="feedback-error">
-                <i class="fas fa-times-circle"></i>
-                <div>
-                    <div style="margin-bottom: 0.5rem;">Out of attempts. You earned 0 marks.</div>
-                    <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid rgba(153, 27, 27, 0.2);">
-                        <strong>Correct Answers:</strong>
-                        <div style="margin-top: 0.5rem; font-size: 0.9375rem;">
-                            ${correctAnswersHTML}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-        feedback.style.display = 'block';
-        state.questionMarks[questionIndex] = 0;
-        marksDisplay.textContent = 0;
-        
-        // Save answer
-        state.userAnswers[questionIndex] = {
-            answers: userAnswers,
-            correct: false,
-            attempts: state.questionAttempts[questionIndex],
-            marks: 0
-        };
-        
-        // Disable inputs and button
-        inputs.forEach(input => input.disabled = true);
-        document.querySelector(`.btn-check[data-question="${questionIndex}"]`).disabled = true;
-        
+        const marks      = state.questionMarks[questionIndex];
+        const badgeClass = marks === question.maxMarks ? 'marks-full'
+            : marks >= question.maxMarks * 0.8        ? 'marks-high'
+            : marks >= question.maxMarks * 0.5        ? 'marks-mid'
+            : marks > 0                               ? 'marks-low'
+            :                                           'marks-zero';
+        historyHTML += `
+            <div style="margin-top:0.75rem;">
+                <span class="marks-badge ${badgeClass}">
+                    <i class="fas fa-star"></i>
+                    ${marks}/${question.maxMarks} marks earned
+                </span>
+            </div>`;
+    }
+
+    historyItem.innerHTML = historyHTML;
+    historyContainer.appendChild(historyItem);
+
+    // ── Handle outcomes ──────────────────────────────────────────────────────
+    if (allCorrect) {
+        state.questionSolved[questionIndex] = true;
+        document.getElementById(`new-attempt-${questionIndex}`).style.display = 'none';
+        document.getElementById(`ma-container-${questionIndex}`).classList.add('solved');
+
+    } else if (currentAttemptNum >= question.maxAttempts) {
+        // Out of attempts — show correct answers
+        const correctItem     = document.createElement('div');
+        correctItem.className = 'attempt-history-item';
+        correctItem.style.cssText = 'border-color:#2563eb;background:#eff6ff;';
+
+        let correctHTML  = `<div class="attempt-history-label" style="color:#2563eb">Correct Answers</div>`;
+        correctHTML     += `<div class="attempt-history-fields">`;
+        question.fields.forEach(field => {
+            const answer = field.correctAnswer || (field.tokens ? field.tokens.join(' ') : (field.keywords || [''])[0]);
+            correctHTML += `
+                <div class="attempt-history-field correct">
+                    <span class="field-name">${field.label}:</span>
+                    <span class="field-value">${escapeHtml(answer)}</span>
+                    <i class="fas fa-lightbulb field-icon" style="color:#2563eb"></i>
+                </div>`;
+        });
+        correctHTML += `</div>`;
+        correctItem.innerHTML = correctHTML;
+        historyContainer.appendChild(correctItem);
+
+        state.questionMarks[questionIndex]         = 0;
+        state.userAnswers[questionIndex].marks      = 0;
+        document.getElementById(`marks-${questionIndex}`).textContent = 0;
+        document.getElementById(`new-attempt-${questionIndex}`).style.display = 'none';
+
     } else {
-        // Incorrect but has attempts left
-        const remainingAttempts = question.maxAttempts - state.questionAttempts[questionIndex];
-        feedback.innerHTML = `
-            <div class="feedback-warning">
-                <i class="fas fa-exclamation-circle"></i>
-                Incorrect. ${remainingAttempts} attempt(s) remaining. Current marks: ${state.questionMarks[questionIndex]}
-            </div>
-        `;
-        feedback.style.display = 'block';
-        
-        // Clear wrong answers
+        // Attempts remaining — keep field values so student can edit, just
+        // lock already-correct fields and leave wrong ones editable with their text intact.
+        const newAttemptNum = currentAttemptNum + 1;
+        document.getElementById(`attempt-label-text-${questionIndex}`).textContent = `Attempt ${newAttemptNum}`;
+
         inputs.forEach((input, idx) => {
-            if (!results[idx]) {
-                input.value = '';
+            const result = fieldResults[idx];
+            if (result.isCorrect) {
+                input.disabled = true;
+                input.classList.add('field-correct');
+            } else if (result.isPartial) {
+                // Partial — keep editable, style amber so student knows they're on the right track
+                input.classList.add('field-partial');
+                input.style.borderColor = '#f59e0b';
+                input.focus();
+                setTimeout(() => { input.style.borderColor = ''; }, 800);
+            } else {
+                // Fully wrong — keep editable, style red
                 input.style.borderColor = '#ef4444';
-                setTimeout(() => {
-                    input.style.borderColor = '';
-                }, 1000);
+                input.focus();
+                setTimeout(() => { input.style.borderColor = ''; }, 800);
             }
         });
+
+        const feedback = document.getElementById(`feedback-${questionIndex}`);
+        if (feedback) feedback.style.display = 'none';
     }
 }
 
@@ -560,28 +839,25 @@ function restoreSavedAnswer(index) {
             const input = document.querySelector(`.short-answer[data-question="${index}"]`);
             if (input) input.value = savedAnswer;
         }
+        // multi-attempt state is preserved in DOM (history + locked fields), no restore needed
     }
 }
 
 // ===== NAVIGATION =====
 function initNavigation() {
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const submitBtn = document.getElementById('submitBtn');
-    
-    prevBtn.addEventListener('click', () => {
+    document.getElementById('prevBtn').addEventListener('click', () => {
         if (state.currentQuestionIndex > 0) {
             showQuestion(state.currentQuestionIndex - 1);
         }
     });
     
-    nextBtn.addEventListener('click', () => {
+    document.getElementById('nextBtn').addEventListener('click', () => {
         if (state.currentQuestionIndex < quizData.length - 1) {
             showQuestion(state.currentQuestionIndex + 1);
         }
     });
     
-    submitBtn.addEventListener('click', submitQuiz);
+    document.getElementById('submitBtn').addEventListener('click', submitQuiz);
 }
 
 function updateNavigationButtons() {
@@ -603,21 +879,17 @@ function updateNavigationButtons() {
 // ===== TIMER =====
 function startTimer() {
     state.startTime = Date.now();
-    
     state.timerInterval = setInterval(() => {
         const elapsed = Date.now() - state.startTime;
         const minutes = Math.floor(elapsed / 60000);
         const seconds = Math.floor((elapsed % 60000) / 1000);
-        
-        document.getElementById('timerDisplay').textContent = 
+        document.getElementById('timerDisplay').textContent =
             `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
     }, 1000);
 }
 
 function stopTimer() {
-    if (state.timerInterval) {
-        clearInterval(state.timerInterval);
-    }
+    if (state.timerInterval) clearInterval(state.timerInterval);
 }
 
 // ===== SUBMIT QUIZ =====
@@ -631,12 +903,10 @@ function submitQuiz() {
     const timeString = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
     
     document.getElementById('quizScreen').classList.remove('active');
+    document.getElementById('resultsScreen').classList.add('active');
     
-    const resultsScreen = document.getElementById('resultsScreen');
-    resultsScreen.classList.add('active');
-    
-    // Calculate total possible marks
-    const totalMarks = Object.values(state.questionMarks).reduce((a, b) => a + b, 0);
+    // Total possible marks
+    const totalMarks = quizData.reduce((sum, q) => sum + (q.type === 'multi-attempt' ? q.maxMarks : 1), 0);
     
     document.getElementById('scoreNumber').textContent = state.score;
     document.getElementById('scoreTotalDisplay').textContent = totalMarks;
@@ -654,42 +924,26 @@ function calculateScore() {
         const userAnswer = state.userAnswers[index];
         
         if (question.type === 'multiple-choice') {
-            if (userAnswer === question.correctAnswer) {
-                state.score += 1;
-            }
+            if (userAnswer === question.correctAnswer) state.score += 1;
             
         } else if (question.type === 'fill-blank') {
             if (userAnswer) {
                 const normalizedAnswer = userAnswer.toLowerCase().trim();
                 const keywords = question.keywords || [question.correctAnswer];
-                
-                if (keywords.some(keyword => normalizedAnswer === keyword.toLowerCase())) {
-                    state.score += 1;
-                }
+                if (keywords.some(k => normalizedAnswer === k.toLowerCase())) state.score += 1;
             }
             
         } else if (question.type === 'multiple-fill-blank') {
             if (Array.isArray(userAnswer)) {
                 let allCorrect = true;
-                
                 question.blanks.forEach((blank, blankIndex) => {
                     const answer = userAnswer[blankIndex];
-                    if (!answer) {
-                        allCorrect = false;
-                        return;
-                    }
-                    
+                    if (!answer) { allCorrect = false; return; }
                     const normalizedAnswer = answer.toLowerCase().trim();
                     const keywords = blank.keywords || [blank.correctAnswer];
-                    
-                    if (!keywords.some(keyword => normalizedAnswer === keyword.toLowerCase())) {
-                        allCorrect = false;
-                    }
+                    if (!keywords.some(k => normalizedAnswer === k.toLowerCase())) allCorrect = false;
                 });
-                
-                if (allCorrect) {
-                    state.score += 1;
-                }
+                if (allCorrect) state.score += 1;
             }
             
         } else if (question.type === 'multi-attempt') {
@@ -700,13 +954,10 @@ function calculateScore() {
         } else if (question.type === 'short-answer') {
             if (userAnswer) {
                 const normalizedAnswer = userAnswer.toLowerCase();
-                const foundKeywords = question.keywords.filter(keyword => 
-                    normalizedAnswer.includes(keyword.toLowerCase())
+                const foundKeywords = question.keywords.filter(k =>
+                    normalizedAnswer.includes(k.toLowerCase())
                 );
-                
-                if (foundKeywords.length >= question.minKeywords) {
-                    state.score += 1;
-                }
+                if (foundKeywords.length >= question.minKeywords) state.score += 1;
             }
         }
     });
