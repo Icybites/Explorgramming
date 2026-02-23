@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Exercise | Explorgramming</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="exercise-quiz.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#" class="logo">
+                    <span class="logo-text1">Explor</span>
+                    <span class="logo-text2">gramming</span>
+                </a>
+            </div>
+            <a href="exercise.html" class="btn-sets">
+                <i class="fas fa-th-large"></i>
+                All Sets
+            </a>
+        </div>
+    </nav>
+
+    <div class="quiz-screen active" id="quizScreen">
+        <div class="quiz-container">
+
+            <div class="quiz-header">
+                <div class="quiz-info">
+                    <div class="set-badge" id="setBadge">
+                        <i class="fas fa-layer-group"></i>
+                        <span id="setBadgeText">Set</span>
+                    </div>
+                    <h1 id="quizTitle">Exercise</h1>
+                    <div class="progress-info">
+                        <span class="question-counter">
+                            Question <span id="currentQuestion">1</span> of <span id="totalQuestions">10</span>
+                        </span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-container" id="questionContainer"></div>
+
+            <div class="quiz-navigation">
+                <button id="prevBtn" class="btn btn-outline" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                    Previous
+                </button>
+                <button id="nextBtn" class="btn btn-primary">
+                    Next
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button id="submitBtn" class="btn btn-submit" style="display:none;">
+                    <i class="fas fa-check-circle"></i>
+                    Submit
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="results-screen" id="resultsScreen">
+        <div class="results-container">
+            <div class="results-icon">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <h1>Exercise Complete!</h1>
+            <div class="score-display">
+                <div class="score-circle">
+                    <span class="score-number" id="scoreNumber">0</span>
+                    <span class="score-total">/ <span id="scoreTotalDisplay">10</span></span>
+                </div>
+                <p class="score-label">Correct Answers</p>
+            </div>
+            <div class="results-stats">
+                <div class="stat-item">
+                    <i class="fas fa-percent"></i>
+                    <span class="stat-label">Score</span>
+                    <span class="stat-value" id="percentageScore">0%</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-layer-group"></i>
+                    <span class="stat-label">Set</span>
+                    <span class="stat-value" id="resultSetLabel">—</span>
+                </div>
+            </div>
+            <div class="results-actions">
+                <button class="btn btn-outline" onclick="window.location.href='exercise.html'">
+                    <i class="fas fa-th-large"></i>
+                    All Sets
+                </button>
+                <button class="btn btn-primary" id="retryBtn">
+                    <i class="fas fa-redo"></i>
+                    Try Again
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="exercise-quiz.js"></script>
+</body>
+</html>
