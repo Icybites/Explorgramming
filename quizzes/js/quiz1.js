@@ -1,964 +1,988 @@
-// ===== QUIZ CONFIGURATION =====
+// =============================================
+// quiz1.js
+// =============================================
 
-// PASSWORD FOR THIS CHECKPOINT (change for each checkpoint)
-const CHECKPOINT_PASSWORD = "ucop";
+// ============================================================
+// CONFIGURATION — change password here before distributing QR
+// ============================================================
+const QUIZ_PASSWORD = "ucop";
 
-// QUIZ QUESTIONS (easily customizable)
+// ===================================================================
+// QUIZ DATA — 10 Questions covering all supported types
+// Supported types:
+//   "multiple-choice"     — options[], correctAnswer (0-based index)
+//   "fill-blank"          — correctAnswer, keywords[]
+//   "multiple-fill-blank" — blanks[{ correctAnswer, keywords[] }]
+//   "short-answer"        — keywords[], minKeywords
+//   "multi-attempt"       — fields[], maxAttempts, maxMarks
+//   "syntax-table"        — headers[], rows[], maxAttempts
+// ===================================================================
+
 const quizData = [
-    // Question 1: Multiple Choice
+
+    // ── Q1: Multiple Choice ──────────────────────────────────
     {
         type: "multiple-choice",
-        question: "Bilakah Explorgramming mula dibina?",
+        question: "What does a compiler do in C programming?",
         options: [
-            "Tahun 1990",
-            "Tahun 2025",
-            "Semalam",
-            "Tahun 2026"
+            "Executes code line by line",
+            "Translates high-level code into machine code",
+            "Manages memory allocation at runtime",
+            "Debugs logical errors automatically"
         ],
         correctAnswer: 1
     },
-    
-    // Question 2: Fill in the Blank (Single)
-    {
-        type: "fill-blank",
-        question: "Nama bagi pengasas Explorgramming ialah _______.",
-        correctAnswer: "Yusuf",
-        keywords: ["Yusuf", "yusuf"]
-    },
-    
-    // Question 3: Multiple Fill in the Blank
-    {
-        type: "multiple-fill-blank",
-        question: "Kucing biasanya tidur antara _____ hingga _____ jam sehari.",
-        blanks: [
-            {
-                correctAnswer: "12",
-                keywords: ["12", "dua belas", "twelve"]
-            },
-            {
-                correctAnswer: "16",
-                keywords: ["16", "enam belas", "sixteen"]
-            }
-        ]
-    },
-    
-    // Question 4: Multi-Attempt Code Question (5 marks max)
-    {
-        type: "multi-attempt",
-        question: "Write C statements to declare an integer variable named score with value 10, then print it using printf.\n\n// Fill in the two statements below:",
-        maxAttempts: 5,
-        maxMarks: 5,
-        fields: [
-            {
-                label: "Statement 1",
-                placeholder: "e.g.  int score = 10;",
-                // correctAnswer is the canonical answer shown when out of attempts
-                correctAnswer: "int score = 10;",
-                // tokens: each token must appear in the student's answer (order-aware diff)
-                tokens: ["int", "score", "=", "10", ";"]
-            },
-            {
-                label: "Statement 2",
-                placeholder: "e.g.  printf(...);",
-                correctAnswer: "printf('%d', score);",
-                tokens: ["printf", "(", "'%d'", ",", "score", ")", ";"]
-            }
-        ]
-    },
-    
-    // Question 5: Short Answer
-    {
-        type: "short-answer",
-        question: "Senaraikan DUA fungsi misai pada kucing.",
-        keywords: ["ruang", "pergerakan", "getaran", "memburu", "mengukur"],
-        minKeywords: 2
-    },
-    
-    // Question 6: Multiple Choice
+
+    // ── Q2: Multiple Choice ──────────────────────────────────
     {
         type: "multiple-choice",
-        question: "Kucing mempunyai _______ kaki, _______ ekor, dan _______ pasang telinga.",
+        question: "Which of the following is a runtime error?",
         options: [
-            "2, 4, 1",
-            "4, 2, 1",
-            "4, 1, 2",
-            "2, 1, 4"
+            "Missing semicolon",
+            "Using an undeclared variable",
+            "Division by zero during execution",
+            "Incorrect loop syntax"
         ],
         correctAnswer: 2
     },
-    
-    // Question 7: Another Multi-Attempt Example
+
+    // ── Q3: Fill Blank ───────────────────────────────────────
     {
-        type: "multi-attempt",
-        question: "Anak kucing yang baru lahir biasanya _______ dan belum boleh _______ dengan kakinya",
-        maxAttempts: 5,
-        maxMarks: 5,
-        fields: [
-            {
-                label: "Pancaindra",
-                placeholder: "Answer 1",
-                keywords: ["buta"]
-            },
-            {
-                label: "Perbuatan",
-                placeholder: "Answer 2",
-                keywords: ["berjalan"]
-            }
+        type: "fill-blank",
+        question: "The standard function used to print formatted output to the console in C is _______.",
+        correctAnswer: "printf",
+        keywords: ["printf"]
+    },
+
+    // ── Q4: Multiple Fill Blank ──────────────────────────────
+    {
+        type: "multiple-fill-blank",
+        question: "Complete the blanks:\nThe _______ directive is used to include header files, and the _______ header is required for printf() and scanf().",
+        blanks: [
+            { correctAnswer: "#include", keywords: ["#include", "include"] },
+            { correctAnswer: "stdio.h",  keywords: ["stdio.h", "stdio"]   }
         ]
     },
 
-    // Question 8: Multiple Choice
+    // ── Q5: Multiple Choice ──────────────────────────────────
     {
         type: "multiple-choice",
-        question: "Apakah deria yang paling kuat pada kucing?",
+        question: "What type of error occurs when a program compiles but produces wrong results?",
         options: [
-            "Penglihatan",
-            "Pendengaran",
-            "Sentuhan",
-            "Rasa"
+            "Syntax error",
+            "Logical error",
+            "Runtime error",
+            "Linker error"
         ],
         correctAnswer: 1
     },
 
-    // Question 9: Fill in the Blank (Single)
+    // ── Q6: Short Answer ─────────────────────────────────────
     {
-        type: "fill-blank",
-        question: "Kucing tergolong dalam kumpulan haiwan _______.",
-        correctAnswer: "Mamalia",
-        keywords: ["mamalia", "Mamalia"]
+        type: "short-answer",
+        question: "Name at least TWO steps in the C Program Development Environment. List as many as you know.",
+        keywords: ["edit", "preprocess", "compile", "link", "load", "execute"],
+        minKeywords: 2
     },
 
-    // Question 10: Multiple Choice
+    // ── Q7: Multi-Attempt (code) ─────────────────────────────
+    {
+        type: "multi-attempt",
+        question: "Write the correct C statement to declare an integer variable named count and initialise it to zero.",
+        maxAttempts: 5,
+        maxMarks: 5,
+        fields: [
+            {
+                label: "Answer",
+                placeholder: "e.g.  Assign SUM = num",
+                correctAnswer: "int count = 0;",
+                tokens: ["int", "count", "=", "0", ";"],
+                altTokenSets: [
+                    ["int", "count", "=", "0;"],
+                    ["int", "count=", "0", ";"],
+                    ["int", "count=", "0;"],
+                    ["int", "count=0", ";"]
+                ]
+            }
+        ]
+    },
+
+    // ── Q8: Multi-Attempt (sequence) ────────────────────────
+    {
+        type: "multi-attempt",
+        question: "State the correct sequence of the Program Development Life Cycle (PDLC).\n\n_____ > _____ > _____ > _____ > _____.",
+        maxAttempts: 5,
+        maxMarks: 5,
+        fields: [
+            {
+                label: "Answer with spaces",
+                placeholder: "e.g.  Step1, Step2, Step3, Step4, Step5",
+                correctAnswer: "Analysis, Design, Implementation, Testing, Maintenance",
+                tokens: ["Analysis", "Design", "Implementation", "Testing", "Maintenance"],
+                altTokenSets: [
+                    ["Analysis", "Design", "Implementation", "Debugging","Maintenance"],
+                    ["Analysis", "Design", "Coding", "Testing", "Maintenance"],
+                    ["Analysis", "Design", "Coding", "Debugging", "Maintenace"]
+                ]
+            }
+        ]
+    },
+
+    // ── Q9: Syntax Table ─────────────────────────────────────
+    {
+        type: "syntax-table",
+        question: "Write the correct syntax keyword or component for each control structure.\n(Just a knock-off version)",
+        maxAttempts: 3,
+        headers: ["Keyword / Start", "Blank 1", "Blank 2"],
+        rows: [
+            {
+                label: "if statement",
+                placeholders: ["keyword", "Your answer", "Your answer"],
+                cells: [
+                    { keywords: ["if"], placeholder: "keyword"},
+                    { keywords: ["condition"], placeholder: "(condition)"},
+                    { keywords: ["statement"], placeholder: "statement"}
+                ]
+            },
+            {
+                label: "while loop",
+                placeholders: ["keyword", "Your answer", "Your answer"],
+                cells: [
+                    { keywords: ["while"], placeholder: "keyword"},
+                    { keywords: ["condition"], placeholder: "(condition)"},
+                    { keywords: ["statement"], placeholder: "statement"}
+                ]
+            },
+            {
+                label: "for loop",
+                placeholders: ["keyword", "Your answer", "Your answer"],
+                cells: [
+                    { keywords: ["for"], placeholder: "keyword"},
+                    { keywords: ["initialization", "condition", "increment","init"], placeholder: "init; condition; inc"},
+                    { keywords: ["statement"], placeholder: "statement"}
+                ]
+            },
+            {
+                label: "do-while loop",
+                placeholders: ["keyword", "Your answer", "Your answer"],
+                cells: [
+                    { keywords: ["do"], placeholder: "keyword"},
+                    { keywords: ["statement"], placeholder: "statement"},
+                    { keywords: ["while"], placeholder: "while(cond);"}
+                ]
+            }
+        ]
+    },
+
+    // ── Q10: Multiple Choice ─────────────────────────────────
     {
         type: "multiple-choice",
-        question: "Apakah baka kucing kesukaan pengasas Explorgramming?",
+        question: "Which statement about #include <stdio.h> is FALSE?",
         options: [
-            "Ragdoll",
-            "Maine Coon",
-            "Bengal",
-            "Siamese"
+            "It is a preprocessor directive.",
+            "It includes the standard input/output header file.",
+            "It must end with a semicolon (;).",
+            "It is processed before compilation starts."
         ],
-        correctAnswer: 3
-    },
-];
+        correctAnswer: 2
+    }
 
-// ===== STATE MANAGEMENT =====
+]; // The end, abes
+
+
+
+// ============================================================
+// STATE - SILA ABAIKAN =======================================
+// ============================================================
 const state = {
-    currentQuestionIndex: 0,
+    currentIndex: 0,
     userAnswers: [],
-    startTime: null,
-    timerInterval: null,
     score: 0,
-    questionAttempts: {},  // Track attempt count per question
-    questionMarks: {},     // Track current marks per question
-    questionSolved: {}     // Track if question is solved
+    questionAttempts: {},
+    questionMarks: {},
+    questionSolved: {},
+    timerSeconds: 0,
+    timerInterval: null,
+    finalTime: "00:00"
 };
 
-// ===== INITIALIZATION =====
-document.addEventListener('DOMContentLoaded', () => {
-    initPasswordScreen();
-});
-
-// ===== PASSWORD SCREEN =====
-function initPasswordScreen() {
-    const unlockBtn = document.getElementById('unlockBtn');
-    const passwordInput = document.getElementById('passwordInput');
-    const errorMessage = document.getElementById('errorMessage');
-
-    passwordInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') checkPassword();
-    });
-    unlockBtn.addEventListener('click', checkPassword);
-
-    function checkPassword() {
-        const enteredPassword = passwordInput.value.trim();
-        
-        if (enteredPassword === CHECKPOINT_PASSWORD) {
-            document.getElementById('passwordScreen').classList.add('hidden');
-            document.getElementById('quizScreen').classList.add('active');
-            initQuiz();
-        } else {
-            errorMessage.textContent = 'Incorrect password. Please try again.';
-            passwordInput.value = '';
-            passwordInput.focus();
-            passwordInput.style.animation = 'shake 0.5s';
-            setTimeout(() => { passwordInput.style.animation = ''; }, 500);
-        }
-    }
-}
-
-// Shake animation
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes shake {
-        0%, 100% { transform: translateX(0); }
-        10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
-        20%, 40%, 60%, 80% { transform: translateX(10px); }
-    }
-
-    /* ===== MULTI-ATTEMPT HISTORY STYLES ===== */
-    .attempt-history {
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-        margin-bottom: 1.25rem;
-    }
-
-    .attempt-history-item {
-        border-radius: 12px;
-        padding: 1rem 1.25rem;
-        border: 2px solid #e2e8f0;
-        background: #f8fafc;
-    }
-
-    .attempt-history-item.has-error {
-        border-color: #fca5a5;
-        background: #fff5f5;
-    }
-
-    .attempt-history-label {
-        font-size: 0.8125rem;
-        font-weight: 700;
-        color: #94a3b8;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        margin-bottom: 0.75rem;
-    }
-
-    .attempt-history-fields {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .attempt-history-field {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        font-size: 0.9375rem;
-    }
-
-    .attempt-history-field .field-name {
-        font-weight: 600;
-        color: #475569;
-        min-width: 120px;
-    }
-
-    .attempt-history-field .field-value {
-        font-family: Consolas, monospace;
-        padding: 0.25rem 0.75rem;
-        border-radius: 6px;
-        font-size: 0.9rem;
-        flex: 1;
-    }
-
-    .attempt-history-field.correct .field-value {
-        background: #dcfce7;
-        color: #166534;
-        border: 1px solid #86efac;
-    }
-
-    .attempt-history-field.incorrect .field-value {
-        background: #fee2e2;
-        color: #991b1b;
-        border: 1px solid #fca5a5;
-    }
-
-    .attempt-history-field .field-icon {
-        font-size: 1rem;
-        flex-shrink: 0;
-    }
-
-    .attempt-history-field.correct .field-icon { color: #16a34a; }
-    .attempt-history-field.incorrect .field-icon { color: #dc2626; }
-
-    .attempt-hint {
-        margin-top: 0.75rem;
-        font-size: 0.875rem;
-        color: #64748b;
-        font-style: italic;
-    }
-
-    /* New attempt section */
-    .new-attempt-section {
-        border-top: 2px dashed #e2e8f0;
-        padding-top: 1.25rem;
-        margin-top: 0.5rem;
-    }
-
-    .new-attempt-label {
-        font-size: 0.875rem;
-        font-weight: 700;
-        color: #2563eb;
-        margin-bottom: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    /* Pre-filled correct fields in new attempt */
-    .attempt-input.field-correct {
-        background: #dcfce7 !important;
-        border-color: #86efac !important;
-        color: #166534 !important;
-        cursor: not-allowed;
-    }
-
-    /* Solved state */
-    .multi-attempt-container.solved .new-attempt-section {
-        display: none;
-    }
-
-    .marks-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.375rem;
-        padding: 0.25rem 0.75rem;
-        border-radius: 100px;
-        font-size: 0.875rem;
-        font-weight: 700;
-    }
-
-    .marks-badge.marks-full { background: #dcfce7; color: #166534; }
-    .marks-badge.marks-high { background: #d1fae5; color: #065f46; }
-    .marks-badge.marks-mid  { background: #fef9c3; color: #854d0e; }
-    .marks-badge.marks-low  { background: #ffedd5; color: #9a3412; }
-    .marks-badge.marks-zero { background: #fee2e2; color: #991b1b; }
-
-    /* ===== PARTIAL FIELD STATE ===== */
-    .attempt-history-field.partial .field-value {
-        background: #fef9c3;
-        color: #854d0e;
-        border: 1px solid #fde047;
-    }
-
-    .attempt-history-field.partial .field-icon { color: #d97706; }
-
-    .partial-tag {
-        font-size: 0.75rem;
-        font-weight: 700;
-        color: #92400e;
-        background: #fef3c7;
-        border: 1px solid #fcd34d;
-        border-radius: 100px;
-        padding: 0.15rem 0.6rem;
-        white-space: nowrap;
-    }
-
-    .attempt-input.field-partial {
-        background: #fffbeb !important;
-        border-color: #fcd34d !important;
-        color: #92400e !important;
-    }
-
-
-`;
-document.head.appendChild(style);
-
-// ===== QUIZ INITIALIZATION =====
-function initQuiz() {
-    state.userAnswers = new Array(quizData.length).fill(null);
-    
-    quizData.forEach((q, index) => {
-        if (q.type === 'multi-attempt') {
-            state.questionAttempts[index] = 0;
-            state.questionMarks[index] = q.maxMarks;
-            state.questionSolved[index] = false;
-        } else {
-            state.questionMarks[index] = 1;
-        }
-    });
-    
-    document.getElementById('totalQuestions').textContent = quizData.length;
-    renderQuestions();
-    showQuestion(0);
-    startTimer();
-    initNavigation();
-}
-
-// ===== RENDER QUESTIONS =====
-function renderQuestions() {
-    const container = document.getElementById('questionContainer');
-    container.innerHTML = '';
-
-    quizData.forEach((q, index) => {
-        const questionDiv = document.createElement('div');
-        questionDiv.className = 'question';
-        questionDiv.id = `question-${index}`;
-
-        const marksText = q.type === 'multi-attempt'
-            ? `(${q.maxMarks} marks)`
-            : '(1 mark)';
-
-        // Split question into label text and optional embedded code.
-        // If q.question contains \n\n, everything before it is the readable sentence
-        // and everything after is treated as a code snippet to render in a <pre> block.
-        const doubleNewlineIdx = q.question.indexOf('\n\n');
-        const questionLabel = doubleNewlineIdx !== -1
-            ? q.question.slice(0, doubleNewlineIdx)
-            : q.question;
-        const embeddedCode = doubleNewlineIdx !== -1
-            ? q.question.slice(doubleNewlineIdx + 2)
-            : null;
-
-        let questionHTML = `
-            <div class="question-text">
-                ${index + 1}. ${questionLabel} <span style="color:#64748b;font-weight:500;">${marksText}</span>
-            </div>
-        `;
-
-        // Render a code block if the question embeds code (via \n\n separator) or has an explicit q.code property
-        if (embeddedCode || q.code) {
-            questionHTML += `<pre class="question-code" id="code-${index}"></pre>`;
-        }
-
-        if (q.image) {
-            questionHTML += `
-                <div class="question-image">
-                    <img src="${q.image}" alt="Question image">
-                </div>
-            `;
-        }
-
-        if (q.type === 'multiple-choice') {
-            questionHTML += '<div class="options">';
-            q.options.forEach((option, optIndex) => {
-                questionHTML += `
-                    <div class="option" data-question="${index}" data-option="${optIndex}">
-                        <div class="option-label">${String.fromCharCode(65 + optIndex)}</div>
-                        <div class="option-text">${option}</div>
-                    </div>
-                `;
-            });
-            questionHTML += '</div>';
-
-        } else if (q.type === 'fill-blank') {
-            questionHTML += `
-                <input type="text" class="text-input" data-question="${index}"
-                    placeholder="Type your answer here..." autocomplete="off">
-            `;
-
-        } else if (q.type === 'multiple-fill-blank') {
-            questionHTML += '<div class="multiple-blanks">';
-            q.blanks.forEach((_, blankIndex) => {
-                questionHTML += `
-                    <div class="blank-item">
-                        <label class="blank-label">Blank ${blankIndex + 1}:</label>
-                        <input type="text" class="text-input blank-input"
-                            data-question="${index}" data-blank="${blankIndex}"
-                            placeholder="Fill in blank ${blankIndex + 1}..." autocomplete="off">
-                    </div>
-                `;
-            });
-            questionHTML += '</div>';
-
-        } else if (q.type === 'multi-attempt') {
-            // Render the multi-attempt container with:
-            // - attempt-history (populated dynamically)
-            // - new-attempt-section (the current input fields)
-            questionHTML += `
-                <div class="multi-attempt-container" id="ma-container-${index}">
-                    <div class="attempt-info">
-                        <span class="attempts-remaining">
-                            <i class="fas fa-redo"></i>
-                            Attempts: <strong><span id="attempts-${index}">0</span>/${q.maxAttempts}</strong>
-                        </span>
-                        <span class="current-marks">
-                            <i class="fas fa-star"></i>
-                            Current Marks: <strong><span id="marks-${index}">${q.maxMarks}</span>/${q.maxMarks}</strong>
-                        </span>
-                    </div>
-
-                    <!-- History of past attempts -->
-                    <div class="attempt-history" id="history-${index}"></div>
-
-                    <!-- Active input section -->
-                    <div class="new-attempt-section" id="new-attempt-${index}">
-                        <div class="new-attempt-label">
-                            <i class="fas fa-pencil-alt"></i>
-                            <span id="attempt-label-text-${index}">Attempt 1</span>
-                        </div>
-                        <div class="multi-attempt-fields" id="fields-${index}">
-            `;
-
-            q.fields.forEach((field, fieldIndex) => {
-                questionHTML += `
-                    <div class="attempt-field">
-                        <label class="field-label">${field.label}:</label>
-                        <input type="text" class="text-input attempt-input"
-                            data-question="${index}" data-field="${fieldIndex}"
-                            placeholder="${field.placeholder || 'Type your answer...'}"
-                            autocomplete="off">
-                    </div>
-                `;
-            });
-
-            questionHTML += `
-                        </div>
-                        <button class="btn btn-check" data-question="${index}" id="check-btn-${index}">
-                            <i class="fas fa-check"></i>
-                            Check Answer
-                        </button>
-                        <div class="attempt-feedback" id="feedback-${index}"></div>
-                    </div>
-                </div>
-            `;
-
-        } else if (q.type === 'short-answer') {
-            questionHTML += `
-                <textarea class="short-answer" data-question="${index}"
-                    placeholder="Type your answer here..." rows="5"></textarea>
-            `;
-        }
-
-        questionDiv.innerHTML = questionHTML;
-
-        // Inject code text safely via textContent (preserves formatting, prevents XSS)
-        if (embeddedCode || q.code) {
-            const codeBlock = questionDiv.querySelector(`#code-${index}`);
-            if (codeBlock) codeBlock.textContent = embeddedCode || q.code;
-        }
-
-        container.appendChild(questionDiv);
-    });
-
-    addAnswerListeners();
-}
-
-// ===== ADD ANSWER LISTENERS =====
-function addAnswerListeners() {
-    // Multiple choice
-    document.querySelectorAll('.option').forEach(option => {
-        option.addEventListener('click', () => {
-            const questionIndex = parseInt(option.dataset.question);
-            const optionIndex = parseInt(option.dataset.option);
-            
-            document.querySelectorAll(`.option[data-question="${questionIndex}"]`)
-                .forEach(o => o.classList.remove('selected'));
-            option.classList.add('selected');
-            state.userAnswers[questionIndex] = optionIndex;
-        });
-    });
-
-    // Fill blank
-    document.querySelectorAll('.text-input:not(.blank-input):not(.attempt-input)').forEach(input => {
-        input.addEventListener('input', () => {
-            const questionIndex = parseInt(input.dataset.question);
-            state.userAnswers[questionIndex] = input.value;
-        });
-    });
-
-    // Multiple fill blank
-    document.querySelectorAll('.blank-input').forEach(input => {
-        input.addEventListener('input', () => {
-            const questionIndex = parseInt(input.dataset.question);
-            const blankIndex = parseInt(input.dataset.blank);
-            
-            if (!Array.isArray(state.userAnswers[questionIndex])) {
-                state.userAnswers[questionIndex] = new Array(quizData[questionIndex].blanks.length).fill('');
-            }
-            state.userAnswers[questionIndex][blankIndex] = input.value;
-        });
-    });
-
-    // Short answer
-    document.querySelectorAll('.short-answer').forEach(textarea => {
-        textarea.addEventListener('input', () => {
-            const questionIndex = parseInt(textarea.dataset.question);
-            state.userAnswers[questionIndex] = textarea.value;
-        });
-    });
-
-    // Multi-attempt check buttons
-    document.querySelectorAll('.btn-check').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const questionIndex = parseInt(btn.dataset.question);
-            checkMultiAttemptAnswer(questionIndex);
-        });
-    });
-}
-
-// ===== CHECK MULTI-ATTEMPT ANSWER =====
-
-/**
- * Tokenises a string into meaningful chunks so we can do a
- * character/token-level diff between the student's answer and the
- * expected tokens list.
- *
- * Splits on whitespace but keeps every non-space run as one token,
- * AND individually splits common punctuation so  "printf(...);"
- * becomes ["printf", "(", "...", ")", ";"] etc.
- */
+// ============================================================
+// HELPERS — tokeniser, diff, escape, formatTime
+// ============================================================
 function tokenise(str) {
     const tokens = [];
-    // Regex: match single-quoted strings, double-quoted strings, identifiers/numbers, or individual punctuation
-    const re = /'[^']*'|"[^"]*"|[A-Za-z0-9_%]+|[^A-Za-z0-9_\s]/g;
+    const re = /'[^']*'|"[^"]*"|[A-Za-z0-9_%#]+|[^A-Za-z0-9_\s]/g;
     let m;
-    while ((m = re.exec(str.trim())) !== null) {
-        tokens.push(m[0]);
-    }
+    while ((m = re.exec(str.trim())) !== null) tokens.push(m[0]);
     return tokens;
 }
 
-/**
- * Given the student's raw answer string and the expected tokens array,
- * returns an array of objects:
- *   { token, found: true|false }
- * representing each expected token and whether it appeared (in order)
- * in the student's tokenised answer.
- */
 function diffTokens(userAnswer, expectedTokens) {
     const userTokens = tokenise(userAnswer.toLowerCase());
-    let userIdx = 0;
-
+    let ui = 0;
     const result = expectedTokens.map(expected => {
         const exp = expected.toLowerCase();
-        while (userIdx < userTokens.length) {
-            if (userTokens[userIdx] === exp) {
-                userIdx++;
-                return { token: expected, found: true };
-            }
-            userIdx++;
+        while (ui < userTokens.length) {
+            if (userTokens[ui] === exp) { ui++; return { token: expected, found: true }; }
+            ui++;
         }
         return { token: expected, found: false };
     });
-
-    const foundCount = result.filter(r => r.found).length;
-    // isPartial: some tokens matched but not all
-    const isPartial = foundCount > 0 && foundCount < expectedTokens.length;
-    const isCorrect = foundCount === expectedTokens.length;
-
-    return { tokens: result, isPartial, isCorrect };
+    const found = result.filter(r => r.found).length;
+    return {
+        tokens: result,
+        isPartial: found > 0 && found < expectedTokens.length,
+        isCorrect: found === expectedTokens.length
+    };
 }
 
-// renderTokenDiff removed — we no longer show token chips to students.
+function checkFieldTokens(ua, field) {
+    const allSets = [field.tokens];
+    if (field.altTokenSets) field.altTokenSets.forEach(s => allSets.push(s));
+    let best = null;
+    for (const tokenSet of allSets) {
+        const result = diffTokens(ua, tokenSet);
+        if (!best
+            || result.isCorrect
+            || (!best.isCorrect && result.isPartial && !best.isPartial)
+            || (!best.isCorrect && !best.isPartial
+                && result.tokens.filter(t => t.found).length > best.tokens.filter(t => t.found).length))
+            best = result;
+        if (best.isCorrect) break;
+    }
+    return best;
+}
 
-function escapeHtml(str) {
-    return str
+// TRANSLATOR FOR HTML
+function escapeHtml(s) {
+    return s
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;');
 }
 
-function checkMultiAttemptAnswer(questionIndex) {
-    const question        = quizData[questionIndex];
-    const currentAttemptNum = state.questionAttempts[questionIndex] + 1;
+function formatTime(secs) {
+    const m = String(Math.floor(secs / 60)).padStart(2, '0');
+    const s = String(secs % 60).padStart(2, '0');
+    return `${m}:${s}`;
+}
 
-    // Collect current answers from the active (non-disabled) input fields
-    const inputs      = document.querySelectorAll(`.attempt-input[data-question="${questionIndex}"]`);
-    const userAnswers = [];
-    inputs.forEach(input => userAnswers.push(input.value.trim()));
+// ============================================================
+// PASSWORD - COPY PASTE FROM PREVIOUS PROTOTYPE
+// ============================================================
+document.getElementById('unlockBtn').addEventListener('click', tryUnlock);
+document.getElementById('passwordInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') tryUnlock();
+});
 
-    // ── Determine correctness per field ──────────────────────────────────────
-    const fieldResults = question.fields.map((field, idx) => {
-        const userAnswer = userAnswers[idx];
-
-        let isCorrect = false;
-        let isPartial = false;
-        let diff      = null;
-
-        if (field.tokens) {
-            diff      = diffTokens(userAnswer, field.tokens);
-            isCorrect = diff.isCorrect;
-            isPartial = diff.isPartial;
-        } else {
-            // Legacy keyword check
-            const lower = userAnswer.toLowerCase();
-            isCorrect   = (field.keywords || []).every(k => lower.includes(k.toLowerCase()));
-        }
-
-        return { isCorrect, isPartial, userAnswer, diff };
-    });
-
-    const allCorrect = fieldResults.every(r => r.isCorrect);
-
-    // Increment attempt count
-    state.questionAttempts[questionIndex] = currentAttemptNum;
-    document.getElementById(`attempts-${questionIndex}`).textContent = currentAttemptNum;
-
-    // Deduct marks if wrong
-    if (!allCorrect) {
-        state.questionMarks[questionIndex] = Math.max(0, question.maxMarks - currentAttemptNum);
-        document.getElementById(`marks-${questionIndex}`).textContent = state.questionMarks[questionIndex];
-    }
-
-    // Save answer state
-    state.userAnswers[questionIndex] = {
-        answers : userAnswers,
-        correct : allCorrect,
-        attempts: currentAttemptNum,
-        marks   : allCorrect ? state.questionMarks[questionIndex] : 0
-    };
-
-    // ── Build history entry ──────────────────────────────────────────────────
-    const historyContainer = document.getElementById(`history-${questionIndex}`);
-    const historyItem      = document.createElement('div');
-    historyItem.className  = `attempt-history-item${allCorrect ? '' : ' has-error'}`;
-
-    let historyHTML = `<div class="attempt-history-label">Attempt ${currentAttemptNum}</div>`;
-    historyHTML    += `<div class="attempt-history-fields">`;
-
-    fieldResults.forEach((result, idx) => {
-        const field     = question.fields[idx];
-        const statusCls = result.isCorrect ? 'correct' : result.isPartial ? 'partial' : 'incorrect';
-        const icon      = result.isCorrect ? 'fa-check-circle' : result.isPartial ? 'fa-circle-half-stroke' : 'fa-times-circle';
-        const display   = result.userAnswer || '<em>left blank</em>';
-
-        historyHTML += `<div class="attempt-history-field ${statusCls}">`;
-        historyHTML += `<span class="field-name">${field.label}:</span>`;
-        historyHTML += `<span class="field-value">${escapeHtml(display)}</span>`;
-        if (result.isPartial) {
-            historyHTML += `<span class="partial-tag">on track</span>`;
-        }
-        historyHTML += `<i class="fas ${icon} field-icon"></i>`;
-        historyHTML += `</div>`;
-    });
-
-    historyHTML += `</div>`;
-
-    if (allCorrect) {
-        const marks      = state.questionMarks[questionIndex];
-        const badgeClass = marks === question.maxMarks ? 'marks-full'
-            : marks >= question.maxMarks * 0.8        ? 'marks-high'
-            : marks >= question.maxMarks * 0.5        ? 'marks-mid'
-            : marks > 0                               ? 'marks-low'
-            :                                           'marks-zero';
-        historyHTML += `
-            <div style="margin-top:0.75rem;">
-                <span class="marks-badge ${badgeClass}">
-                    <i class="fas fa-star"></i>
-                    ${marks}/${question.maxMarks} marks earned
-                </span>
-            </div>`;
-    }
-
-    historyItem.innerHTML = historyHTML;
-    historyContainer.appendChild(historyItem);
-
-    // ── Handle outcomes ──────────────────────────────────────────────────────
-    if (allCorrect) {
-        state.questionSolved[questionIndex] = true;
-        document.getElementById(`new-attempt-${questionIndex}`).style.display = 'none';
-        document.getElementById(`ma-container-${questionIndex}`).classList.add('solved');
-
-    } else if (currentAttemptNum >= question.maxAttempts) {
-        // Out of attempts — show correct answers
-        const correctItem     = document.createElement('div');
-        correctItem.className = 'attempt-history-item';
-        correctItem.style.cssText = 'border-color:#2563eb;background:#eff6ff;';
-
-        let correctHTML  = `<div class="attempt-history-label" style="color:#2563eb">Correct Answers</div>`;
-        correctHTML     += `<div class="attempt-history-fields">`;
-        question.fields.forEach(field => {
-            const answer = field.correctAnswer || (field.tokens ? field.tokens.join(' ') : (field.keywords || [''])[0]);
-            correctHTML += `
-                <div class="attempt-history-field correct">
-                    <span class="field-name">${field.label}:</span>
-                    <span class="field-value">${escapeHtml(answer)}</span>
-                    <i class="fas fa-lightbulb field-icon" style="color:#2563eb"></i>
-                </div>`;
-        });
-        correctHTML += `</div>`;
-        correctItem.innerHTML = correctHTML;
-        historyContainer.appendChild(correctItem);
-
-        state.questionMarks[questionIndex]         = 0;
-        state.userAnswers[questionIndex].marks      = 0;
-        document.getElementById(`marks-${questionIndex}`).textContent = 0;
-        document.getElementById(`new-attempt-${questionIndex}`).style.display = 'none';
-
+function tryUnlock() {
+    const val = document.getElementById('passwordInput').value.trim();
+    if (val === QUIZ_PASSWORD) {
+        document.getElementById('passwordScreen').classList.add('hidden');
+        document.getElementById('quizScreen').classList.add('active');
+        initQuiz();
+        startTimer();
     } else {
-        // Attempts remaining — keep field values so student can edit, just
-        // lock already-correct fields and leave wrong ones editable with their text intact.
-        const newAttemptNum = currentAttemptNum + 1;
-        document.getElementById(`attempt-label-text-${questionIndex}`).textContent = `Attempt ${newAttemptNum}`;
-
-        inputs.forEach((input, idx) => {
-            const result = fieldResults[idx];
-            if (result.isCorrect) {
-                input.disabled = true;
-                input.classList.add('field-correct');
-            } else if (result.isPartial) {
-                // Partial — keep editable, style amber so student knows they're on the right track
-                input.classList.add('field-partial');
-                input.style.borderColor = '#f59e0b';
-                input.focus();
-                setTimeout(() => { input.style.borderColor = ''; }, 800);
-            } else {
-                // Fully wrong — keep editable, style red
-                input.style.borderColor = '#ef4444';
-                input.focus();
-                setTimeout(() => { input.style.borderColor = ''; }, 800);
-            }
-        });
-
-        const feedback = document.getElementById(`feedback-${questionIndex}`);
-        if (feedback) feedback.style.display = 'none';
+        const err = document.getElementById('errorMessage');
+        err.textContent = 'Incorrect password. Please try again.';
+        document.getElementById('passwordInput').value = '';
+        document.getElementById('passwordInput').focus();
+        setTimeout(() => (err.textContent = ''), 3000);
     }
 }
 
-// ===== SHOW QUESTION =====
-function showQuestion(index) {
-    document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
-    document.getElementById(`question-${index}`).classList.add('active');
-    
-    state.currentQuestionIndex = index;
-    document.getElementById('currentQuestion').textContent = index + 1;
-    
-    const progress = ((index + 1) / quizData.length) * 100;
-    document.getElementById('progressFill').style.width = `${progress}%`;
-    
-    updateNavigationButtons();
-    restoreSavedAnswer(index);
-}
-
-// ===== RESTORE SAVED ANSWER =====
-function restoreSavedAnswer(index) {
-    const savedAnswer = state.userAnswers[index];
-    const question = quizData[index];
-    
-    if (savedAnswer !== null && savedAnswer !== undefined) {
-        if (question.type === 'multiple-choice') {
-            const option = document.querySelector(`.option[data-question="${index}"][data-option="${savedAnswer}"]`);
-            if (option) option.classList.add('selected');
-            
-        } else if (question.type === 'fill-blank') {
-            const input = document.querySelector(`.text-input[data-question="${index}"]`);
-            if (input) input.value = savedAnswer;
-            
-        } else if (question.type === 'multiple-fill-blank') {
-            if (Array.isArray(savedAnswer)) {
-                savedAnswer.forEach((answer, blankIndex) => {
-                    const input = document.querySelector(`.blank-input[data-question="${index}"][data-blank="${blankIndex}"]`);
-                    if (input && answer) input.value = answer;
-                });
-            }
-            
-        } else if (question.type === 'short-answer') {
-            const input = document.querySelector(`.short-answer[data-question="${index}"]`);
-            if (input) input.value = savedAnswer;
-        }
-        // multi-attempt state is preserved in DOM (history + locked fields), no restore needed
-    }
-}
-
-// ===== NAVIGATION =====
-function initNavigation() {
-    document.getElementById('prevBtn').addEventListener('click', () => {
-        if (state.currentQuestionIndex > 0) {
-            showQuestion(state.currentQuestionIndex - 1);
-        }
-    });
-    
-    document.getElementById('nextBtn').addEventListener('click', () => {
-        if (state.currentQuestionIndex < quizData.length - 1) {
-            showQuestion(state.currentQuestionIndex + 1);
-        }
-    });
-    
-    document.getElementById('submitBtn').addEventListener('click', submitQuiz);
-}
-
-function updateNavigationButtons() {
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const submitBtn = document.getElementById('submitBtn');
-    
-    prevBtn.disabled = state.currentQuestionIndex === 0;
-    
-    if (state.currentQuestionIndex === quizData.length - 1) {
-        nextBtn.style.display = 'none';
-        submitBtn.style.display = 'inline-flex';
-    } else {
-        nextBtn.style.display = 'inline-flex';
-        submitBtn.style.display = 'none';
-    }
-}
-
-// ===== TIMER =====
+// ============================================================
+// TIMER - SAME
+// ============================================================
 function startTimer() {
-    state.startTime = Date.now();
     state.timerInterval = setInterval(() => {
-        const elapsed = Date.now() - state.startTime;
-        const minutes = Math.floor(elapsed / 60000);
-        const seconds = Math.floor((elapsed % 60000) / 1000);
-        document.getElementById('timerDisplay').textContent =
-            `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        state.timerSeconds++;
+        document.getElementById('timerDisplay').textContent = formatTime(state.timerSeconds);
+        // Turn red after 15 minutes
+        if (state.timerSeconds >= 900)
+            document.getElementById('timerBox').classList.add('timer-warning');
     }, 1000);
 }
 
 function stopTimer() {
-    if (state.timerInterval) clearInterval(state.timerInterval);
+    clearInterval(state.timerInterval);
+    state.finalTime = formatTime(state.timerSeconds);
 }
 
-// ===== SUBMIT QUIZ =====
+// ============================================================
+// INIT - FROM PER CHAPTER QUIZ
+// ============================================================
+function initQuiz() {
+    state.userAnswers = new Array(quizData.length).fill(null);
+
+    quizData.forEach((q, i) => {
+        if (q.type === 'multi-attempt') {
+            state.questionAttempts[i] = 0;
+            state.questionMarks[i]    = q.maxMarks;
+            state.questionSolved[i]   = false;
+        } else if (q.type === 'syntax-table') {
+            state.questionAttempts[i] = 0;
+            state.questionMarks[i]    = q.rows.length;
+        } else {
+            state.questionMarks[i] = 1;
+        }
+    });
+
+    document.getElementById('totalQuestions').textContent = quizData.length;
+    renderQuestions();
+    showQuestion(0);
+    initNavigation();
+}
+
+// ============================================================
+// RENDER ALL QUESTIONS
+// ============================================================
+function renderQuestions() {
+    const container = document.getElementById('questionContainer');
+    container.innerHTML = '';
+
+    quizData.forEach((q, index) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        div.id = `question-${index}`;
+
+        // Better understanding
+        const marksText    = q.type === 'multi-attempt'  ? `(${q.maxMarks} marks)`
+                           : q.type === 'syntax-table'   ? `(${q.rows.length} marks)`
+                           : '(1 mark)';
+        const doubleNL     = q.question.indexOf('\n\n');
+        const label        = doubleNL !== -1 ? q.question.slice(0, doubleNL) : q.question;
+        const embeddedCode = doubleNL !== -1 ? q.question.slice(doubleNL + 2) : null;
+
+        // Unanswered warning banner
+        let html = `<div class="unanswered-alert" id="alert-${index}">
+            <i class="fas fa-exclamation-triangle"></i>
+            Please answer this question before moving on.
+        </div>`;
+
+        html += `<div class="question-text">${index + 1}. ${label} <span style="color:#64748b;font-weight:500;">${marksText}</span></div>`;
+
+        if (embeddedCode || q.code) html += `<pre class="question-code" id="code-${index}"></pre>`;
+
+        // ── Multiple Choice ──────────────────────────────────
+        if (q.type === 'multiple-choice') {
+            html += '<div class="options">';
+            q.options.forEach((opt, oi) => {
+                html += `<div class="option" data-question="${index}" data-option="${oi}">
+                    <div class="option-label">${String.fromCharCode(65 + oi)}</div>
+                    <div class="option-text">${opt}</div>
+                </div>`;
+            });
+            html += '</div>';
+
+        // ── Fill Blank ───────────────────────────────────────
+        } else if (q.type === 'fill-blank') {
+            html += `<input type="text" class="text-input" data-question="${index}"
+                placeholder="Type your answer here..." autocomplete="off">`;
+
+        // ── Multiple Fill Blank ──────────────────────────────
+        } else if (q.type === 'multiple-fill-blank') {
+            html += '<div class="multiple-blanks">';
+            q.blanks.forEach((_, bi) => {
+                html += `<div class="blank-item">
+                    <label class="blank-label">Blank ${bi + 1}:</label>
+                    <input type="text" class="text-input blank-input"
+                        data-question="${index}" data-blank="${bi}"
+                        placeholder="Fill in blank ${bi + 1}..." autocomplete="off">
+                </div>`;
+            });
+            html += '</div>';
+
+        // ── Short Answer ─────────────────────────────────────
+        } else if (q.type === 'short-answer') {
+            html += `<textarea class="short-answer" data-question="${index}"
+                placeholder="Type your answer here..." rows="5"></textarea>`;
+
+        // ── Multi-Attempt ────────────────────────────────────
+        } else if (q.type === 'multi-attempt') {
+            html += `<div class="multi-attempt-container" id="ma-container-${index}">
+                <div class="attempt-info">
+                    <span class="attempts-remaining">
+                        <i class="fas fa-redo"></i>
+                        Attempts: <strong><span id="attempts-${index}">0</span>/${q.maxAttempts}</strong>
+                    </span>
+                    <span class="current-marks">
+                        <i class="fas fa-star"></i>
+                        Current Marks: <strong><span id="marks-${index}">${q.maxMarks}</span>/${q.maxMarks}</strong>
+                    </span>
+                </div>
+                <div class="attempt-history" id="history-${index}"></div>
+                <div class="new-attempt-section" id="new-attempt-${index}">
+                    <div class="new-attempt-label">
+                        <i class="fas fa-pencil-alt"></i>
+                        <span id="attempt-label-text-${index}">Attempt 1</span>
+                    </div>
+                    <div class="multi-attempt-fields" id="fields-${index}">`;
+
+            q.fields.forEach((field, fi) => {
+                html += `<div class="attempt-field">
+                    <label class="field-label">${field.label}:</label>
+                    <input type="text" class="text-input attempt-input"
+                        data-question="${index}" data-field="${fi}"
+                        placeholder="${field.placeholder || 'Type your answer...'}" autocomplete="off">
+                </div>`;
+            });
+
+            html += `</div>
+                    <button class="btn btn-check" data-question="${index}" id="check-btn-${index}">
+                        <i class="fas fa-check"></i> Check Answer
+                    </button>
+                    <div class="attempt-feedback" id="feedback-${index}"></div>
+                </div>
+            </div>`;
+
+        // ── Syntax Table ─────────────────────────────────────
+        } else if (q.type === 'syntax-table') {
+            const headers = q.headers || ['Part 1', 'Part 2', 'Part 3'];
+            const maxAtt  = q.maxAttempts || 3;
+
+            html += `<div class="attempt-info" style="margin-bottom:1rem;">
+                <span class="attempts-remaining">
+                    <i class="fas fa-redo"></i>
+                    Attempts: <strong><span id="syntax-attempts-${index}">0</span>/${maxAtt}</strong>
+                </span>
+                <span class="current-marks">
+                    <i class="fas fa-star"></i>
+                    Marks: <strong><span id="syntax-rows-${index}">0</span>/${q.rows.length}</strong>
+                </span>
+            </div>
+            <div class="syntax-table" id="syntax-table-${index}">
+                <div class="syntax-table-head" style="grid-template-columns:repeat(${headers.length},1fr);">
+                    ${headers.map(h => `<div class="syntax-col-head">${h}</div>`).join('')}
+                </div>
+                <div class="syntax-table-body">`;
+
+            q.rows.forEach((row, ri) => {
+                html += `<div class="syntax-row" id="syntax-row-${index}-${ri}">
+                    <div class="syntax-row-label">${row.label}</div>
+                    <div class="syntax-row-cells">`;
+                row.cells.forEach((_, ci) => {
+                    html += `<input type="text" class="syntax-cell-input"
+                        data-question="${index}" data-row="${ri}" data-cell="${ci}"
+                        placeholder="${row.placeholders ? row.placeholders[ci] || '' : ''}"
+                        autocomplete="off">`;
+                });
+                html += `</div></div>`;
+            });
+
+            html += `</div></div>
+            <button class="btn btn-check syntax-check-btn" data-question="${index}" id="syntax-btn-${index}">
+                <i class="fas fa-check"></i> Check All
+            </button>
+            <div class="syntax-feedback" id="syntax-feedback-${index}"></div>`;
+        }
+
+        div.innerHTML = html;
+
+        // Inject embedded code block text safely
+        if (embeddedCode || q.code) {
+            const cb = div.querySelector(`#code-${index}`);
+            if (cb) cb.textContent = embeddedCode || q.code;
+        }
+
+        container.appendChild(div);
+    });
+
+    addListeners();
+}
+
+// ============================================================
+// ANSWER LISTENERS
+// ============================================================
+function addListeners() {
+
+    // Multiple choice
+    document.querySelectorAll('.option').forEach(opt => {
+        opt.addEventListener('click', () => {
+            const qi = parseInt(opt.dataset.question);
+            document.querySelectorAll(`.option[data-question="${qi}"]`).forEach(o => o.classList.remove('selected'));
+            opt.classList.add('selected');
+            state.userAnswers[qi] = parseInt(opt.dataset.option);
+            hideAlert(qi);
+        });
+    });
+
+    // Fill blank / text inputs (not blanks or attempt inputs)
+    document.querySelectorAll('.text-input:not(.blank-input):not(.attempt-input)').forEach(inp => {
+        inp.addEventListener('input', () => {
+            const qi = parseInt(inp.dataset.question);
+            state.userAnswers[qi] = inp.value;
+            if (inp.value.trim()) hideAlert(qi);
+        });
+    });
+
+    // Multiple fill blank
+    document.querySelectorAll('.blank-input').forEach(inp => {
+        inp.addEventListener('input', () => {
+            const qi = parseInt(inp.dataset.question);
+            const bi = parseInt(inp.dataset.blank);
+            if (!Array.isArray(state.userAnswers[qi]))
+                state.userAnswers[qi] = new Array(quizData[qi].blanks.length).fill('');
+            state.userAnswers[qi][bi] = inp.value;
+            if (state.userAnswers[qi].every(v => v && v.trim())) hideAlert(qi);
+        });
+    });
+
+    // Short answer textarea
+    document.querySelectorAll('.short-answer').forEach(ta => {
+        ta.addEventListener('input', () => {
+            const qi = parseInt(ta.dataset.question);
+            state.userAnswers[qi] = ta.value;
+            if (ta.value.trim()) hideAlert(qi);
+        });
+    });
+
+    // Multi-attempt check buttons
+    document.querySelectorAll('.btn-check:not(.syntax-check-btn)').forEach(btn => {
+        btn.addEventListener('click', () => checkMultiAttempt(parseInt(btn.dataset.question)));
+    });
+
+    // Syntax table check buttons
+    document.querySelectorAll('.syntax-check-btn').forEach(btn => {
+        btn.addEventListener('click', () => checkSyntaxTable(parseInt(btn.dataset.question)));
+    });
+
+    // Syntax cell inputs
+    document.querySelectorAll('.syntax-cell-input').forEach(inp => {
+        inp.addEventListener('input', () => {
+            const qi = parseInt(inp.dataset.question);
+            const ri = parseInt(inp.dataset.row);
+            const ci = parseInt(inp.dataset.cell);
+            if (!state.userAnswers[qi]) state.userAnswers[qi] = [];
+            if (!state.userAnswers[qi][ri]) state.userAnswers[qi][ri] = [];
+            state.userAnswers[qi][ri][ci] = inp.value;
+        });
+    });
+}
+
+// ============================================================
+// ALERT HELPERS
+// ============================================================
+function showAlert(qi) {
+    const el = document.getElementById(`alert-${qi}`);
+    if (el) {
+        el.classList.add('show');
+        setTimeout(() => el.classList.remove('show'), 2500);
+    }
+}
+
+function hideAlert(qi) {
+    const el = document.getElementById(`alert-${qi}`);
+    if (el) el.classList.remove('show');
+}
+
+// ============================================================
+// IS ANSWERED — gate before Next / Submit
+// ============================================================
+function isAnswered(index) {
+    const q = quizData[index];
+    const ua = state.userAnswers[index];
+
+    if (q.type === 'multiple-choice') return ua !== null && ua !== undefined;
+    if (q.type === 'fill-blank') return ua && ua.trim() !== '';
+    if (q.type === 'multiple-fill-blank') return Array.isArray(ua) && ua.every(v => v && v.trim() !== '');
+    if (q.type === 'short-answer') return ua && ua.trim() !== '';
+    if (q.type === 'multi-attempt') return state.questionSolved[index] || state.questionAttempts[index] >= q.maxAttempts;
+    if (q.type === 'syntax-table') {
+        if (state.questionAttempts[index] >= (q.maxAttempts || 3)) return true;
+        return q.rows.every((row, ri) =>
+            row.cells.every((_, ci) => {
+                const inp = document.querySelector(`.syntax-cell-input[data-question="${index}"][data-row="${ri}"][data-cell="${ci}"]`);
+                return inp && inp.disabled && inp.classList.contains('syntax-correct');
+            })
+        );
+    }
+    return false;
+}
+
+// ============================================================
+// SHOW QUESTION
+// ============================================================
+function showQuestion(index) {
+    document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
+    document.getElementById(`question-${index}`).classList.add('active');
+    state.currentIndex = index;
+    document.getElementById('currentQuestion').textContent = index + 1;
+    document.getElementById('progressFill').style.width = `${((index + 1) / quizData.length) * 100}%`;
+    updateNav();
+    restoreAnswer(index);
+}
+
+function restoreAnswer(index) {
+    const saved = state.userAnswers[index];
+    const q = quizData[index];
+    if (!saved) return;
+
+    if (q.type === 'multiple-choice') {
+        const opt = document.querySelector(`.option[data-question="${index}"][data-option="${saved}"]`);
+        if (opt) opt.classList.add('selected');
+    } else if (q.type === 'fill-blank') {
+        const inp = document.querySelector(`.text-input[data-question="${index}"]`);
+        if (inp) inp.value = saved;
+    } else if (q.type === 'multiple-fill-blank' && Array.isArray(saved)) {
+        saved.forEach((val, bi) => {
+            const inp = document.querySelector(`.blank-input[data-question="${index}"][data-blank="${bi}"]`);
+            if (inp && val) inp.value = val;
+        });
+    } else if (q.type === 'short-answer') {
+        const ta = document.querySelector(`.short-answer[data-question="${index}"]`);
+        if (ta) ta.value = saved;
+    }
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function initNavigation() {
+    document.getElementById('prevBtn').addEventListener('click', () => {
+        if (state.currentIndex > 0) showQuestion(state.currentIndex - 1);
+    });
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+        if (!isAnswered(state.currentIndex)) { showAlert(state.currentIndex); return; }
+        if (state.currentIndex < quizData.length - 1) showQuestion(state.currentIndex + 1);
+    });
+
+    document.getElementById('submitBtn').addEventListener('click', () => {
+        if (!isAnswered(state.currentIndex)) { showAlert(state.currentIndex); return; }
+        submitQuiz();
+    });
+
+}
+
+function updateNav() {
+    const prev = document.getElementById('prevBtn');
+    const next = document.getElementById('nextBtn');
+    const submit = document.getElementById('submitBtn');
+
+    prev.disabled = state.currentIndex === 0;
+
+    if (state.currentIndex === quizData.length - 1) {
+        next.style.display = 'none';
+        submit.style.display = 'inline-flex';
+    } else {
+        next.style.display = 'inline-flex';
+        submit.style.display = 'none';
+    }
+}
+
+// ============================================================
+// SUBMIT + SCORE
+// ============================================================
 function submitQuiz() {
     stopTimer();
     calculateScore();
-    
-    const elapsed = Date.now() - state.startTime;
-    const minutes = Math.floor(elapsed / 60000);
-    const seconds = Math.floor((elapsed % 60000) / 1000);
-    const timeString = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-    
     document.getElementById('quizScreen').classList.remove('active');
     document.getElementById('resultsScreen').classList.add('active');
-    
-    // Total possible marks
-    const totalMarks = quizData.reduce((sum, q) => sum + (q.type === 'multi-attempt' ? q.maxMarks : 1), 0);
-    
+
+    const totalMarks = quizData.reduce((s, q) => {
+        if (q.type === 'multi-attempt') return s + q.maxMarks;
+        if (q.type === 'syntax-table')  return s + q.rows.length;
+        return s + 1;
+    }, 0);
+
     document.getElementById('scoreNumber').textContent = state.score;
     document.getElementById('scoreTotalDisplay').textContent = totalMarks;
-    document.getElementById('timeTaken').textContent = timeString;
-    
-    const percentage = totalMarks > 0 ? Math.round((state.score / totalMarks) * 100) : 0;
-    document.getElementById('percentageScore').textContent = `${percentage}%`;
+    document.getElementById('timeTaken').textContent = state.finalTime;
+
+    const pct = totalMarks > 0 ? Math.round((state.score / totalMarks) * 100) : 0;
+    document.getElementById('percentageScore').textContent = `${pct}%`;
 }
 
-// ===== CALCULATE SCORE =====
 function calculateScore() {
     state.score = 0;
-    
-    quizData.forEach((question, index) => {
-        const userAnswer = state.userAnswers[index];
-        
-        if (question.type === 'multiple-choice') {
-            if (userAnswer === question.correctAnswer) state.score += 1;
-            
-        } else if (question.type === 'fill-blank') {
-            if (userAnswer) {
-                const normalizedAnswer = userAnswer.toLowerCase().trim();
-                const keywords = question.keywords || [question.correctAnswer];
-                if (keywords.some(k => normalizedAnswer === k.toLowerCase())) state.score += 1;
+    quizData.forEach((q, i) => {
+        const ua = state.userAnswers[i];
+
+        if (q.type === 'multiple-choice') {
+            if (ua === q.correctAnswer) state.score++;
+
+        } else if (q.type === 'fill-blank') {
+            if (ua) {
+                const norm = ua.toLowerCase().trim();
+                const kws = q.keywords || [q.correctAnswer];
+                if (kws.some(k => norm === k.toLowerCase())) state.score++;
             }
-            
-        } else if (question.type === 'multiple-fill-blank') {
-            if (Array.isArray(userAnswer)) {
-                let allCorrect = true;
-                question.blanks.forEach((blank, blankIndex) => {
-                    const answer = userAnswer[blankIndex];
-                    if (!answer) { allCorrect = false; return; }
-                    const normalizedAnswer = answer.toLowerCase().trim();
-                    const keywords = blank.keywords || [blank.correctAnswer];
-                    if (!keywords.some(k => normalizedAnswer === k.toLowerCase())) allCorrect = false;
+
+        } else if (q.type === 'multiple-fill-blank') {
+            if (Array.isArray(ua)) {
+                let ok = true;
+                q.blanks.forEach((blank, bi) => {
+                    const a = ua[bi];
+                    if (!a) { ok = false; return; }
+                    const kws = blank.keywords || [blank.correctAnswer];
+                    if (!kws.some(k => a.toLowerCase().trim().includes(k.toLowerCase()))) ok = false;
                 });
-                if (allCorrect) state.score += 1;
+                if (ok) state.score++;
             }
-            
-        } else if (question.type === 'multi-attempt') {
-            if (userAnswer && userAnswer.correct) {
-                state.score += userAnswer.marks;
+
+        } else if (q.type === 'multi-attempt') {
+            if (ua && ua.correct) state.score += ua.marks;
+
+        } else if (q.type === 'short-answer') {
+            if (ua) {
+                const norm = ua.toLowerCase();
+                const found = q.keywords.filter(k => norm.includes(k.toLowerCase()));
+                if (found.length >= q.minKeywords) state.score++;
             }
-            
-        } else if (question.type === 'short-answer') {
-            if (userAnswer) {
-                const normalizedAnswer = userAnswer.toLowerCase();
-                const foundKeywords = question.keywords.filter(k =>
-                    normalizedAnswer.includes(k.toLowerCase())
-                );
-                if (foundKeywords.length >= question.minKeywords) state.score += 1;
+
+        } else if (q.type === 'syntax-table') {
+            if (ua) {
+                q.rows.forEach((row, ri) => {
+                    const allCorrectlyLocked = row.cells.every((_, ci) => {
+                        const inp = document.querySelector(`.syntax-cell-input[data-question="${i}"][data-row="${ri}"][data-cell="${ci}"]`);
+                        return inp && inp.disabled && inp.classList.contains('syntax-correct');
+                    });
+                    if (allCorrectlyLocked) state.score++;
+                });
             }
         }
     });
+}
+
+// ============================================================
+// CHECK MULTI-ATTEMPT
+// ============================================================
+function checkMultiAttempt(questionIndex) {
+    const question = quizData[questionIndex];
+    const currentAttempt = state.questionAttempts[questionIndex] + 1;
+    const inputs = document.querySelectorAll(`.attempt-input[data-question="${questionIndex}"]`);
+    const userAnswers = [];
+    inputs.forEach(inp => userAnswers.push(inp.value.trim()));
+
+    const fieldResults = question.fields.map((field, idx) => {
+        const ua = userAnswers[idx];
+        let isCorrect = false, isPartial = false, diff = null;
+
+        if (field.tokens) {
+            diff = checkFieldTokens(ua, field);
+            isCorrect = diff.isCorrect;
+            isPartial = diff.isPartial;
+        } else {
+            const lower = ua.toLowerCase();
+            isCorrect = (field.keywords || []).every(k => lower.includes(k.toLowerCase()));
+        }
+        return { isCorrect, isPartial, userAnswer: ua, diff };
+    });
+
+    const allCorrect = fieldResults.every(r => r.isCorrect);
+
+    state.questionAttempts[questionIndex] = currentAttempt;
+    document.getElementById(`attempts-${questionIndex}`).textContent = currentAttempt;
+
+    if (!allCorrect)
+        state.questionMarks[questionIndex] = Math.max(0, question.maxMarks - currentAttempt);
+    document.getElementById(`marks-${questionIndex}`).textContent = state.questionMarks[questionIndex];
+
+    state.userAnswers[questionIndex] = {
+        answers: userAnswers,
+        correct: allCorrect,
+        attempts: currentAttempt,
+        marks: allCorrect ? state.questionMarks[questionIndex] : 0
+    };
+
+    // Build history entry
+    const historyContainer = document.getElementById(`history-${questionIndex}`);
+    const item = document.createElement('div');
+    item.className = `attempt-history-item${allCorrect ? '' : ' has-error'}`;
+
+    let h = `<div class="attempt-history-label">Attempt ${currentAttempt}</div><div class="attempt-history-fields">`;
+    fieldResults.forEach((result, idx) => {
+        const field = question.fields[idx];
+        const cls = result.isCorrect ? 'correct' : result.isPartial ? 'partial' : 'incorrect';
+        const icon = result.isCorrect ? 'fa-check-circle' : result.isPartial ? 'fa-circle-half-stroke' : 'fa-times-circle';
+        const display = result.userAnswer || '<em>left blank</em>';
+        h += `<div class="attempt-history-field ${cls}">
+            <span class="field-name">${field.label}:</span>
+            <span class="field-value">${escapeHtml(display)}</span>
+            ${result.isPartial ? '<span class="partial-tag">on track</span>' : ''}
+            <i class="fas ${icon} field-icon"></i>
+        </div>`;
+    });
+    h += '</div>';
+
+    if (allCorrect) {
+        const marks = state.questionMarks[questionIndex];
+        const bc = marks === question.maxMarks ? 'marks-full'
+            : marks >= question.maxMarks * 0.8  ? 'marks-high'
+            : marks >= question.maxMarks * 0.5  ? 'marks-mid'
+            : marks > 0                         ? 'marks-low'
+            :                                     'marks-zero';
+        h += `<div style="margin-top:.75rem;">
+            <span class="marks-badge ${bc}"><i class="fas fa-star"></i> ${marks}/${question.maxMarks} marks earned</span>
+        </div>`;
+    }
+
+    item.innerHTML = h;
+    historyContainer.appendChild(item);
+
+    if (allCorrect) {
+        state.questionSolved[questionIndex] = true;
+        document.getElementById(`new-attempt-${questionIndex}`).style.display = 'none';
+        document.getElementById(`ma-container-${questionIndex}`).classList.add('solved');
+        hideAlert(questionIndex);
+
+    } else if (currentAttempt >= question.maxAttempts) {
+        // Show correct answers
+        const ci = document.createElement('div');
+        ci.className     = 'attempt-history-item';
+        ci.style.cssText = 'border-color:#2563eb;background:#eff6ff;';
+        let ch = `<div class="attempt-history-label" style="color:#2563eb">Correct Answers</div><div class="attempt-history-fields">`;
+        question.fields.forEach(field => {
+            const ans = field.correctAnswer
+                || (field.tokens ? field.tokens.join(' ') : (field.keywords || [''])[0]);
+            ch += `<div class="attempt-history-field correct">
+                <span class="field-name">${field.label}:</span>
+                <span class="field-value">${escapeHtml(ans)}</span>
+                <i class="fas fa-lightbulb field-icon" style="color:#2563eb"></i>
+            </div>`;
+        });
+        ch += '</div>';
+        ci.innerHTML = ch;
+        historyContainer.appendChild(ci);
+
+        state.questionMarks[questionIndex] = 0;
+        state.userAnswers[questionIndex].marks = 0;
+        document.getElementById(`marks-${questionIndex}`).textContent = 0;
+        document.getElementById(`new-attempt-${questionIndex}`).style.display = 'none';
+        hideAlert(questionIndex);
+
+    } else {
+        // Still has attempts — lock correct fields, highlight wrong ones
+        const next = currentAttempt + 1;
+        document.getElementById(`attempt-label-text-${questionIndex}`).textContent = `Attempt ${next}`;
+        inputs.forEach((inp, idx) => {
+            const r = fieldResults[idx];
+            if (r.isCorrect) {
+                inp.disabled = true;
+                inp.classList.add('field-correct');
+            } else if (r.isPartial) {
+                inp.classList.add('field-partial');
+                inp.style.borderColor = '#f59e0b';
+                setTimeout(() => { inp.style.borderColor = ''; }, 800);
+            } else {
+                inp.style.borderColor = '#ef4444';
+                inp.focus();
+                setTimeout(() => { inp.style.borderColor = ''; }, 800);
+            }
+        });
+    }
+}
+
+// ============================================================
+// CHECK SYNTAX TABLE
+// ============================================================
+function checkSyntaxTable(questionIndex) {
+    const question = quizData[questionIndex];
+    const maxAttempts = question.maxAttempts || 3;
+    const feedback = document.getElementById(`syntax-feedback-${questionIndex}`);
+    const btn = document.getElementById(`syntax-btn-${questionIndex}`);
+
+    state.questionAttempts[questionIndex]++;
+    const attempt = state.questionAttempts[questionIndex];
+    document.getElementById(`syntax-attempts-${questionIndex}`).textContent = attempt;
+
+    // Collect current values
+    const inputs = document.querySelectorAll(`.syntax-cell-input[data-question="${questionIndex}"]`);
+    const rowValues = {};
+    inputs.forEach(inp => {
+        const ri = parseInt(inp.dataset.row);
+        const ci = parseInt(inp.dataset.cell);
+        if (!rowValues[ri]) rowValues[ri] = [];
+        rowValues[ri][ci] = inp.value.trim();
+    });
+
+    // Check each cell
+    question.rows.forEach((row, ri) => {
+        row.cells.forEach((cell, ci) => {
+            const inp = document.querySelector(`.syntax-cell-input[data-question="${questionIndex}"][data-row="${ri}"][data-cell="${ci}"]`);
+            if (inp.disabled) return;
+
+            const ua = (rowValues[ri] && rowValues[ri][ci]) || '';
+            let cellOk = false;
+
+            if (cell.tokens) {
+                const result = checkFieldTokens(ua, cell);
+                cellOk = result.isCorrect;
+                if (!cellOk) {
+                    inp.style.borderColor = result.isPartial ? '#f59e0b' : '#ef4444';
+                    setTimeout(() => { inp.style.borderColor = ''; }, 1200);
+                }
+            } else if (cell.keywords) {
+                const lower = ua.toLowerCase();
+                const primaryOk = cell.keywords.every(k => lower.includes(k.toLowerCase()));
+                const altOk = (cell.altKeywords || []).some(alt =>
+                    alt.every(k => lower.includes(k.toLowerCase()))
+                );
+                cellOk = primaryOk || altOk;
+                if (!cellOk) {
+                    inp.style.borderColor = '#ef4444';
+                    setTimeout(() => { inp.style.borderColor = ''; }, 1200);
+                }
+            }
+
+            if (cellOk) {
+                inp.disabled = true;
+                inp.classList.add('syntax-correct');
+            }
+        });
+    });
+
+    // Count correct rows
+    let correctRows = 0;
+    question.rows.forEach((row, ri) => {
+        const allCorrect = row.cells.every((_, ci) => {
+            const inp = document.querySelector(`.syntax-cell-input[data-question="${questionIndex}"][data-row="${ri}"][data-cell="${ci}"]`);
+            return inp && inp.disabled && inp.classList.contains('syntax-correct');
+        });
+        if (allCorrect) correctRows++;
+    });
+
+    const allCorrect = correctRows === question.rows.length;
+    document.getElementById(`syntax-rows-${questionIndex}`).textContent = correctRows;
+    state.userAnswers[questionIndex] = rowValues;
+
+    if (allCorrect) {
+        btn.disabled = true;
+        btn.style.opacity = '0.5';
+        if (feedback) feedback.innerHTML = `<span class="syntax-result correct">
+            <i class="fas fa-check-circle"></i> All correct! ${correctRows}/${question.rows.length} marks earned.
+        </span>`;
+        hideAlert(questionIndex);
+
+    } else if (attempt >= maxAttempts) {
+        btn.disabled = true;
+        btn.style.opacity = '0.5';
+        // Reveal correct answers in blue
+        question.rows.forEach((row, ri) => {
+            row.cells.forEach((cell, ci) => {
+                const inp = document.querySelector(`.syntax-cell-input[data-question="${questionIndex}"][data-row="${ri}"][data-cell="${ci}"]`);
+                if (!inp || inp.disabled) return;
+                const correct = cell.correctAnswer
+                    || (cell.tokens  ? cell.tokens.join(' ') : '')
+                    || (cell.keywords ? cell.keywords[0] : '');
+                inp.value    = correct;
+                inp.disabled = true;
+                inp.classList.add('syntax-revealed');
+            });
+        });
+        if (feedback) feedback.innerHTML = `<span class="syntax-result revealed">
+            <i class="fas fa-lightbulb"></i>
+            Out of attempts - ${correctRows}/${question.rows.length} marks earned. Correct answers shown in blue.
+        </span>`;
+        hideAlert(questionIndex);
+
+    } else {
+        const remaining = maxAttempts - attempt;
+        if (feedback) feedback.innerHTML = `<span class="syntax-result partial">
+            <i class="fas fa-pencil-alt"></i>
+            ${correctRows}/${question.rows.length} marks - ${remaining} attempt${remaining > 1 ? 's' : ''} remaining
+        </span>`;
+    }
 }
