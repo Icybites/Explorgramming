@@ -158,7 +158,7 @@ const quizData = [
                 placeholders: ["keyword", "Your answer", "Your answer"],
                 cells: [
                     { keywords: ["for"], placeholder: "keyword"},
-                    { keywords: ["initialization", "condition", "increment","init"], placeholder: "init; condition; inc"},
+                    { keywords: ["initialization", "condition", "increment"], placeholder: "init; condition; inc"},
                     { keywords: ["statement"], placeholder: "statement"}
                 ]
             },
