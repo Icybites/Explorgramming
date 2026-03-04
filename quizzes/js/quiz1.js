@@ -18,6 +18,72 @@ const QUIZ_PASSWORD = "ucop";
 //   "syntax-table"        — headers[], rows[], maxAttempts
 // ===================================================================
 
+// ===================================================================
+// QUIZ QUESTIONS SAMPLES
+
+// 1 ── Multiple Choice ──────────────────────────────────
+//     {
+//         type: "multiple-choice",
+//         question: "Whatever question is here?",
+//         options: [
+//             "Option A",
+//             "Option B",
+//             "Option C",
+//             "Option D"
+//         ],
+//         correctAnswer: 1 // Answer, indexing start from zero '0'
+//     }
+
+// 2 ── Fill Blank ───────────────────────────────────────
+// {
+//     type: "fill-blank",
+//     question: The question will be ________.",
+//     correctAnswer: "Answer",
+//     keywords: ["Answer"]
+// }
+
+// 3 ── Multiple Fill Blank ──────────────────────────────
+// {
+//     type: "multiple-fill-blank",
+//     question: "Questions goes _______ and ____________.",
+//     blanks: [
+//         { correctAnswer: "Answer1", keywords: ["Answer1", "Alternative Answer2"] },
+//         { correctAnswer: "Answer2",  keywords: ["Answer2", "Alternative Answer2"]   }
+//     ]
+// }
+
+// 4 ── Short Answer ─────────────────────────────────────
+//     {
+//         type: "short-answer",
+//         question: "Short answer can be type as long as the user want",
+//         keywords: ["Keyword 1", "Keyword 2", "Keyword 3"],
+//         minKeywords: 2 // Mininum keyword need to be mention to get correct answer mark
+//     }
+
+// 5 ── Multi-Attempt (code) ─────────────────────────────
+// {
+//     type: "multi-attempt",
+//     question: "Questions goes here",
+//     maxAttempts: 5,
+//     maxMarks: 5,
+//     fields: [
+//         {
+//             label: "Answer",
+//             placeholder: "This is the placeholder",
+//             correctAnswer: "Answer",
+//             tokens: ["Sequence1", "Sequence2", "Sequence3", "Sequence4", "Sequence5"],
+//             altTokenSets: [
+//                 ["Alternative1", "ALternative2", "ALternative", "Alternative4", "Alternative5"],
+//                 ["Alternative1", "ALternative2", "ALternative", "Alternative4", "Alternative5"],
+//                 ["Alternative1", "ALternative2", "ALternative", "Alternative4", "Alternative5"],
+//                 ["Alternative1", "ALternative2", "ALternative", "Alternative4", "Alternative5"]
+//             ]
+//         }
+//     ]
+// }
+// ===================================================================
+
+
 const quizData = [
 
     // ── Q1: Multiple Choice ──────────────────────────────────
