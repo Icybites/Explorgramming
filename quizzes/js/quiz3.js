@@ -1,21 +1,21 @@
 // =============================================
-// quiz1.js
+// quiz3.js
 // =============================================
 
 // ============================================================
-// CONFIGURATION � change password here before distributing QR
+// CONFIGURATION — change password here before distributing QR
 // ============================================================
-const QUIZ_PASSWORD = "OrionSky";
+const QUIZ_PASSWORD = "cp3";
 
 // ===================================================================
-// QUIZ DATA � 10 Questions covering all supported types
+// QUIZ DATA — 10 Questions covering all supported types
 // Supported types:
-//   "multiple-choice"     � options[], correctAnswer (0-based index)
-//   "fill-blank"          � correctAnswer, keywords[]
-//   "multiple-fill-blank" � blanks[{ correctAnswer, keywords[] }]
-//   "short-answer"        � keywords[], minKeywords
-//   "multi-attempt"       � fields[], maxAttempts, maxMarks
-//   "syntax-table"        � headers[], rows[], maxAttempts
+//   "multiple-choice"     — options[], correctAnswer (0-based index)
+//   "fill-blank"          — correctAnswer, keywords[]
+//   "multiple-fill-blank" — blanks[{ correctAnswer, keywords[] }]
+//   "short-answer"        — keywords[], minKeywords
+//   "multi-attempt"       — fields[], maxAttempts, maxMarks
+//   "syntax-table"        — headers[], rows[], maxAttempts
 // ===================================================================
 
 // ===================================================================
@@ -47,8 +47,8 @@ const QUIZ_PASSWORD = "OrionSky";
 //     type: "multiple-fill-blank",
 //     question: "Questions goes _______ and ____________.",
 //     blanks: [
-//         { correctAnswer: "Answer1", keywords: ["Answer1", "Alternative Answer2"] },
-//         { correctAnswer: "Answer2",  keywords: ["Answer2", "Alternative Answer2"]   }
+//         { correctAnswer: "Answer1", keywords: ["Answer1", "Answer2"] },
+//         { correctAnswer: "Answer2",  keywords: ["Answer2", "Answer2"]   }
 //     ]
 // }
 
@@ -73,10 +73,10 @@ const QUIZ_PASSWORD = "OrionSky";
 //             correctAnswer: "Answer",
 //             tokens: ["Sequence1", "Sequence2", "Sequence3", "Sequence4", "Sequence5"],
 //             altTokenSets: [
-//                 ["Alternative1", "ALternative2", "ALternative", "Alternative4", "Alternative5"],
-//                 ["Alternative1", "ALternative2", "ALternative", "Alternative4", "Alternative5"],
-//                 ["Alternative1", "ALternative2", "ALternative", "Alternative4", "Alternative5"],
-//                 ["Alternative1", "ALternative2", "ALternative", "Alternative4", "Alternative5"]
+//                 ["", "", ", "", ""],
+//                 ["", "", ", "", ""],
+//                 ["", "", ", "", ""],
+//                 ["", "", ", "", ""]
 //             ]
 //         }
 //     ]
@@ -86,130 +86,117 @@ const QUIZ_PASSWORD = "OrionSky";
 
 const quizData = [
 
-    // PASTE SOALAN DEKAT SINI
-
-    // Question
+    // Q1
     {
         type: "multiple-choice",
-        question: "Who developed the C programming language?",
+        question: "Which control structure is used to repeat a block of code as long as a condition is true?",
         options: [
-            "Brendan Eichs",
-            "Dennis Ritchie",
-            "Anders Hejlsberg",
-            "James Gosling"
-        ],
-        correctAnswer: 1 // Answer, indexing start from zero '0'
-    },
-
-    // Question 2
-    {
-        type: "multiple-choice",
-        question: "C programming language is mainly used to...",
-        options: [
-            "Write programs and software",
-            "Decorates computers",
-            "Replace hardware",
-            "Draw pictures only"
-        ],
-        correctAnswer: 0 // Answer, indexing start from zero '0'
-    },
-
-    // Question 3
-    {
-        type: "multiple-choice",
-        question: "Which function must exist in every C program?",
-        options: [
-            "start()",
-            "begin()",
-            "main()",
-            "run()"
+            "Sequence",
+            "Selection",
+            "Loop",
+            "Function"
         ],
         correctAnswer: 2 // Answer, indexing start from zero '0'
     },
 
-    // Question 4
+    // Q2
     {
         type: "multiple-choice",
-        question: "The language closest to the hardware is...",
+        question: "Which statement is commonly used in selection control structure?",
         options: [
-            "High-level language",
-            "Java",
-            "C language",
-            "Machine language"
+            "for",
+            "while",
+            "if",
+            "do-while"
         ],
-        correctAnswer: 3 // Answer, indexing start from zero '0'
+        correctAnswer: 2 // Answer, indexing start from zero '0'
     },
 
-    // Question 5
+    // Q3
+    {
+        type: "multiple-fill-blank",
+        question: "List down the examples of loop structure? ________, ________, ________",
+        blanks: [
+            { correctAnswer: "while", keywords: ["while", "do-while", "for", "do while"] },
+            { correctAnswer: "do-while", keywords: ["do-while", "while", "for", "do while"] },
+            { correctAnswer: "for",  keywords: ["for", "while", "do-while", "do while"]   }
+        ]
+    },
+    
+    // Q4
     {
         type: "multiple-choice",
-        question: "A compiler is used to...",
+        question: "What will be the output?\n\n#include <stdio.h>\n\nint x = 5;\n\tif (x > 10) {\n\tprintf('A');\n}\nelse {\n\tprintf('B');\n}",
         options: [
-            "Edit the program",
-            "Translate high-level language into machine language",
-            "Print output",
-            "Run the hardware"
+            "A",
+            "B",
+            "AB",
+            "Compile-Time Error"
         ],
         correctAnswer: 1 // Answer, indexing start from zero '0'
     },
 
-    // Question 6
+    // Q5
     {
         type: "fill-blank",
-        question: "The original code written by a programmer is called ________.",
-        correctAnswer: "source code",
-        keywords: ["source"]
+        question: "Complete the code.\n\n#include <stdio.h>\n\nint x = 7;\n\nif (x > 10) {\n\tprintf('Greater than 10');\n}\n_______ {\n\tprintf('10 or less');\n}",
+        correctAnswer: "else",
+        keywords: ["else", "Else"]
     },
 
-    // Question 7
-    {
-        type: "fill-blank",
-        question: "The set of rules for writing a program correctly is called _______.",
-        correctAnswer: "syntax",
-        keywords: ["syntax"]
-    },
-
-    // Questino 8
+    // Q6
     {
         type: "multiple-fill-blank",
-        question: "The two main translator used in programming are _________ and _________.",
+        question: "List down the type of control structure can be used for a sentinel loop? _______, _______",
         blanks: [
-            { correctAnswer: "compiler", keywords: ["compiler", "interpreter"] },
-            { correctAnswer: "interpreter",  keywords: ["interpreter", "compiler"]   }
+            { correctAnswer: "while", keywords: ["while", "do-while"] },
+            { correctAnswer: "do-while",  keywords: ["do-while", "while"]   }
         ]
     },
 
-    // Question 9
+    // Q7
     {
-        type: "short-answer",
-        question: "State two types of programming languages.",
-        keywords: ["low-level", "high-level", "low level", "high level"],
-        minKeywords: 2 // Mininum keyword need to be mention to get correct answer mark
+        type: "multiple-choice",
+        question: "In looping statement, if we forgot to put increment what would happened?",
+        options: [
+            "Infinite loop",
+            "Runtime error",
+            "Nothing happen",
+            "The program will run once"
+        ],
+        correctAnswer: 0 // Answer, indexing start from zero '0'
+    },
+
+    // Q8
+    {
+        type: "multiple-choice",
+        question: "Which of the following is NOT a type of control structure?",
+        options: [
+            "Sequence",
+            "Selection",
+            "Repetition",
+            "Compilation"
+        ],
+        correctAnswer: 3 // Answer, indexing start from zero '0'
+    },
+
+    // Q9
+    {
+        type: "fill-blank",
+        question: "A loop is usually controlled y three parts which is initialization, ________ and increment/decrement.",
+        correctAnswer: "condition",
+        keywords: ["condition"]
     },
     
-    // Question 10
+    // Q10
     {
-        type: "multi-attempt",
-        question: "Fix the function header in this program snippet:\n\n#include <stdio.h>\n\nint Main() {\n\tprintf('Hello World');\n\treturn 0;\n}",
-        maxAttempts: 3,
-        maxMarks: 5,
-        fields: [
-            {
-                label: "Correct Function",
-                placeholder: "Type the correct function header",
-                correctAnswer: "int main()",
-                tokens: ["int", "main", "()"],
-                altTokenSets: [
-                    ["int", "main()"],
-                    ["int", "main", "()"],
-                    ["int", "main", "(", ")"],
-                    ["int", "main(", ")"]
-                ]
-            }
-        ]
-    }
-    
-]; // The end, abes
+        type: "short-answer",
+        question: "Identify the error.\n\n#include <stdio.h>\n\nint main() {\n\nint sum = 0;\nfor (int i = 0; i <= 10; i++;)\n\t{\n\tsum += number;\n\t}\n\tprintf('Sum is %d\\n', sum);\n}",
+        keywords: ["semicolon", "semicolon after increment"],
+        minKeywords: 1 // Mininum keyword need to be mention to get correct answer mark
+    },
+
+]; // The end
 
 
 

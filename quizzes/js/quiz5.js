@@ -1,21 +1,21 @@
 // =============================================
-// quiz1.js
+// quiz5.js
 // =============================================
 
 // ============================================================
-// CONFIGURATION � change password here before distributing QR
+// CONFIGURATION — change password here before distributing QR
 // ============================================================
-const QUIZ_PASSWORD = "OrionSky";
+const QUIZ_PASSWORD = "12345";
 
 // ===================================================================
-// QUIZ DATA � 10 Questions covering all supported types
+// QUIZ DATA — 10 Questions covering all supported types
 // Supported types:
-//   "multiple-choice"     � options[], correctAnswer (0-based index)
-//   "fill-blank"          � correctAnswer, keywords[]
-//   "multiple-fill-blank" � blanks[{ correctAnswer, keywords[] }]
-//   "short-answer"        � keywords[], minKeywords
-//   "multi-attempt"       � fields[], maxAttempts, maxMarks
-//   "syntax-table"        � headers[], rows[], maxAttempts
+//   "multiple-choice"     — options[], correctAnswer (0-based index)
+//   "fill-blank"          — correctAnswer, keywords[]
+//   "multiple-fill-blank" — blanks[{ correctAnswer, keywords[] }]
+//   "short-answer"        — keywords[], minKeywords
+//   "multi-attempt"       — fields[], maxAttempts, maxMarks
+//   "syntax-table"        — headers[], rows[], maxAttempts
 // ===================================================================
 
 // ===================================================================
@@ -83,132 +83,114 @@ const QUIZ_PASSWORD = "OrionSky";
 // }
 // ===================================================================
 
-
 const quizData = [
+// QUIZ QUESTIONS SAMPLES
 
-    // PASTE SOALAN DEKAT SINI
-
-    // Question
+// Checkpoint 5 (Array)
+// Question 1
     {
         type: "multiple-choice",
-        question: "Who developed the C programming language?",
+        question: "What is definition of array?",
         options: [
-            "Brendan Eichs",
-            "Dennis Ritchie",
-            "Anders Hejlsberg",
-            "James Gosling"
-        ],
-        correctAnswer: 1 // Answer, indexing start from zero '0'
-    },
-
-    // Question 2
-    {
-        type: "multiple-choice",
-        question: "C programming language is mainly used to...",
-        options: [
-            "Write programs and software",
-            "Decorates computers",
-            "Replace hardware",
-            "Draw pictures only"
-        ],
-        correctAnswer: 0 // Answer, indexing start from zero '0'
-    },
-
-    // Question 3
-    {
-        type: "multiple-choice",
-        question: "Which function must exist in every C program?",
-        options: [
-            "start()",
-            "begin()",
-            "main()",
-            "run()"
+            "Allow coder to execute a specific block of code repeatedly as long as a defined condition remains true.",
+            "Sequence of characters stored in an array and terminated by a null character.",
+            "A group of elements of the same type stored contiguously in memory locations",
+            "Let a program choose between different actions based on a condition"
         ],
         correctAnswer: 2 // Answer, indexing start from zero '0'
     },
 
-    // Question 4
+// Question 2
     {
         type: "multiple-choice",
-        question: "The language closest to the hardware is...",
+        question: "Array start at index?",
         options: [
-            "High-level language",
-            "Java",
-            "C language",
-            "Machine language"
+            "size",
+            "none of the above",
+            "1",
+            "0"
         ],
         correctAnswer: 3 // Answer, indexing start from zero '0'
     },
 
-    // Question 5
+// Question 3
     {
         type: "multiple-choice",
-        question: "A compiler is used to...",
+        question: "What the sum of array[1] and array[3]?\n\narray[4] = {2, 3, 4, 5}\n",
         options: [
-            "Edit the program",
-            "Translate high-level language into machine language",
-            "Print output",
-            "Run the hardware"
+            "8",
+            "6",
+            "7",
+            "9"
         ],
-        correctAnswer: 1 // Answer, indexing start from zero '0'
+        correctAnswer: 0 // Answer, indexing start from zero '0'
     },
 
-    // Question 6
+// Question 4
+    {
+    type: "fill-blank",
+    question: "Array need size and ______ for memory allocation.",
+    correctAnswer: "type",
+    keywords: ["types","Data type","Data types", "data-type", "datatype", "Data-type"]
+    },
+
+// Question 5
     {
         type: "fill-blank",
-        question: "The original code written by a programmer is called ________.",
-        correctAnswer: "source code",
-        keywords: ["source"]
+        question: "What the value n[1] in digit.\n\nint n[3] = {67, 76, 57}",
+        correctAnswer: "76",
+        keywords: ["76"]
     },
-
-    // Question 7
-    {
-        type: "fill-blank",
-        question: "The set of rules for writing a program correctly is called _______.",
-        correctAnswer: "syntax",
-        keywords: ["syntax"]
-    },
-
-    // Questino 8
+    
+// Question 6
     {
         type: "multiple-fill-blank",
-        question: "The two main translator used in programming are _________ and _________.",
+        question: "What index we need if the sum of three array is 14.\nn[__] + n[__] + n[__] = 14\n\nn[5] = {1, 2, 3, 4, 5}",
         blanks: [
-            { correctAnswer: "compiler", keywords: ["compiler", "interpreter"] },
-            { correctAnswer: "interpreter",  keywords: ["interpreter", "compiler"]   }
+            { correctAnswer: "3", keywords: ["3", "4"] },
+            { correctAnswer: "4",  keywords: ["4", "3"]   },
+            { correctAnswer: "4",  keywords: ["4", "3"]   }
         ]
     },
 
-    // Question 9
+// Question 7 
+    {
+        type: "multiple-fill-blank",
+        question: "Given size of array is 7. The index or position of array start with ______ and end with ______.",
+        blanks: [
+            { correctAnswer: "0", keywords: ["0", "zero"] },
+            { correctAnswer: "6",  keywords: ["6", "six"]   }
+        ]
+    },
+
+// Question 8
     {
         type: "short-answer",
-        question: "State two types of programming languages.",
-        keywords: ["low-level", "high-level", "low level", "high level"],
+        question: "What are the requirements to declare and initialize an array? (List out at least two)",
+        keywords: ["data type", "datatype", "data-type", "name", "size", "assigning", "assign", "assigned", "initial values", "values", "brackets", "bracket", "square bracket", "square brackets", "index matching", "fix sized", "fix size"],
         minKeywords: 2 // Mininum keyword need to be mention to get correct answer mark
     },
-    
-    // Question 10
+
+// Question 9
+   {
+        type: "short-answer",
+        question: "Which index of array, that contain 30 value?\n\nint a[3] = {10, 20, 30};",
+        keywords: ["2", "a[2]", "int a[2]"],
+        minKeywords: 1 // Mininum keyword need to be mention to get correct answer mark
+    },
+
+// Question 10
     {
-        type: "multi-attempt",
-        question: "Fix the function header in this program snippet:\n\n#include <stdio.h>\n\nint Main() {\n\tprintf('Hello World');\n\treturn 0;\n}",
-        maxAttempts: 3,
-        maxMarks: 5,
-        fields: [
-            {
-                label: "Correct Function",
-                placeholder: "Type the correct function header",
-                correctAnswer: "int main()",
-                tokens: ["int", "main", "()"],
-                altTokenSets: [
-                    ["int", "main()"],
-                    ["int", "main", "()"],
-                    ["int", "main", "(", ")"],
-                    ["int", "main(", ")"]
-                ]
-            }
-        ]
+        type: "multiple-choice",
+        question: "What the different between int array and char array?",
+        options: [
+            "elements",
+            "name",
+            "position",
+            "type"
+        ],
+        correctAnswer: 3 // Answer, indexing start from zero '0'
     }
-    
 ]; // The end, abes
 
 
@@ -330,7 +312,7 @@ function startTimer() {
         document.getElementById('timerDisplay').textContent = formatTime(state.timerSeconds);
 
         // Turn red in the last 60 seconds
-        if (state.timerSeconds <= 30)
+        if (state.timerSeconds <= 60)
             document.getElementById('timerBox').classList.add('timer-warning');
 
         // Time is up — auto-submit

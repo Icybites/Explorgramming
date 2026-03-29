@@ -1,214 +1,108 @@
 // =============================================
-// quiz1.js
+// quiz6.js
 // =============================================
 
 // ============================================================
-// CONFIGURATION � change password here before distributing QR
+// CONFIGURATION — change password here before distributing QR
 // ============================================================
-const QUIZ_PASSWORD = "OrionSky";
+const QUIZ_PASSWORD = "syamirahramarah";
 
 // ===================================================================
-// QUIZ DATA � 10 Questions covering all supported types
-// Supported types:
-//   "multiple-choice"     � options[], correctAnswer (0-based index)
-//   "fill-blank"          � correctAnswer, keywords[]
-//   "multiple-fill-blank" � blanks[{ correctAnswer, keywords[] }]
-//   "short-answer"        � keywords[], minKeywords
-//   "multi-attempt"       � fields[], maxAttempts, maxMarks
-//   "syntax-table"        � headers[], rows[], maxAttempts
+// QUIZ DATA
 // ===================================================================
-
-// ===================================================================
-// QUIZ QUESTIONS SAMPLES
-
-// 1 - Multiple Choice ------------------------------
-//     {
-//         type: "multiple-choice",
-//         question: "Whatever question is here?",
-//         options: [
-//             "Option A",
-//             "Option B",
-//             "Option C",
-//             "Option D"
-//         ],
-//         correctAnswer: 1 // Answer, indexing start from zero '0'
-//     }
-
-// 2 - Fill Blank ------------------------------
-// {
-//     type: "fill-blank",
-//     question: "The question will be ________.",
-//     correctAnswer: "Answer",
-//     keywords: ["Answer"]
-// }
-
-// 3 - Multiple Fill Blank ------------------------------
-// {
-//     type: "multiple-fill-blank",
-//     question: "Questions goes _______ and ____________.",
-//     blanks: [
-//         { correctAnswer: "Answer1", keywords: ["Answer1", "Alternative Answer2"] },
-//         { correctAnswer: "Answer2",  keywords: ["Answer2", "Alternative Answer2"]   }
-//     ]
-// }
-
-// 4 - Short Answer ------------------------------
-//     {
-//         type: "short-answer",
-//         question: "Short answer can be type as long as the user want",
-//         keywords: ["Keyword 1", "Keyword 2", "Keyword 3"],
-//         minKeywords: 2 // Mininum keyword need to be mention to get correct answer mark
-//     }
-
-// 5 - Multi-Attempt (code) ------------------------------
-// {
-//     type: "multi-attempt",
-//     question: "Questions goes here",
-//     maxAttempts: 5,
-//     maxMarks: 5,
-//     fields: [
-//         {
-//             label: "Answer",
-//             placeholder: "This is the placeholder",
-//             correctAnswer: "Answer",
-//             tokens: ["Sequence1", "Sequence2", "Sequence3", "Sequence4", "Sequence5"],
-//             altTokenSets: [
-//                 ["Alternative1", "ALternative2", "ALternative", "Alternative4", "Alternative5"],
-//                 ["Alternative1", "ALternative2", "ALternative", "Alternative4", "Alternative5"],
-//                 ["Alternative1", "ALternative2", "ALternative", "Alternative4", "Alternative5"],
-//                 ["Alternative1", "ALternative2", "ALternative", "Alternative4", "Alternative5"]
-//             ]
-//         }
-//     ]
-// }
-// ===================================================================
-
-
 const quizData = [
 
-    // PASTE SOALAN DEKAT SINI
-
-    // Question
+    // Question 1
     {
         type: "multiple-choice",
-        question: "Who developed the C programming language?",
+        question: "What is an array?",
         options: [
-            "Brendan Eichs",
-            "Dennis Ritchie",
-            "Anders Hejlsberg",
-            "James Gosling"
+            "A collection of different data types stored randomly",
+            "A group of elements of the same type stored contiguously",
+            "A single variable storing one value",
+            "A function used to store data"
         ],
-        correctAnswer: 1 // Answer, indexing start from zero '0'
+        correctAnswer: 1
     },
 
     // Question 2
     {
         type: "multiple-choice",
-        question: "C programming language is mainly used to...",
+        question: "What is the index of the first element in a C array?",
         options: [
-            "Write programs and software",
-            "Decorates computers",
-            "Replace hardware",
-            "Draw pictures only"
+            "1",
+            "-1",
+            "0",
+            "Depends on size"
         ],
-        correctAnswer: 0 // Answer, indexing start from zero '0'
+        correctAnswer: 2
     },
 
     // Question 3
     {
         type: "multiple-choice",
-        question: "Which function must exist in every C program?",
+        question: "What will happen if an array is declared but not initialized?",
         options: [
-            "start()",
-            "begin()",
-            "main()",
-            "run()"
+            "All values become 0",
+            "Values are random (garbage values)",
+            "Compilation error",
+            "Values become NULL"
         ],
-        correctAnswer: 2 // Answer, indexing start from zero '0'
+        correctAnswer: 1
     },
 
     // Question 4
     {
         type: "multiple-choice",
-        question: "The language closest to the hardware is...",
+        question: "Which of the following is a correct way to declare an array in C?",
         options: [
-            "High-level language",
-            "Java",
-            "C language",
-            "Machine language"
+            "int arr;",
+            "int arr(5);",
+            "int arr[5];",
+            "array int arr[5];"
         ],
-        correctAnswer: 3 // Answer, indexing start from zero '0'
+        correctAnswer: 2
     },
 
     // Question 5
     {
         type: "multiple-choice",
-        question: "A compiler is used to...",
+        question: "What does this code do?\n\nint n[5] = {0};",
         options: [
-            "Edit the program",
-            "Translate high-level language into machine language",
-            "Print output",
-            "Run the hardware"
+            "Only n[0] = 0, others are garbage",
+            "All elements of array are set to 0",
+            "Causes error",
+            "Only last element is 0"
         ],
-        correctAnswer: 1 // Answer, indexing start from zero '0'
+        correctAnswer: 1
     },
 
     // Question 6
     {
-        type: "fill-blank",
-        question: "The original code written by a programmer is called ________.",
-        correctAnswer: "source code",
-        keywords: ["source"]
+        type: "multiple-choice",
+        question: "Which of the following is NOT true about arrays?",
+        options: [
+            "Arrays store elements of the same data type",
+            "Array elements are stored contiguously in memory",
+            "Array index can be negative",
+            "Array size must be defined during declaration"
+        ],
+        correctAnswer: 2
     },
 
     // Question 7
     {
-        type: "fill-blank",
-        question: "The set of rules for writing a program correctly is called _______.",
-        correctAnswer: "syntax",
-        keywords: ["syntax"]
-    },
-
-    // Questino 8
-    {
-        type: "multiple-fill-blank",
-        question: "The two main translator used in programming are _________ and _________.",
-        blanks: [
-            { correctAnswer: "compiler", keywords: ["compiler", "interpreter"] },
-            { correctAnswer: "interpreter",  keywords: ["interpreter", "compiler"]   }
-        ]
-    },
-
-    // Question 9
-    {
-        type: "short-answer",
-        question: "State two types of programming languages.",
-        keywords: ["low-level", "high-level", "low level", "high level"],
-        minKeywords: 2 // Mininum keyword need to be mention to get correct answer mark
-    },
-    
-    // Question 10
-    {
-        type: "multi-attempt",
-        question: "Fix the function header in this program snippet:\n\n#include <stdio.h>\n\nint Main() {\n\tprintf('Hello World');\n\treturn 0;\n}",
-        maxAttempts: 3,
-        maxMarks: 5,
-        fields: [
-            {
-                label: "Correct Function",
-                placeholder: "Type the correct function header",
-                correctAnswer: "int main()",
-                tokens: ["int", "main", "()"],
-                altTokenSets: [
-                    ["int", "main()"],
-                    ["int", "main", "()"],
-                    ["int", "main", "(", ")"],
-                    ["int", "main(", ")"]
-                ]
-            }
-        ]
+        type: "multiple-choice",
+        question: "What will be the output?\n\n#include <stdio.h>\n\nint a[5] = {2, 4, 6, 8, 10};\nint sum = 0;\n\nfor(int i = 0; i < 5; i++) {\n\tsum += a[i];\n}\n\nprintf(\"%d\", sum);",
+        options: [
+            "10",
+            "20",
+            "18",
+            "Runtime Error"
+        ],
+        correctAnswer: 2
     }
-    
+
 ]; // The end, abes
 
 
@@ -330,7 +224,7 @@ function startTimer() {
         document.getElementById('timerDisplay').textContent = formatTime(state.timerSeconds);
 
         // Turn red in the last 60 seconds
-        if (state.timerSeconds <= 30)
+        if (state.timerSeconds <= 60)
             document.getElementById('timerBox').classList.add('timer-warning');
 
         // Time is up — auto-submit
