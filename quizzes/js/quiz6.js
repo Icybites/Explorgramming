@@ -80,7 +80,7 @@ const quizData = [
     // Question 7 - Multi-Attempt
     {
         type: "multi-attempt",
-        question: "Write the correct syntax to declare a string that stores \"Hello\".",
+        question: "Write the correct syntax to declare a named str that stores \"Hello\".",
         maxAttempts: 5,
         maxMarks: 5,
         fields: [
