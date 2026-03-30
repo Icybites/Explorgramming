@@ -5,7 +5,7 @@
 // ============================================================
 // CONFIGURATION — change password here before distributing QR
 // ============================================================
-const QUIZ_PASSWORD = "12345";
+const QUIZ_PASSWORD = "bayarlah";
 
 // ===================================================================
 // QUIZ DATA — 10 Questions covering all supported types

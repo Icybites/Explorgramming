@@ -5,7 +5,7 @@
 // ============================================================
 // CONFIGURATION — change password here before distributing QR
 // ============================================================
-const QUIZ_PASSWORD = "syamirah";
+const QUIZ_PASSWORD = "kucingtidur";
 
 // ===================================================================
 // QUIZ DATA
