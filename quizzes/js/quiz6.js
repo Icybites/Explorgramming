@@ -989,3 +989,4 @@ function checkSyntaxTable(questionIndex) {
         </span>`;
     }
 }
+
