@@ -10,12 +10,12 @@ const QUIZ_PASSWORD = "OrionSky";
 // ===================================================================
 // QUIZ DATA � 10 Questions covering all supported types
 // Supported types:
-//   "multiple-choice"     � options[], correctAnswer (0-based index)
-//   "fill-blank"          � correctAnswer, keywords[]
-//   "multiple-fill-blank" � blanks[{ correctAnswer, keywords[] }]
-//   "short-answer"        � keywords[], minKeywords
-//   "multi-attempt"       � fields[], maxAttempts, maxMarks
-//   "syntax-table"        � headers[], rows[], maxAttempts
+//   "multiple-choice"      options[], correctAnswer (0-based index)
+//   "fill-blank"           correctAnswer, keywords[]
+//   "multiple-fill-blank"  blanks[{ correctAnswer, keywords[] }]
+//   "short-answer"         keywords[], minKeywords
+//   "multi-attempt"        fields[], maxAttempts, maxMarks
+//   "syntax-table"         headers[], rows[], maxAttempts
 // ===================================================================
 
 // ===================================================================

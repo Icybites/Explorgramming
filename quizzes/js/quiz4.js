@@ -71,7 +71,7 @@ const quizData = [
 // ============================================================
 // STATE - SILA ABAIKAN SEMUA YANG DIBAWAH ====================
 // ============================================================
-const TIMER_LIMIT = 600; // 10 minutes in seconds
+const TIMER_LIMIT = 300; // 10 minutes in seconds
  
 const state = {
     currentIndex: 0,

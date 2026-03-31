@@ -83,120 +83,176 @@ const QUIZ_PASSWORD = "ketupatcicahsusu";
 // }
 // ===================================================================
 
-
 const quizData = [
 
     // Q1
     {
         type: "multiple-choice",
         question: "Which control structure is used to repeat a block of code as long as a condition is true?",
-        options: [
-            "Sequence",
-            "Selection",
-            "Loop",
-            "Function"
-        ],
-        correctAnswer: 2 // Answer, indexing start from zero '0'
+        options: ["Sequence", "Selection", "Loop", "Function"],
+        correctAnswer: 2
     },
 
     // Q2
     {
         type: "multiple-choice",
-        question: "Which statement is commonly used in selection control structure?",
-        options: [
-            "for",
-            "while",
-            "if",
-            "do-while"
-        ],
-        correctAnswer: 2 // Answer, indexing start from zero '0'
+        question: "Which loop is best used when the number of iterations is known?",
+        options: ["for loop", "while loop", "do-while loop", "if statement"],
+        correctAnswer: 0
     },
 
     // Q3
+    {
+        type: "multiple-choice",
+        question: "Which control structure is used to make decisions in a program?",
+        options: ["sequence", "selection", "repetition", "function"],
+        correctAnswer: 1
+    },
+
+    // Q4
+    {
+        type: "fill-blank",
+        question: "In switch case, it is optional to put the default statement at the end. ________",
+        correctAnswer: "FALSE",
+        keywords: ["false", "FALSE", "False"]
+    },
+
+    // Q5
+    {
+        type: "multiple-choice",
+        question: "Which statement is commonly used in selection control structure?",
+        options: ["for", "while", "if", "do-while"],
+        correctAnswer: 2
+    },
+
+    // Q6
+    {
+        type: "multiple-choice",
+        question: "The ______ statement is used to make decisions between two or more conditions in programming.",
+        options: ["for", "while", "if", "do-while"],
+        correctAnswer: 2
+    },
+
+    // Q7
     {
         type: "multiple-fill-blank",
         question: "List down the examples of loop structure? ________, ________, ________",
         blanks: [
             { correctAnswer: "while", keywords: ["while", "do-while", "for", "do while"] },
             { correctAnswer: "do-while", keywords: ["do-while", "while", "for", "do while"] },
-            { correctAnswer: "for",  keywords: ["for", "while", "do-while", "do while"]   }
+            { correctAnswer: "for", keywords: ["for", "while", "do-while", "do while"] }
         ]
-    },
-    
-    // Q4
-    {
-        type: "multiple-choice",
-        question: "What will be the output?\n\n#include <stdio.h>\n\nint x = 5;\n\tif (x > 10) {\n\tprintf('A');\n}\nelse {\n\tprintf('B');\n}",
-        options: [
-            "A",
-            "B",
-            "AB",
-            "Compile-Time Error"
-        ],
-        correctAnswer: 1 // Answer, indexing start from zero '0'
-    },
-
-    // Q5
-    {
-        type: "fill-blank",
-        question: "Complete the code.\n\n#include <stdio.h>\n\nint x = 7;\n\nif (x > 10) {\n\tprintf('Greater than 10');\n}\n_______ {\n\tprintf('10 or less');\n}",
-        correctAnswer: "else",
-        keywords: ["else", "Else"]
-    },
-
-    // Q6
-    {
-        type: "multiple-fill-blank",
-        question: "List down the type of control structure can be used for a sentinel loop? _______, _______",
-        blanks: [
-            { correctAnswer: "while", keywords: ["while", "do-while"] },
-            { correctAnswer: "do-while",  keywords: ["do-while", "while"]   }
-        ]
-    },
-
-    // Q7
-    {
-        type: "multiple-choice",
-        question: "In looping statement, if we forgot to put increment what would happened?",
-        options: [
-            "Infinite loop",
-            "Runtime error",
-            "Nothing happen",
-            "The program will run once"
-        ],
-        correctAnswer: 0 // Answer, indexing start from zero '0'
     },
 
     // Q8
     {
         type: "multiple-choice",
-        question: "Which of the following is NOT a type of control structure?",
-        options: [
-            "Sequence",
-            "Selection",
-            "Repetition",
-            "Compilation"
-        ],
-        correctAnswer: 3 // Answer, indexing start from zero '0'
+        question: "Which loop is guaranteed to execute at least once?",
+        options: ["for loop", "while loop", "do-while loop", "if statement"],
+        correctAnswer: 2
     },
 
     // Q9
     {
+        type: "multiple-choice",
+        question: "To use selection control structure in Raptor, we use _______ symbol.",
+        options: ["Rectangle", "Diamond", "Oval", "Parallelogram"],
+        correctAnswer: 1
+    },
+
+    // Q10
+    {
+        type: "multiple-choice",
+        question: "What will be the output?\n\n#include <stdio.h>\n\nint x = 2;\n\nif (x % 2 == 0) {\n    printf(\"Even\");\n} else {\n    printf(\"Odd\");\n}",
+        options: ["Even", "Odd", "Error", "No output"],
+        correctAnswer: 0
+    },
+
+    // Q11
+    {
+        type: "multiple-choice",
+        question: "What will be the output?\n\n#include <stdio.h>\n\nint x = 5;\n\nif (x > 10) {\n    printf(\"A\");\n} else {\n    printf(\"B\");\n}",
+        options: ["A", "B", "AB", "No output"],
+        correctAnswer: 1
+    },
+
+    // Q12
+    {
         type: "fill-blank",
-        question: "A loop is usually controlled y three parts which is initialization, ________ and increment/decrement.",
+        question: "Complete the code.\n\nif (x > 10) {\n    printf(\"Greater than 10\");\n}\n_______ {\n    printf(\"10 or less\");\n}",
+        correctAnswer: "else",
+        keywords: ["else"]
+    },
+
+    // Q13
+    {
+        type: "multiple-fill-blank",
+        question: "List down the type of control structure can be used for a sentinel loop? _______, _______",
+        blanks: [
+            { correctAnswer: "while", keywords: ["while", "do-while"] },
+            { correctAnswer: "do-while", keywords: ["do-while", "while"] }
+        ]
+    },
+
+    // Q14
+    {
+        type: "multiple-choice",
+        question: "In looping statement, if we forgot to put increment what would happened?",
+        options: ["Infinite loop", "Runtime error", "Nothing happen", "The program will run once"],
+        correctAnswer: 0
+    },
+
+    // Q15
+    {
+        type: "multiple-choice",
+        question: "Which of the following is NOT a type of control structure?",
+        options: ["Sequence", "Selection", "Repetition", "Compilation"],
+        correctAnswer: 3
+    },
+
+    // Q16
+    {
+        type: "fill-blank",
+        question: "A loop is usually controlled by three parts which is initialization, ________ and increment/decrement.",
         correctAnswer: "condition",
         keywords: ["condition"]
     },
-    
-    // Q10
+
+    // Q17
     {
-        type: "short-answer",
-        question: "Identify the error.\n\n#include <stdio.h>\n\nint main() {\n\nint sum = 0;\nfor (int i = 0; i <= 10; i++;)\n\t{\n\tsum += number;\n\t}\n\tprintf('Sum is %d\\n', sum);\n}",
-        keywords: ["semicolon", "semicolon after increment"],
-        minKeywords: 1 // Mininum keyword need to be mention to get correct answer mark
+        type: "multiple-fill-blank",
+        question: "List down the selection control structure. __________, __________",
+        blanks: [
+            { correctAnswer: "if else", keywords: ["if else", "switch", "if-else"] },
+            { correctAnswer: "switch", keywords: ["switch", "if else", "if-else"] }
+        ]
     },
 
-]; // The end
+    // Q18
+    {
+        type: "short-answer",
+        question: "Identify the error.\n\n#include <stdio.h>\n\nint main() {\n    int sum = 0;\n\n    for (int i = 0; i <= 10; i++;) {\n        sum += number;\n    }\n\n    printf(\"Sum is %d\\n\", sum);\n}",
+        keywords: ["semicolon", "semicolon after increment"],
+        minKeywords: 1
+    },
+
+    // Q19
+    {
+        type: "short-answer",
+        question: "Identify the error.\n\n#include <stdio.h>\n\nint num = 10;\n\nif (num > 5)\n    printf(\"Number is greater than 5\");\n    printf(\"Done\");",
+        keywords: ["no curly bracket", "missing curly bracket", "curly bracket"],
+        minKeywords: 1
+    },
+
+    // Q20
+    {
+        type: "short-answer",
+        question: "Identify the error.\n\nswitch (choice) {\n    case 1:\n        printf(\"Option 1\");\n    case 2:\n        printf(\"Option 2\");\n        break;\n    default:\n        printf(\"INVALID INPUT\");\n        break;\n}",
+        keywords: ["missing break", "no break", "break"],
+        minKeywords: 1
+    }
+
+]; // End
 
 
 
