@@ -1,0 +1,415 @@
+/* =============================================
+   team.css - Team Members Page
+   Loaded AFTER style.css - adds only
+   team-specific styles, no overrides.
+   ============================================= */
+
+/* ── SCROLL REVEAL BASE STATE ── */
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==============================
+   HERO
+================================= */
+.team-hero {
+    min-height: 62vh;
+    display: flex;
+    align-items: center;
+    padding-top: 160px;
+    padding-bottom: 80px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.team-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 780px;
+    margin: 0 auto;
+    animation: fadeInUp 0.8s ease both;
+}
+
+.team-hero .section-tag { margin-bottom: 1.5rem; }
+.team-hero .section-tag i { margin-right: 0.4rem; font-size: 0.875rem; }
+.team-hero .hero-title   { margin-bottom: 1.25rem; }
+.team-hero .hero-subtitle { margin-bottom: 2.5rem; }
+
+/* Stats row under hero subtitle */
+.team-hero-stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    animation: fadeInUp 0.8s ease 0.3s both;
+}
+
+/* Decorative background blobs */
+.team-hero-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+.hero-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.06;
+}
+.hero-blob-1 {
+    width: 600px; height: 600px;
+    background: #2563eb;
+    top: -220px; left: -120px;
+}
+.hero-blob-2 {
+    width: 500px; height: 500px;
+    background: #7c3aed;
+    bottom: -180px; right: -100px;
+}
+
+/* ==============================
+   ROLE & STRUCTURE
+================================= */
+.roles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+}
+
+.role-card {
+    background: white;
+    border-radius: 24px;
+    padding: 2.25rem 2rem;
+    border: 1px solid #f1f5f9;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.role-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(37,99,235,0.08);
+    border-color: #e2e8f0;
+}
+
+.role-icon {
+    width: 56px;
+    height: 56px;
+    background: rgba(37,99,235,0.08);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+.role-card:hover .role-icon {
+    background: rgba(37,99,235,0.14);
+    transform: scale(1.05);
+}
+.role-icon i {
+    font-size: 1.625rem;
+    color: #2563eb;
+}
+
+.role-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0a1929;
+    margin-bottom: 0.75rem;
+}
+
+.role-card p {
+    font-size: 0.9375rem;
+    color: #64748b;
+    line-height: 1.65;
+    margin-bottom: 1.25rem;
+}
+
+.role-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #2563eb;
+    background: rgba(37,99,235,0.08);
+    border-radius: 100px;
+    padding: 0.2rem 0.75rem;
+    letter-spacing: 0.03em;
+}
+
+/* ==============================
+   SUPERVISOR
+================================= */
+.supervisor-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.supervisor-card {
+    background: white;
+    border-radius: 28px;
+    border: 1px solid #f1f5f9;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+    display: flex;
+    gap: 2.5rem;
+    padding: 2.75rem;
+    max-width: 720px;
+    width: 100%;
+    transition: all 0.35s ease;
+}
+.supervisor-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(37,99,235,0.08);
+    border-color: #e2e8f0;
+}
+
+/* Photo */
+.supervisor-photo-wrap {
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* Shared placeholder style */
+.photo-placeholder {
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(37,99,235,0.06) 0%, rgba(124,58,237,0.06) 100%);
+    border: 2px dashed #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.photo-placeholder i { color: #cbd5e1; }
+
+/* Supervisor — larger photo */
+.photo-placeholder.large {
+    width: 150px;
+    height: 150px;
+}
+.photo-placeholder.large i { font-size: 3.5rem; }
+
+/* Real photo for supervisor */
+.supervisor-photo-wrap img {
+    width: 150px;
+    height: 150px;
+    border-radius: 20px;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+}
+
+.supervisor-badge {
+    position: absolute;
+    bottom: -11px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2563eb;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    padding: 0.25rem 0.875rem;
+    border-radius: 100px;
+    white-space: nowrap;
+}
+
+/* Info */
+.supervisor-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+}
+.supervisor-info h3 {
+    font-size: 1.625rem;
+    font-weight: 700;
+    color: #0a1929;
+    line-height: 1.2;
+}
+.supervisor-title {
+    font-size: 0.9375rem;
+    color: #2563eb;
+    font-weight: 600;
+}
+.supervisor-bio {
+    font-size: 1rem;
+    color: #64748b;
+    line-height: 1.7;
+    margin-top: 0.25rem;
+}
+.supervisor-contact {
+    margin-top: 0.75rem;
+}
+.contact-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #475569;
+    text-decoration: none;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 0.5rem 1rem;
+    border-radius: 100px;
+    transition: all 0.2s ease;
+}
+.contact-pill:hover {
+    border-color: #2563eb;
+    color: #2563eb;
+    background: rgba(37,99,235,0.04);
+}
+.contact-pill i { color: #2563eb; font-size: 0.875rem; }
+
+/* ==============================
+   TEAM MEMBER GRID
+================================= */
+.members-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);  /* 4 cards across */
+    gap: 1.75rem;
+}
+
+.member-card {
+    background: white;
+    border-radius: 24px;
+    border: 1px solid #f1f5f9;
+    overflow: hidden;
+    transition: all 0.35s ease;
+}
+.member-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(37,99,235,0.09);
+    border-color: #e2e8f0;
+}
+
+/* Photo square */
+.member-photo-wrap {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #f8fafc;
+}
+.member-photo-wrap .photo-placeholder {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    border: none;
+}
+.member-photo-wrap .photo-placeholder i { font-size: 4rem; }
+
+/* Real photo */
+.member-photo-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    transition: transform 0.5s ease;
+}
+.member-card:hover .member-photo-wrap img { transform: scale(1.05); }
+
+/* Card body */
+.member-info {
+    padding: 1.375rem 1.5rem 1.5rem;
+}
+
+.member-role-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #2563eb;
+    background: rgba(37,99,235,0.08);
+    border-radius: 100px;
+    padding: 0.2rem 0.75rem;
+    margin-bottom: 0.625rem;
+}
+
+.member-info h4 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #0a1929;
+    margin-bottom: 0.2rem;
+}
+.member-id {
+    font-size: 0.8125rem;
+    color: #94a3b8;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+.member-socials {
+    display: flex;
+    gap: 0.5rem;
+}
+.member-social {
+    width: 34px;
+    height: 34px;
+    background: #f8fafc;
+    border: 1px solid #f1f5f9;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    text-decoration: none;
+    font-size: 0.8125rem;
+    transition: all 0.2s ease;
+}
+.member-social:hover {
+    background: #2563eb;
+    color: white;
+    border-color: #2563eb;
+    transform: translateY(-2px);
+}
+
+/* ==============================
+   RESPONSIVE
+================================= */
+@media (max-width: 1200px) {
+    .members-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 992px) {
+    .roles-grid   { grid-template-columns: repeat(2, 1fr); }
+    .members-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .supervisor-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: 440px;
+        padding: 2.5rem 2rem;
+    }
+    .supervisor-contact { display: flex; justify-content: center; }
+}
+
+@media (max-width: 768px) {
+    .team-hero {
+        padding-top: 130px;
+        padding-bottom: 60px;
+        min-height: auto;
+    }
+    .team-hero-stats { gap: 2rem; }
+    .roles-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+    .members-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .members-grid { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; }
+}
