@@ -89,7 +89,12 @@ const quizData = [
     {
         type: "multiple-choice",
         question: "Which control structure is used to repeat a block of code as long as a condition is true?",
-        options: ["Sequence", "Selection", "Loop", "Function"],
+        options: [
+            "Sequence", 
+            "Selection",
+            "Loop", 
+            "Function"
+        ],
         correctAnswer: 2
     },
 
@@ -97,7 +102,12 @@ const quizData = [
     {
         type: "multiple-choice",
         question: "Which loop is best used when the number of iterations is known?",
-        options: ["for loop", "while loop", "do-while loop", "if statement"],
+        options: [
+            "for loop", 
+            "while loop", 
+            "do-while loop", 
+            "if statement"
+        ],
         correctAnswer: 0
     },
 

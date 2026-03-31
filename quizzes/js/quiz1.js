@@ -88,7 +88,7 @@ const quizData = [
 
     // PASTE SOALAN DEKAT SINI
 
-    // Question
+    // Question 1
     {
         type: "multiple-choice",
         question: "Who developed the C programming language?",
@@ -172,10 +172,10 @@ const quizData = [
     // Questino 8
     {
         type: "multiple-fill-blank",
-        question: "The two main translator used in programming are _________ and _________.",
+        question: "The two translator used in programming are _________ and _________.",
         blanks: [
-            { correctAnswer: "compiler", keywords: ["compiler", "interpreter"] },
-            { correctAnswer: "interpreter",  keywords: ["interpreter", "compiler"]   }
+            { correctAnswer: "compiler", keywords: ["compiler", "interpreter", "assembler"] },
+            { correctAnswer: "interpreter",  keywords: ["interpreter", "compiler", "assembler"] }
         ]
     },
 
